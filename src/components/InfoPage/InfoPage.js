@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Grid, Text, Image } from "@chakra-ui/core";
 
-export default function InfoPage() {
+import { connect } from "react-redux";
+
+function InfoPage(props) {
+  //ALL PRACTICES FOR A USER COMPONENT
+
+  useEffect(() => {
+    //useEffect makes a fetch request to a restful api every time the component is rendered
+    props.dispatch({ type: "FETCH_PRACTICES" });
+  }, []);
+
   return (
     <div>
       <Box w="100%" bg="blue.500">
@@ -68,3 +77,5 @@ export default function InfoPage() {
     </div>
   );
 }
+
+export default connect()(InfoPage);

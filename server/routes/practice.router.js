@@ -1,16 +1,23 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 
 /**
  * GET route template
  */
-router.get("/all", async (req, res) => {
+router.get("/all-for-user", rejectUnauthenticated, async (req, res) => {
+  console.log("frontend talking!");
   // GET route code here
-  res.send("in get!");
+  let user_id = 6; //TODO: PARAMETERIZE THIS
   try {
-    const allPractices = await pool.query("SELECT * FROM feedback ORDER BY id");
-    res.json(allPractices.rows);
+    const allPracticesForGivenUser = await pool.query(
+      'SELECT pr.id as practice_id, pr.practice_name FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=$1 ORDER BY practice_id',
+      [user_id]
+    );
+    res.json(allPracticesForGivenUser.rows);
   } catch (err) {
     res.sendStatus(500);
     console.log(err.message);
@@ -20,7 +27,7 @@ router.get("/all", async (req, res) => {
 /**
  * POST route template
  */
-router.post("/add", async (req, res) => {
+router.post("/add", rejectUnauthenticated, async (req, res) => {
   try {
     //TODO: parameterize this in the future...
     let userId = 6; //this should be coming from req.user object
@@ -73,7 +80,6 @@ router.post("/add", async (req, res) => {
         "SELECT id FROM poses WHERE pose_name=$1",
         [poseObj.pose_name]
       );
-      //console.log(result.rows[0].id);
       const poseId = result.rows[0].id;
       const poseTimeForGivenPractice = poseObj.time;
       //INSERT INTO practices_poses junction table using practiceId, poseId, and pose_time

@@ -1,18 +1,33 @@
 
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
+-- SELECTS
+-- all
+-- ####################################################################################
+select * from "user";
+select * from practices;
+select * from poses;
+select * from practices_poses;
+-- ####################################################################################
 
+-- ####################################################################################
+-- this should happen when user gets the !DETAILS! of a practice
+-- all practices for a given user and given practice id
+SELECT pose_name, pose_time FROM "user" u
+JOIN practices pr ON u.id=pr.user_id
+JOIN practices_poses pp ON pr.id=pp.practice_id
+JOIN poses ps ON pp.pose_id=ps.id
+WHERE u.id = 6
+AND pr.id = 2
+ORDER BY pp.id ASC; --this ensures that the poses are in order
+-- ####################################################################################
+-- get practice_id and practice_name for a given user
+SELECT * FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=6 ORDER BY pr.id;
+-- ####################################################################################
 -- DROP TABLE practices_poses;
 -- DROP TABLE practices;
 -- DROP TABLE poses;
 -- DROP TABLE users;
+-- ####################################################################################
+
 
 CREATE TABLE "user" (
 "id" SERIAL PRIMARY KEY,
@@ -24,7 +39,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE practices(
 id SERIAL PRIMARY KEY,
-name VARCHAR(80),
+practice_name VARCHAR(80),
 user_id INTEGER REFERENCES "user"
 );
 
@@ -46,7 +61,7 @@ pose_time INTEGER NOT NULL
 
 --INSERTS ####################################################################################
 --users
-INSERT INTO users ("user_name", "user_password", "first_name", "last_name")
+INSERT INTO "user" ("username", "password", "first_name", "last_name")
 VALUES ('garrethue','password','Garret', 'Larson'),
 ('charles_darwin123','password2','Charles', 'Darwin'),
 ('george123','password3','George', 'Foreman');
@@ -58,16 +73,11 @@ VALUES ('downward dog'), ('tree pose'), ('plank'), ('triangle pose');
 
 --practices_poses junction table
 INSERT INTO practices_poses ("practice_id","pose_id","pose_time")
-VALUES (2, 1, 3), (2, 2, 2), (2, 4, 5);
+VALUES (1, 1, 3), (1, 2, 2), (1, 4, 5);
 
 --############################################################################################
 
--- SELECTS
--- all
-select * from users;
-select * from practices;
-select * from poses;
-select * from practices_poses;
+
 ---------------------------------------------
 
 -- this should happen when user gets the details of a practice
