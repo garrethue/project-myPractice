@@ -4,9 +4,13 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 function Timer(props) {
-  const [internalTimeInSec, setInternalTime] = useState(30); //props.total_time garret: this should come from the database --> TOTAL TIME IN SECONDS!
+  //the time driver
+  const [internalTimeInSec, setInternalTime] = useState(props.total_time); //props.total_time garret: this should come from the database --> TOTAL TIME IN SECONDS!
+  //isActive will toggle on/off the timer
   const [isActive, setIsActive] = useState(false); //currently timing (isActive) or is paused (!isActive)
+  //displayTime is what is shown on the DOM
   const [displayTime, setDisplayTime] = useState(formatTime()); //this piece of state is for formatting the timer
+  //bell contains the mp3 audio file to signal pose transitions
   const [bell] = useState(
     new Howl({
       src: [
@@ -16,20 +20,30 @@ function Timer(props) {
       ],
     })
   );
+  //timesToRingBell is an array of integers that are used to signal transitions by playing the bell mp3 file
   const [timesToRingBell, setTimesToRingBell] = useState(
     props.timesToRingBellArr
   );
-  const [poseList, setPoseList] = useState(props.poseList); //bring in names of poses
+  //poseList is an array of pose names that are used in conjunction with currentPose and poseListIndex to render the current pose in the practice
+  const [poseList, setPoseList] = useState(props.poseList);
   const [currentPose, setCurrentPose] = useState(props.poseList[0]);
-  const [poseListIndex, setPoseListIndex] = useState(1); //this allows one to iterate through the array to display the correct counter
+  const [poseListIndex, setPoseListIndex] = useState(0); //this allows one to iterate through the array to display the correct counter
+  const [isStopped, setIsStopped] = useState(false);
 
+  //turns on/off the timer
   function toggleTimer() {
     setIsActive(!isActive);
   }
 
-  function stopTimer() {
+  function quitPractice() {
     //implement this as a STOP practice
-    setIsActive(false);
+    if (
+      internalTimeInSec !== props.total_time &&
+      window.confirm("Are you sure you want to quit?")
+    ) {
+      // go back to home page?
+      toggleTimer();
+    }
   }
 
   function formatTime() {
@@ -43,10 +57,10 @@ function Timer(props) {
 
     // conditional rendering: when the hours, minutes and seconds to display are less than 10, add an extra 0 for normal looking display
     minutes = hours > 0 && minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    seconds = minutes > 0 && seconds < 10 ? "0" + seconds : seconds;
 
     // if hours > 0, show it, if the minutes are > 0, show them, else only show the seconds
-    let timeToDisplay = `${seconds}`;
+    let timeToDisplay = `${seconds} seconds`;
     //hours > 0 ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
     if (hours > 0) {
       timeToDisplay = `${hours}:${minutes}:${seconds}`;
@@ -60,6 +74,7 @@ function Timer(props) {
   useEffect(() => {
     //getAudio(); //Garret: anytime this is called, the client makes a req to the server for the audio file!
     console.log(poseList);
+    console.log(timesToRingBell);
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
@@ -70,10 +85,13 @@ function Timer(props) {
       if (internalTimeInSec === 0) {
         //Practice is over!
         bell.play();
-        stopTimer();
+        toggleTimer();
       } else if (timesToRingBell.includes(internalTimeInSec)) {
         bell.play();
-        setCurrentPose(poseList[poseListIndex]);
+        if (poseListIndex > 0) {
+          //avoids the pose changing upon starting the practice
+          setCurrentPose(poseList[poseListIndex]);
+        }
         setPoseListIndex((poseListIndex) => poseListIndex + 1);
       }
     } else if (!isActive && internalTimeInSec !== 0) {
@@ -86,19 +104,14 @@ function Timer(props) {
     <div className="app">
       <div className="newTime">Timer: {displayTime}</div>
       <div className="currentPose">
-        {isActive && `currentPose: ${currentPose}`}
+        {!isStopped && internalTimeInSec !== 0
+          ? `Current Pose: ${currentPose}`
+          : `You finished your practice.`}
       </div>
       <div className="row">
-        <button
-          className={`button button-primary button-primary-${
-            isActive ? "active" : "inactive"
-          }`}
-          onClick={toggleTimer}
-        >
-          {isActive ? "Pause" : "Start"}
-        </button>
-        <button className="button" onClick={stopTimer}>
-          Stop
+        <button onClick={toggleTimer}>{isActive ? "Pause" : "Start"}</button>
+        <button className="button" onClick={quitPractice}>
+          Quit
         </button>
       </div>
     </div>
@@ -125,11 +138,17 @@ const mapReduxStateToProps = (store) => {
       pose_name: "corpse pose",
       pose_time: 10,
     },
+    {
+      pose_name: "another pose",
+      pose_time: 30,
+    },
   ];
   const poseTimes = getPoseTimes(test_data); //GAR --> should be store.currentPractice
   const TOTAL_TIME = getTotalPracticeTime(poseTimes);
   const arrOfInvertedPoseTimes = invertPoseTimes(TOTAL_TIME, poseTimes);
   const poseList = getPoseList(test_data);
+
+  console.log(arrOfInvertedPoseTimes);
 
   return {
     total_time: TOTAL_TIME,

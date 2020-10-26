@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   HashRouter as Router,
   Route,
   Redirect,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
+import Timer from "../Timer/Timer";
+import UserPage from "../UserPage/UserPage";
+import InfoPage from "../InfoPage/InfoPage";
+import LandingPage from "../LandingPage/LandingPage";
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
 
-import './App.css';
+import "./App.css";
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: "FETCH_USER" });
   }
 
   render() {
@@ -38,10 +38,10 @@ class App extends Component {
 
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
-              // shows AboutPage at all times (logged in or not)
+              // shows Timer at all times (logged in or not)
               exact
               path="/about"
-              component={AboutPage}
+              component={Timer}
             />
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -49,7 +49,7 @@ class App extends Component {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
             <ProtectedRoute
-              // logged in shows UserPage else shows LoginPage
+              // logged in shows UserPage else shows LoginPage --> GARRET: CHANGE USER PAGE TO ALL PRACTICES.js page
               exact
               path="/user"
               component={UserPage}

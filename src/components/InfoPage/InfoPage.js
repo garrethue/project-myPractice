@@ -1,29 +1,70 @@
-import React from 'react';
+import React from "react";
+import { Box, Grid, Text, Image } from "@chakra-ui/core";
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
-const InfoPage = () => (
-  <div>
-    <p>Info Page</p>
-  </div>
-);
-
-// If you needed to add local state or other things,
-// you can make it a class component like:
-
-/*
-class InfoPage extends React.Component {
-
-  render() {
-    return (
-      <div>
-        <p>Info Page</p>
-      </div>
-    )
-  }
+export default function InfoPage() {
+  return (
+    <div>
+      <Box w="100%" bg="blue.500">
+        <Text bg="red" textAlign="center" fontWeight="bold" fontSize="50px">
+          All Practices:
+        </Text>
+      </Box>
+      <Box rounded={3} h="100%" w="100%" bg="yellow">
+        <Grid
+          bg="transparent"
+          margin={5}
+          justifyContent="center"
+          alignItems="center"
+          templateColumns="repeat(3, 1fr)"
+          gap={4}
+        >
+          <Box
+            textAlign="center"
+            bg="green"
+            padding={1}
+            w="100%"
+            h="100%"
+            fontSize="1.5em"
+          >
+            <Image
+              rounded="full"
+              size="150px"
+              src="https://bit.ly/sage-adebayo"
+              alt="Segun Adebayo"
+            />
+          </Box>
+          <Box
+            textAlign="center"
+            bg="green"
+            padding={1}
+            w="100%"
+            h="100%"
+            fontSize="1.5em"
+          >
+            Practice2
+          </Box>
+          <Box
+            textAlign="center"
+            bg="green"
+            padding={1}
+            w="100%"
+            h="100%"
+            fontSize="1.5em"
+          >
+            Box3
+          </Box>
+          <Box
+            textAlign="center"
+            bg="green"
+            padding={1}
+            w="100%"
+            h="100%"
+            fontSize="1.5em"
+          >
+            Box4
+          </Box>
+        </Grid>
+      </Box>
+    </div>
+  );
 }
-*/
-export default InfoPage;
