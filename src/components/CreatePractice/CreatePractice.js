@@ -18,9 +18,15 @@ import { Formik } from "formik";
 function CreatePractice(props) {
   const [availableSlots] = useState(10); //while slots does NOT equal zero, add a slot
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
+  const [pose1, setPose1] = useState("");
+  const [time1, setTime1] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(pose1, time1);
+  };
+
+  const handleChange = (e) => {
     console.log(e.target.value);
   };
 
@@ -55,37 +61,67 @@ function CreatePractice(props) {
           >
             Total Time: x
           </Text>
-          <FormControl>
-            <Grid
-              bg="transparent"
-              margin={5}
-              justifyContent="center"
-              alignItems="center"
-              templateColumns="repeat(3, 1fr)"
-              gap={4}
-            >
-              {/* Need to Implement dynamic adding of rows!!*/}
-              {/* row 1!!*/}
-              <Select placeholder="Pose">
-                {props.store.poses.map((poseObj) => (
-                  <option value={poseObj.pose_name}>{poseObj.pose_name}</option>
-                ))}
-              </Select>
-
-              <Select placeholder="Time">
-                {availableTimes.map((time) => (
-                  <option value={time}>{time} seconds</option>
-                ))}
-              </Select>
-              <Button>Delete</Button>
-              <Button type="submit">Create</Button>
-            </Grid>
-          </FormControl>
+          <form onSubmit={handleSubmit}>
+            <FormControl>
+              <Grid
+                bg="transparent"
+                margin={5}
+                justifyContent="center"
+                alignItems="center"
+                templateColumns="repeat(3, 1fr)"
+                gap={4}
+              >
+                {/* Need to Implement dynamic adding of rows!!*/}
+                {/* row 1!!*/}
+                <Select
+                  value={pose1}
+                  onChange={(e) => setPose1(e.target.value)}
+                  placeholder="Pose"
+                >
+                  {props.store.poses.map((poseObj) => (
+                    <option value={poseObj.pose_name}>
+                      {poseObj.pose_name}
+                    </option>
+                  ))}
+                </Select>
+                <Select
+                  value={time1}
+                  onChange={(e) => setTime1(e.target.value)}
+                  placeholder="Time"
+                >
+                  {availableTimes.map((time) => (
+                    <option value={time}>{time} seconds</option>
+                  ))}
+                </Select>
+                <Button>Delete</Button>
+                <Button type="submit">Create</Button>
+              </Grid>
+            </FormControl>
+          </form>
         </Box>
       </Grid>
 
       {/* Formik testing...*/}
-      <Formik></Formik>
+      {/* <Formik
+        initialValues={{ poseTime: "" }}
+        onSubmit={(data, values) => console.log(data, values)}
+      >
+        {({ values, handleSubmit, handleChange }) => (
+          <form onSubmit={handleSubmit}>
+            <Select
+              value={values.poseTime}
+              onChange={handleChange}
+              name="poseTime"
+              placeholder="Time"
+            >
+              {availableTimes.map((time) => (
+                <option value={time}>{time} seconds</option>
+              ))}
+            </Select>
+            <Button type="submit">Submit</Button>
+          </form>
+        )}
+      </Formik> */}
     </div>
   );
 }
