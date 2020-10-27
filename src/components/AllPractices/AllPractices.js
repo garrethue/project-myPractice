@@ -6,7 +6,6 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
   const handleViewChange = (id) => {
-    console.log("hi!!!!!");
     props.dispatch({ type: "FETCH_PRACTICE_DETAILS", payload: id });
     props.history.push("/details");
   };

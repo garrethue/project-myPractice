@@ -7,7 +7,7 @@ select * from practices_poses;
 ------------------------------------
 -- this should happen when user gets the !DETAILS! of a practice
 -- all poses and times for a given user and given practice id
-SELECT pose_name, pose_time FROM "user" u
+SELECT pr.id as practice_id, ps.pose_name, pp.pose_time FROM "user" u
 JOIN practices pr ON u.id=pr.user_id
 JOIN practices_poses pp ON pr.id=pp.practice_id
 JOIN poses ps ON pp.pose_id=ps.id
@@ -20,7 +20,7 @@ SELECT * FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=6 ORDER B
 -- ####################################################################################
 
 -- DELETES
-------------------------------------
+-- ####################################################################################
 -- DROP TABLE practices_poses;
 ------------------------------------
 -- DROP TABLE practices;
@@ -32,7 +32,7 @@ SELECT * FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=6 ORDER B
 -- ####################################################################################
 
 -- CREATES
-------------------------------------
+-- ####################################################################################
 CREATE TABLE "user" (
 "id" SERIAL PRIMARY KEY,
 "username" VARCHAR(100) UNIQUE NOT NULL,
@@ -61,7 +61,6 @@ pose_time INTEGER NOT NULL
 
 -- ####################################################################################
 --INSERTS
-------------------------------------
 --users
 INSERT INTO "user" ("username", "password", "first_name", "last_name")
 VALUES ('garrethue','password','Garret', 'Larson'),

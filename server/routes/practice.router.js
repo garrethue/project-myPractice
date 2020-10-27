@@ -5,7 +5,6 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 
-// Garret: THIS ONE IS WORKING..CHECK
 router.get("/all", rejectUnauthenticated, async (req, res) => {
   let { id } = req.user;
   try {
@@ -21,7 +20,6 @@ router.get("/all", rejectUnauthenticated, async (req, res) => {
 }); //End GET All Practices Route
 
 // GET Details of a Practice Route
-// Garret: THIS ONE IS WORKING..CHECK
 router.get("/details/:practice_id", rejectUnauthenticated, async (req, res) => {
   let { id } = req.user;
   let { practice_id } = req.params;
@@ -47,7 +45,7 @@ router.post("/add", rejectUnauthenticated, async (req, res) => {
     // Simulate incoming practiceObj data from client
     // THIS WILL BE THE REQ.BODY
     let practice = {
-      practice_name: "garret test",
+      practice_name: "delete test",
       poses: [
         {
           pose_name: "triangle pose",
@@ -110,15 +108,12 @@ router.post("/add", rejectUnauthenticated, async (req, res) => {
 
 // DELETE a Practice Route
 
-//DELETE Route
 router.delete(
   "/delete/:practice_id",
   rejectUnauthenticated,
   async (req, res) => {
     try {
       const { practice_id } = req.params;
-      console.log("In delete route!");
-      console.log("practice id", practice_id);
 
       //note: must delete from junction table first due to foreign key constraints
       const deletePracticePoses = await pool.query(

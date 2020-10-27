@@ -5,6 +5,14 @@ import { Grid, Box, Button } from "@chakra-ui/core";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function PracticeDetails(props) {
+  const handleDeletePractice = (practiceId) => {
+    if (window.confirm("Are you sure you want to delete this practice?")) {
+      props.dispatch({ type: "DELETE_A_PRACTICE", payload: practiceId });
+      props.history.push("/all-practices");
+    }
+    //push user back to ALL PRACTICES! AFTER GETTING UPDATED LIST!
+  };
+
   console.log(props.store);
   return (
     <div>
@@ -45,7 +53,14 @@ function PracticeDetails(props) {
         templateColumns="repeat(3, 1fr)"
         gap={2}
       >
-        <Button>Start</Button> <Button>Edit</Button> <Button>Delete</Button>
+        <Button>Start</Button> <Button>Edit</Button>{" "}
+        <Button
+          onClick={() =>
+            handleDeletePractice(props.store.practiceDetails[0].practice_id)
+          }
+        >
+          Delete
+        </Button>
       </Grid>
     </div>
   );
