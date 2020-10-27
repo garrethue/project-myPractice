@@ -1,4 +1,4 @@
-const allPracticersForUser = (state = {}, action) => {
+const allPracticersForUser = (state = [], action) => {
   switch (action.type) {
     case "SET_PRACTICES": //this loads in all the practices for a given user
       return action.payload;

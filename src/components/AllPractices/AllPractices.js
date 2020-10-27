@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { Box, Grid, Text, Image } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
-  //ALL PRACTICES FOR A USER COMPONENT
-
   const handleViewChange = (id) => {
-    props.dispatch({ type: "SET_CURRENT_MOVIE_ID", payload: id });
+    console.log("hi!!!!!");
+    props.dispatch({ type: "FETCH_PRACTICE_DETAILS", payload: id });
     props.history.push("/details");
   };
 
@@ -15,6 +15,8 @@ function AllPractices(props) {
     //useEffect makes a fetch request to a restful api every time the component is rendered
     props.dispatch({ type: "FETCH_PRACTICES" });
   }, []);
+
+  console.log(props.store.practices);
 
   return (
     <div>
@@ -32,55 +34,32 @@ function AllPractices(props) {
           templateColumns="repeat(3, 1fr)"
           gap={4}
         >
-          <Box
-            textAlign="center"
-            bg="green"
-            padding={1}
-            w="100%"
-            h="100%"
-            fontSize="1.5em"
-          >
-            <Image
-              rounded="full"
-              size="150px"
-              src="https://bit.ly/sage-adebayo"
-              alt="Segun Adebayo"
-            />
-          </Box>
-          <Box
-            textAlign="center"
-            bg="green"
-            padding={1}
-            w="100%"
-            h="100%"
-            fontSize="1.5em"
-          >
-            Practice2
-          </Box>
-          <Box
-            textAlign="center"
-            bg="green"
-            padding={1}
-            w="100%"
-            h="100%"
-            fontSize="1.5em"
-          >
-            Box3
-          </Box>
-          <Box
-            textAlign="center"
-            bg="green"
-            padding={1}
-            w="100%"
-            h="100%"
-            fontSize="1.5em"
-          >
-            Box4
-          </Box>
+          {props.store.practices.map((practiceObj) => {
+            return (
+              <Box
+                textAlign="center"
+                bg="green"
+                padding={1}
+                w="100%"
+                h="100%"
+                fontSize="1.5em"
+                onClick={() => handleViewChange(practiceObj.practice_id)}
+              >
+                <Image
+                  rounded="full"
+                  size="150px"
+                  src="https://bit.ly/sage-adebayo"
+                  alt="Segun Adebayo"
+                />
+                <br />
+                {practiceObj.practice_name}
+              </Box>
+            );
+          })}
         </Grid>
       </Box>
     </div>
   );
 }
 
-export default connect()(withRouter(AllPractices));
+export default connect(mapStoreToProps)(withRouter(AllPractices));

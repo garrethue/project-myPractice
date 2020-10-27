@@ -1,5 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { Grid, Box, Button } from "@chakra-ui/core";
+import mapStoreToProps from "../../redux/mapStoreToProps";
 
-export default function PracticeDetails() {
-  return <div>Hello world!</div>;
+function PracticeDetails(props) {
+  console.log(props.store);
+  return (
+    <div>
+      <Button>Start</Button>
+      <br />
+      <button>Edit</button>
+      <br />
+      <button>Delete</button>
+    </div>
+  );
 }
+
+export default connect(mapStoreToProps)(withRouter(PracticeDetails));
