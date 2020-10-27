@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
-import { Box, Grid, Text, Image } from "@chakra-ui/core";
+import { Box, Grid, Text, Image, Button } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
-  const handleViewChange = (id) => {
+  const goToDetailsPage = (id) => {
     props.dispatch({ type: "FETCH_PRACTICE_DETAILS", payload: id });
     props.history.push("/details");
+  };
+
+  const goToCreatePage = () => {
+    props.history.push("/create");
   };
 
   useEffect(() => {
@@ -17,8 +21,9 @@ function AllPractices(props) {
 
   console.log(props.store.practices);
 
+  //justifyContent is what makes the outer Grid in the center of the page
   return (
-    <div>
+    <Grid justifyContent="center">
       <Box w="100%" bg="blue.500">
         <Text bg="red" textAlign="center" fontWeight="bold" fontSize="50px">
           All Practices:
@@ -42,7 +47,7 @@ function AllPractices(props) {
                 w="100%"
                 h="100%"
                 fontSize="1.5em"
-                onClick={() => handleViewChange(practiceObj.practice_id)}
+                onClick={() => goToDetailsPage(practiceObj.practice_id)}
               >
                 <Image
                   rounded="full"
@@ -57,7 +62,10 @@ function AllPractices(props) {
           })}
         </Grid>
       </Box>
-    </div>
+      <Box textAlign="right">
+        <Button onClick={goToCreatePage}>Add Practice</Button>
+      </Box>
+    </Grid>
   );
 }
 

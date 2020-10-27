@@ -22,6 +22,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 //garret's additions
 import Timer from "../Timer/Timer";
 import PracticeDetails from "../PracticeDetails/PracticeDetails";
+import CreatePractice from "../CreatePractice/CreatePractice";
 
 import "./App.css";
 
@@ -63,6 +64,13 @@ class App extends Component {
               exact
               path="/all-practices"
               component={AllPractices}
+            />
+
+            <ProtectedRoute
+              // logged in shows a list of all of the user's practices
+              exact
+              path="/create"
+              component={CreatePractice}
             />
 
             <ProtectedRoute
