@@ -10,9 +10,9 @@ function PracticeDetails(props) {
     <div>
       <Button>Start</Button>
       <br />
-      <button>Edit</button>
+      <Button>Edit</Button>
       <br />
-      <button>Delete</button>
+      <Button>Delete</Button>
     </div>
   );
 }

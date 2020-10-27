@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Howl } from "howler";
 import { connect } from "react-redux";
 import axios from "axios";
+import { Button } from "@chakra-ui/core";
 
 function Timer(props) {
   //the time driver
@@ -109,10 +110,10 @@ function Timer(props) {
           : `You finished your practice.`}
       </div>
       <div className="row">
-        <button onClick={toggleTimer}>{isActive ? "Pause" : "Start"}</button>
-        <button className="button" onClick={quitPractice}>
+        <Button onClick={toggleTimer}>{isActive ? "Pause" : "Start"}</Button>
+        <Button className="button" onClick={quitPractice}>
           Quit
-        </button>
+        </Button>
       </div>
     </div>
   );
