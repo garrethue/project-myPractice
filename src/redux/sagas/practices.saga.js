@@ -1,6 +1,7 @@
 import axios from "axios";
+import { takeEvery } from "redux-saga/effects";
 
-function* fetchPracticesSaga(action) {
+function* fetchPractices(action) {
   try {
     console.log("here i am!");
     const response = yield axios.get("/api/practices/all-for-user/");
@@ -11,4 +12,8 @@ function* fetchPracticesSaga(action) {
   }
 }
 
-export { fetchPracticesSaga };
+function* fetchPracticesSaga() {
+  yield takeEvery("FETCH_PRACTICES", fetchPractices);
+}
+
+export default fetchPracticesSaga;
