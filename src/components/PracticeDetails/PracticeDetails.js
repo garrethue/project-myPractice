@@ -9,23 +9,44 @@ function PracticeDetails(props) {
   return (
     <div>
       <Grid
-        bg="blue"
+        bg="blue.500"
         margin={5}
+        padding={2}
         justifyContent="center"
         alignItems="center"
         templateColumns="repeat(2, 1fr)"
-        gap={4}
+        gap={2}
       >
+        <Box textAlign="center" bg="green.500">
+          Pose
+        </Box>
+        <Box textAlign="center" bg="green.500">
+          Duration
+        </Box>
         {props.store.practiceDetails.map((poseObj) => {
           return (
             <>
-              <Box>{poseObj.pose_name}</Box>
-              <Box>{poseObj.pose_time}</Box>
+              <Box textAlign="center" bg="yellow.500">
+                {poseObj.pose_name}
+              </Box>
+              <Box textAlign="center" bg="yellow.500">
+                {poseObj.pose_time}
+              </Box>
             </>
           );
         })}
       </Grid>
-      <Button>Start</Button> <Button>Edit</Button> <Button>Delete</Button>
+      <Grid
+        bg="blue.500"
+        margin={5}
+        padding={2}
+        justifyContent="center"
+        alignItems="center"
+        templateColumns="repeat(3, 1fr)"
+        gap={2}
+      >
+        <Button>Start</Button> <Button>Edit</Button> <Button>Delete</Button>
+      </Grid>
     </div>
   );
 }

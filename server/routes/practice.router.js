@@ -5,6 +5,7 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 
+// Garret: THIS ONE IS WORKING..CHECK
 router.get("/all", rejectUnauthenticated, async (req, res) => {
   let { id } = req.user;
   try {
@@ -19,13 +20,14 @@ router.get("/all", rejectUnauthenticated, async (req, res) => {
   }
 }); //End GET All Practices Route
 
+// GET Details of a Practice Route
+// Garret: THIS ONE IS WORKING..CHECK
 router.get("/details/:practice_id", rejectUnauthenticated, async (req, res) => {
-  console.log("frontend talking!");
   let { id } = req.user;
   let { practice_id } = req.params;
   try {
     const practiceDetails = await pool.query(
-      'SELECT pose_name, pose_time FROM "user" u JOIN practices pr ON u.id=pr.user_id JOIN practices_poses pp ON pr.id=pp.practice_id JOIN poses ps ON pp.pose_id=ps.id WHERE u.id=$1 AND pr.id=$2 ORDER BY pp.id ASC',
+      'SELECT pr.id as practice_id, ps.pose_name, pp.pose_time FROM "user" u JOIN practices pr ON u.id=pr.user_id JOIN practices_poses pp ON pr.id=pp.practice_id JOIN poses ps ON pp.pose_id=ps.id WHERE u.id=$1 AND pr.id=$2 ORDER BY pp.id ASC',
       [id, practice_id]
     );
     res.json(practiceDetails.rows);
@@ -35,6 +37,8 @@ router.get("/details/:practice_id", rejectUnauthenticated, async (req, res) => {
   }
 }); //End GET Details of a Practice Route
 
+// POST a Practice Route
+//TODO: THIS ONE NEEDS TO BE HOOKED UP TO THE FRONTEND and PARAMETERIZED
 router.post("/add", rejectUnauthenticated, async (req, res) => {
   try {
     //TODO: parameterize this in the future...
@@ -103,5 +107,36 @@ router.post("/add", rejectUnauthenticated, async (req, res) => {
     console.error(err.message);
   }
 });
+
+// DELETE a Practice Route
+
+//DELETE Route
+router.delete(
+  "/delete/:practice_id",
+  rejectUnauthenticated,
+  async (req, res) => {
+    try {
+      const { practice_id } = req.params;
+      console.log("In delete route!");
+      console.log("practice id", practice_id);
+
+      //note: must delete from junction table first due to foreign key constraints
+      const deletePracticePoses = await pool.query(
+        "DELETE FROM practices_poses WHERE practice_id=$1",
+        [practice_id]
+      );
+
+      const deletePractice = await pool.query(
+        "DELETE FROM practices WHERE id=$1",
+        [practice_id]
+      );
+
+      res.sendStatus(200);
+    } catch (err) {
+      res.sendStatus(500);
+      console.log(err.message);
+    }
+  }
+); //END DELETE Route
 
 module.exports = router;
