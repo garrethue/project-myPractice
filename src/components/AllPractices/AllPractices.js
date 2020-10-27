@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { Box, Grid, Text, Image } from "@chakra-ui/core";
-
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-function InfoPage(props) {
+function AllPractices(props) {
   //ALL PRACTICES FOR A USER COMPONENT
+
+  const handleViewChange = (id) => {
+    props.dispatch({ type: "SET_CURRENT_MOVIE_ID", payload: id });
+    props.history.push("/details");
+  };
 
   useEffect(() => {
     //useEffect makes a fetch request to a restful api every time the component is rendered
@@ -78,4 +83,4 @@ function InfoPage(props) {
   );
 }
 
-export default connect()(InfoPage);
+export default connect()(withRouter(AllPractices));

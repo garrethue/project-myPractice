@@ -5,17 +5,12 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 
-/**
- * GET route template
- */
-router.get("/all-for-user", rejectUnauthenticated, async (req, res) => {
-  console.log("frontend talking!");
-  // GET route code here
-  let user_id = 6; //TODO: PARAMETERIZE THIS
+router.get("/all", rejectUnauthenticated, async (req, res) => {
+  let { id } = req.user;
   try {
     const allPracticesForGivenUser = await pool.query(
       'SELECT pr.id as practice_id, pr.practice_name FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=$1 ORDER BY practice_id',
-      [user_id]
+      [id]
     );
     res.json(allPracticesForGivenUser.rows);
   } catch (err) {
@@ -24,9 +19,22 @@ router.get("/all-for-user", rejectUnauthenticated, async (req, res) => {
   }
 }); //End GET All Practices Route
 
-/**
- * POST route template
- */
+router.get("/details/:practice_id", rejectUnauthenticated, async (req, res) => {
+  console.log("frontend talking!");
+  let { id } = req.user;
+  let { practice_id } = req.params;
+  try {
+    const practiceDetails = await pool.query(
+      'SELECT pose_name, pose_time FROM "user" u JOIN practices pr ON u.id=pr.user_id JOIN practices_poses pp ON pr.id=pp.practice_id JOIN poses ps ON pp.pose_id=ps.id WHERE u.id=$1 AND pr.id=$2 ORDER BY pp.id ASC',
+      [id, practice_id]
+    );
+    res.json(practiceDetails.rows);
+  } catch (err) {
+    res.sendStatus(500);
+    console.log(err.message);
+  }
+}); //End GET Details of a Practice Route
+
 router.post("/add", rejectUnauthenticated, async (req, res) => {
   try {
     //TODO: parameterize this in the future...

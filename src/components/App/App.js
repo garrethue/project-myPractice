@@ -13,12 +13,15 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import Timer from "../Timer/Timer";
 import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
+import AllPractices from "../AllPractices/AllPractices";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
+
+//garret's additions
+import Timer from "../Timer/Timer";
+import PracticeDetails from "../PracticeDetails/PracticeDetails";
 
 import "./App.css";
 
@@ -56,10 +59,17 @@ class App extends Component {
             />
 
             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
+              // logged in shows a list of all of the user's practices
               exact
-              path="/info"
-              component={InfoPage}
+              path="/all-practices"
+              component={AllPractices}
+            />
+
+            <ProtectedRoute
+              // once a user clicks on a given practice, should take them to this page
+              exact
+              path="/details"
+              component={PracticeDetails}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will
