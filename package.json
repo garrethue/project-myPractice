@@ -13,6 +13,7 @@
     "dotenv": "^4.0.0",
     "emotion-theming": "^10.0.27",
     "express": "^4.16.4",
+    "formik": "^2.2.1",
     "howler": "^2.2.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
