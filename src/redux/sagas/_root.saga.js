@@ -5,6 +5,7 @@ import userSaga from "./user.saga";
 import fetchPracticesSaga from "./practices.saga";
 import fetchPracticeDetails from "./practiceDetails.saga";
 import deleteAPracticeSaga from "./deletePractice.saga";
+import fetchAvailablePosesSaga from "./poses.saga";
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -22,5 +23,6 @@ export default function* rootSaga() {
     fetchPracticesSaga(),
     fetchPracticeDetails(),
     deleteAPracticeSaga(),
+    fetchAvailablePosesSaga(),
   ]);
 }
