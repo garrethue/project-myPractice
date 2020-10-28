@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import {
   Grid,
   Box,
@@ -10,51 +10,133 @@ import {
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 
 function EditPractice(props) {
-  const [practiceId] = useState(
-    props.store.practiceDetails[0].practice_id || null
-  );
-  const [availableSlots] = useState(10); //while slots does NOT equal zero, add a slot
-  const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
+  const [availableRows, setAvailableRows] = useState(10);
+  const [availableTimes] = useState([30, 60, 120]);
+  const [availablePoses] = useState(props.availablePoses);
   const [practiceName, setPracticeName] = useState("");
-  const [pose1, setPose1] = useState("");
-  const [time1, setTime1] = useState("");
-  const [pose2, setPose2] = useState("");
-  const [time2, setTime2] = useState("");
-  //wrap up each pose into an object? like im doing in the POST route?
+  const [poses, setPoses] = useState(props.posesAndTimesInPractice);
+  const [practiceId] = useState(props.practiceId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(pose1, time1);
-    console.log(pose2, time2);
-    console.log(practiceName);
-    console.log(practiceId);
+    const allPosesValid = poses.every(
+      (poseObj) => poseObj.pose_name && poseObj.time
+    );
+    const practiceNameValid = practiceName ? true : false;
 
-    axios
-      .put(`/api/practices/edit/${practiceId}`, {
-        practice_name: practiceName,
-        poses: [
-          {
-            pose_name: pose1,
-            time: time1,
-          },
-          { pose_name: pose2, time: time2 },
-        ],
-      })
-      .then(() => {
-        props.dispatch({ type: "FETCH_PRACTICES" });
-        props.history.push("/all-practices");
-      })
-      .catch((err) => console.log(err));
+    console.log(poses.length);
+    console.log(allPosesValid);
+    console.log(practiceNameValid);
+
+    if (practiceNameValid && poses.length > 0 && allPosesValid) {
+      //   axios
+      //     .post("/api/practices/add", {
+      //       practice_name: practiceName,
+      //       poses: poses,
+      //     })
+      //     .then(() => {
+      //       props.dispatch({ type: "FETCH_PRACTICES" });
+      //       props.history.push("/all-practices");
+      //     })
+      //     .catch((err) => console.log(err));
+      //   axios
+      //   .put(`/api/practices/edit/${practiceId}`, {
+      //     practice_name: practiceName,
+      //     poses: [
+      //       {
+      //         pose_name: pose1,
+      //         time: time1,
+      //       },
+      //       { pose_name: pose2, time: time2 },
+      //     ],
+      //   })
+      //   .then(() => {
+      //     props.dispatch({ type: "FETCH_PRACTICES" });
+      //     props.history.push("/all-practices");
+      //   })
+      //   .catch((err) => console.log(err));
+    } else if (!practiceNameValid && poses.length === 0) {
+      alert("Error: You can't fill out an empty form!");
+    } else if (!allPosesValid && !practiceNameValid) {
+      alert(
+        "Error: Give your practice a name and make sure all poses have a name and a time! "
+      );
+    } else if (!allPosesValid) {
+      alert("Error: make sure all poses have a name and a time!");
+    } else if (!practiceNameValid) {
+      alert("Error: give your practice a name!");
+    } else {
+      alert("Error: something unexpected occurred.");
+    }
   };
 
-  useEffect(() => {
-    //not sure if i need this
-    props.dispatch({ type: "FETCH_POSES" });
-  }, []);
+  const handleChangePoseName = (i, value) => {
+    let newPoses = [...poses]; //bring in the poses [...poses]
+    newPoses[i].pose_name = value; //mutate whichever object in the array
+    setPoses(newPoses); //reset the state with the newly mutated array
+  };
+
+  const handleChangePoseTime = (i, value) => {
+    let newPoses = [...poses]; //bring in the poses [...poses]
+    newPoses[i].time = value; //mutate whichever object in the array
+    console.log(newPoses);
+    setPoses(newPoses); //reset the state with the newly mutated array
+  };
+
+  const addItem = () => {
+    // this.setState((prevState) => ({ values: [...prevState.values, ""] }));
+    if (availableRows > 0) {
+      setPoses([...poses, { pose_name: "", time: 0 }]);
+      const newAvailableRows = availableRows - 1;
+      setAvailableRows(newAvailableRows);
+    } else {
+      alert("Error: the max number of poses is 10!");
+    }
+  };
+
+  const removeItem = (i) => {
+    let newPoses = [...poses];
+    newPoses.splice(i, 1);
+    setPoses(newPoses);
+    const newAvailableRows = availableRows + 1;
+    setAvailableRows(newAvailableRows);
+  };
+
+  const createUI = () => {
+    console.log("inside createUI", poses);
+    if (poses !== undefined) {
+      return poses.map((poseObj, index) => {
+        return (
+          <Fragment key={index}>
+            <Select
+              value={poseObj.pose_name || ""}
+              onChange={(e) => handleChangePoseName(index, e.target.value)}
+              placeholder="Pose"
+            >
+              {availablePoses.map((poseString) => (
+                <option value={poseString}>{poseString}</option>
+              ))}
+            </Select>
+            <Select
+              value={poseObj.time || ""}
+              onChange={(e) => handleChangePoseTime(index, e.target.value)}
+              placeholder="Time"
+            >
+              {availableTimes.map((time) => (
+                <option value={time}>{time} seconds</option>
+              ))}
+            </Select>
+            <Button onClick={() => removeItem(index)}>Delete</Button>
+          </Fragment>
+        );
+      });
+    }
+  };
+
+  console.log("outside createUI", poses);
 
   return (
     <div>
@@ -67,7 +149,7 @@ function EditPractice(props) {
             fontWeight="bold"
             fontSize="50px"
           >
-            Edit this Practice
+            Edit This Practice
           </Text>
           <br />
           <Text
@@ -98,60 +180,27 @@ function EditPractice(props) {
                 templateColumns="repeat(3, 1fr)"
                 gap={4}
               >
-                {/* Need to Implement dynamic adding of rows!!*/}
-                {/* row 1!!*/}
-                <Select
-                  value={pose1}
-                  onChange={(e) => setPose1(e.target.value)}
-                  placeholder="Pose"
-                >
-                  {props.store.poses.map((poseObj) => (
-                    <option value={poseObj.pose_name}>
-                      {poseObj.pose_name}
-                    </option>
-                  ))}
-                </Select>
-                <Select
-                  value={time1}
-                  onChange={(e) => setTime1(e.target.value)}
-                  placeholder="Time"
-                >
-                  {availableTimes.map((time) => (
-                    <option value={time}>{time} seconds</option>
-                  ))}
-                </Select>
-                <Button>Delete</Button>
-
-                <Select
-                  value={pose2}
-                  onChange={(e) => setPose2(e.target.value)}
-                  placeholder="Pose"
-                >
-                  {props.store.poses.map((poseObj) => (
-                    <option value={poseObj.pose_name}>
-                      {poseObj.pose_name}
-                    </option>
-                  ))}
-                </Select>
-                <Select
-                  value={time2}
-                  onChange={(e) => setTime2(e.target.value)}
-                  placeholder="Time"
-                >
-                  {availableTimes.map((time) => (
-                    <option value={time}>{time} seconds</option>
-                  ))}
-                </Select>
-                <Button>Delete</Button>
-
+                {createUI()}
                 <Button type="submit">Edit</Button>
               </Grid>
             </FormControl>
           </form>
+          <Button onClick={addItem}>Add a Row</Button>
         </Box>
       </Grid>
     </div>
   );
 }
+
+const mapStoreToProps = (store) => {
+  let { practiceDetails, poses } = store;
+  const posesAndTimesInPractice = practiceDetails.map((poseObj) => {
+    return { pose_name: poseObj.pose_name, time: poseObj.pose_time };
+  });
+  const availablePoses = poses.map((poseObj) => poseObj.pose_name);
+  const practiceId = practiceDetails[0].practice_id;
+
+  return { ...store, posesAndTimesInPractice, practiceId, availablePoses };
+};
 
 export default connect(mapStoreToProps)(withRouter(EditPractice));

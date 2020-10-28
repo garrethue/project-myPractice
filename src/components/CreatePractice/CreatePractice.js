@@ -15,7 +15,7 @@ import axios from "axios";
 
 function CreatePractice(props) {
   const [availableRows, setAvailableRows] = useState(10); //while slots does NOT equal zero, add a slot
-  const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
+  const [availableTimes] = useState([30, 60, 120]);
   const [practiceName, setPracticeName] = useState("");
   const [poses, setPoses] = useState([]);
 
@@ -25,10 +25,6 @@ function CreatePractice(props) {
       (poseObj) => poseObj.pose_name && poseObj.time
     );
     const practiceNameValid = practiceName ? true : false;
-
-    console.log(poses.length);
-    console.log(allPosesValid);
-    console.log(practiceNameValid);
 
     if (practiceNameValid && poses.length > 0 && allPosesValid) {
       axios
