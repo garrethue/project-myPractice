@@ -6,28 +6,43 @@ import {
   Button,
   Text,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
+  Input,
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import { Formik } from "formik";
+import axios from "axios";
 
 function CreatePractice(props) {
   const [availableSlots] = useState(10); //while slots does NOT equal zero, add a slot
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
+  const [practiceName, setPracticeName] = useState("");
   const [pose1, setPose1] = useState("");
   const [time1, setTime1] = useState("");
+  const [pose2, setPose2] = useState("");
+  const [time2, setTime2] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(pose1, time1);
-  };
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
+    console.log(pose2, time2);
+    console.log(practiceName);
+    axios
+      .post("/api/practices/add", {
+        practice_name: practiceName,
+        poses: [
+          {
+            pose_name: pose1,
+            time: time1,
+          },
+          { pose_name: pose2, time: time2 },
+        ],
+      })
+      .then(() => {
+        props.dispatch({ type: "FETCH_PRACTICES" });
+        //props.history.push("/create");
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -63,6 +78,12 @@ function CreatePractice(props) {
           </Text>
           <form onSubmit={handleSubmit}>
             <FormControl>
+              <Input
+                value={practiceName}
+                onChange={(e) => setPracticeName(e.target.value)}
+                type="text"
+                placeholder="Your practice name here."
+              />
               <Grid
                 bg="transparent"
                 margin={5}
@@ -94,6 +115,29 @@ function CreatePractice(props) {
                   ))}
                 </Select>
                 <Button>Delete</Button>
+
+                <Select
+                  value={pose2}
+                  onChange={(e) => setPose2(e.target.value)}
+                  placeholder="Pose"
+                >
+                  {props.store.poses.map((poseObj) => (
+                    <option value={poseObj.pose_name}>
+                      {poseObj.pose_name}
+                    </option>
+                  ))}
+                </Select>
+                <Select
+                  value={time2}
+                  onChange={(e) => setTime2(e.target.value)}
+                  placeholder="Time"
+                >
+                  {availableTimes.map((time) => (
+                    <option value={time}>{time} seconds</option>
+                  ))}
+                </Select>
+                <Button>Delete</Button>
+
                 <Button type="submit">Create</Button>
               </Grid>
             </FormControl>

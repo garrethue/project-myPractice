@@ -39,36 +39,12 @@ router.get("/details/:practice_id", rejectUnauthenticated, async (req, res) => {
 //TODO: THIS ONE NEEDS TO BE HOOKED UP TO THE FRONTEND and PARAMETERIZED
 router.post("/add", rejectUnauthenticated, async (req, res) => {
   try {
-    //TODO: parameterize this in the future...
-    let userId = 6; //this should be coming from req.user object
-
-    // Simulate incoming practiceObj data from client
-    // THIS WILL BE THE REQ.BODY
-    let practice = {
-      practice_name: "delete test",
-      poses: [
-        {
-          pose_name: "triangle pose",
-          time: 2,
-        },
-        {
-          pose_name: "tree pose",
-          time: 3,
-        },
-        {
-          pose_name: "downward dog",
-          time: 1,
-        },
-      ],
-    };
-
-    let { practice_name, poses } = practice;
-
-    console.log(practice_name, poses);
+    let { id } = req.user;
+    let { practice_name, poses } = req.body;
 
     const newPractice = await pool.query(
       "INSERT INTO practices (practice_name, user_id) VALUES ($1,$2) RETURNING *", //RETURNING * is used whenever you are updating, inserting, deleting data
-      [practice_name, userId]
+      [practice_name, id]
     );
 
     //grab newPractice.rows.id to get the PRACTICE_ID
