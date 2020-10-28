@@ -14,38 +14,46 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 
 function CreatePractice(props) {
-  const [availablePoses, setAvailablePoses] = useState(props.store.poses);
   const [availableRows] = useState(5); //while slots does NOT equal zero, add a slot
-  const [rowsInGrid, setRowsInGrid] = useState();
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
   const [practiceName, setPracticeName] = useState("");
-  const [pose1, setPose1] = useState("");
-  const [time1, setTime1] = useState("");
-  const [pose2, setPose2] = useState("");
-  const [time2, setTime2] = useState("");
-
   const [poses, setPoses] = useState([]);
-  //poses needs to be an arrray of objects with pose_name and time
-  //wrap up each pose into an object? like im doing in the POST route?
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // axios
-    //   .post("/api/practices/add", {
-    //     practice_name: practiceName,
-    //     poses: [
-    //       {
-    //         pose_name: pose1,
-    //         time: time1,
-    //       },
-    //       { pose_name: pose2, time: time2 },
-    //     ],
-    //   })
-    //   .then(() => {
-    //     props.dispatch({ type: "FETCH_PRACTICES" });
-    //     //props.history.push("/create");
-    //   })
-    //   .catch((err) => console.log(err));
+    const allPosesValid = poses.every(
+      (poseObj) => poseObj.pose_name && poseObj.time
+    );
+    const practiceNameValid = practiceName ? true : false;
+
+    console.log(poses.length);
+    console.log(allPosesValid);
+    console.log(practiceNameValid);
+
+    if (practiceNameValid && poses.length > 0 && allPosesValid) {
+      axios
+        .post("/api/practices/add", {
+          practice_name: practiceName,
+          poses: poses,
+        })
+        .then(() => {
+          props.dispatch({ type: "FETCH_PRACTICES" });
+          props.history.push("/all-practices");
+        })
+        .catch((err) => console.log(err));
+    } else if (!practiceNameValid && poses.length === 0) {
+      alert("Error: You can't fill out an empty form!");
+    } else if (!allPosesValid && !practiceNameValid) {
+      alert(
+        "Error: Give your practice a name and make sure all poses have a name and a time! "
+      );
+    } else if (!allPosesValid) {
+      alert("Error: make sure all poses have a name and a time!");
+    } else if (!practiceNameValid) {
+      alert("Error: give your practice a name!");
+    } else {
+      alert("Error: something unexpected occurred.");
+    }
   };
 
   const handleChangePoseName = (i, value) => {
@@ -69,21 +77,10 @@ function CreatePractice(props) {
   const removeItem = (i) => {
     let newPoses = [...poses];
     newPoses.splice(i, 1);
-    console.log(newPoses);
     setPoses(newPoses);
   };
 
   const createUI = () => {
-    // when a user clicks the add row button, check if we have reach the maximum number of ROWS (ie, Check availableRows)
-    //   if (availableRows >= 1) {
-    //need to add a row to the grid somehow
-    //can i put the props into its own state and append items to it?? def for the edit!
-    //
-
-    //NEED TO MAP STATE AND RETURN THIS!!
-    //what needs to be a part of state
-    //pose1,
-    console.log(poses);
     return poses.map((poseObj, index) => {
       return (
         <Fragment key={index}>
@@ -155,30 +152,6 @@ function CreatePractice(props) {
                 templateColumns="repeat(3, 1fr)"
                 gap={4}
               >
-                {/* Need to Implement dynamic adding of rows!!*/}
-                {/* row 1!!*/}
-
-                {/* <Select
-                  value={pose1}
-                  onChange={(e) => setPose1(e.target.value)}
-                  placeholder="Pose"
-                >
-                  {props.store.poses.map((poseObj) => (
-                    <option value={poseObj.pose_name}>
-                      {poseObj.pose_name}
-                    </option>
-                  ))}
-                </Select>
-                <Select
-                  value={time1}
-                  onChange={(e) => setTime1(e.target.value)}
-                  placeholder="Time"
-                >
-                  {availableTimes.map((time) => (
-                    <option value={time}>{time} seconds</option>
-                  ))}
-                </Select>
-                <Button>Delete</Button> */}
                 {createUI()}
                 <Button type="submit">Create</Button>
               </Grid>
