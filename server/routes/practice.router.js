@@ -103,33 +103,8 @@ router.delete(
 // EDIT a Practice Route
 router.put("/edit/:practice_id", rejectUnauthenticated, async (req, res) => {
   try {
-    // const { id } = req.params;
-    // let { title, description } = req.body;
-
-    //TODO: parameterize this in the future...
-    //let userId = 6; //this should be coming from req.user object
     const { practice_id } = req.params;
-    // Simulate incoming practiceObj data from client
-    // THIS WILL BE THE REQ.BODY
-    console.log(practice_id);
-    let newPractice = {
-      practice_name: "EDIT_TEST",
-      poses: [
-        {
-          pose_name: "triangle pose",
-          time: 100,
-        },
-        {
-          pose_name: "tree pose",
-          time: 120,
-        },
-        {
-          pose_name: "downward dog",
-          time: 300,
-        },
-      ],
-    };
-    let { practice_name, poses } = newPractice;
+    const { practice_name, poses } = req.body;
 
     //UPDATE practice name
     const updatePracticeName = await pool.query(
@@ -137,7 +112,7 @@ router.put("/edit/:practice_id", rejectUnauthenticated, async (req, res) => {
       [practice_name, practice_id]
     );
 
-    //delete rows with practice id of to clear it out
+    //DELETE rows with practice id of to clear it out
     const deleteCurrentPracticePoses = await pool.query(
       "DELETE FROM practices_poses WHERE practice_id = $1",
       [practice_id]
