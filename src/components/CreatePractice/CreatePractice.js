@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import {
   Grid,
   Box,
@@ -61,15 +61,16 @@ function CreatePractice(props) {
     setPoses(newPoses); //reset the state with the newly mutated array
   };
 
-  const addClick = () => {
+  const addItem = () => {
     // this.setState((prevState) => ({ values: [...prevState.values, ""] }));
     setPoses([...poses, { pose_name: "", time: 0 }]);
   };
 
-  const removeClick = (i) => {
-    let values = [...poses];
-    values.splice(i, 1);
-    this.setState({ values });
+  const removeItem = (i) => {
+    let newPoses = [...poses];
+    newPoses.splice(i, 1);
+    console.log(newPoses);
+    setPoses(newPoses);
   };
 
   const createUI = () => {
@@ -82,9 +83,10 @@ function CreatePractice(props) {
     //NEED TO MAP STATE AND RETURN THIS!!
     //what needs to be a part of state
     //pose1,
+    console.log(poses);
     return poses.map((poseObj, index) => {
       return (
-        <>
+        <Fragment key={index}>
           <Select
             value={poseObj.pose_name || ""}
             onChange={(e) => handleChangePoseName(index, e.target.value)}
@@ -103,22 +105,13 @@ function CreatePractice(props) {
               <option value={time}>{time} seconds</option>
             ))}
           </Select>
-          <Button>Delete</Button>
-        </>
+          <Button onClick={() => removeItem(index)}>Delete</Button>
+        </Fragment>
       );
     });
     //     availableRows--;
     //   }
   };
-
-  //   const createUI = () => {
-  //     return this.state.values.map((el, i) =>
-  //         <div key={i}>
-  //            <input type="text" value={el||''} onChange={this.handleChange.bind(this, i)} />
-  //            <input type='button' value='remove' onClick={this.removeClick.bind(this, i)}/>
-  //         </div>
-  //     )
-  //  }
 
   return (
     <div>
@@ -187,12 +180,11 @@ function CreatePractice(props) {
                 </Select>
                 <Button>Delete</Button> */}
                 {createUI()}
-
                 <Button type="submit">Create</Button>
               </Grid>
             </FormControl>
           </form>
-          <Button onClick={addClick}>Add a Row</Button>
+          <Button onClick={addItem}>Add a Row</Button>
         </Box>
       </Grid>
     </div>
