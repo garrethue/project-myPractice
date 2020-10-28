@@ -14,7 +14,7 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 
 function CreatePractice(props) {
-  const [availableRows] = useState(5); //while slots does NOT equal zero, add a slot
+  const [availableRows, setAvailableRows] = useState(10); //while slots does NOT equal zero, add a slot
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
   const [practiceName, setPracticeName] = useState("");
   const [poses, setPoses] = useState([]);
@@ -71,13 +71,21 @@ function CreatePractice(props) {
 
   const addItem = () => {
     // this.setState((prevState) => ({ values: [...prevState.values, ""] }));
-    setPoses([...poses, { pose_name: "", time: 0 }]);
+    if (availableRows > 0) {
+      setPoses([...poses, { pose_name: "", time: 0 }]);
+      const newAvailableRows = availableRows - 1;
+      setAvailableRows(newAvailableRows);
+    } else {
+      alert("Error: the max number of poses is 10!");
+    }
   };
 
   const removeItem = (i) => {
     let newPoses = [...poses];
     newPoses.splice(i, 1);
     setPoses(newPoses);
+    const newAvailableRows = availableRows + 1;
+    setAvailableRows(newAvailableRows);
   };
 
   const createUI = () => {

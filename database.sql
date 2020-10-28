@@ -15,6 +15,36 @@ WHERE u.id = 6
 AND pr.id = 2
 ORDER BY pp.id ASC; --this ensures that the poses are in order
 ------------------------------------
+-- EDIT a Practice Query
+SELECT * FROM practices pr
+JOIN practices_poses pp ON pr.id=pp.practice_id
+WHERE pr.id = 7 -- have this
+ORDER BY pp.id ASC; --this ensures that the poses are in order
+--
+select *
+from practices_poses
+where practice_id = 7;
+
+----
+UPDATE practices_poses pp
+SET pp.pose_id = 3,
+pp.pose_time = 30,
+WHERE 
+
+-- 
+DELETE FROM practices_poses pp
+WHERE practice_id = 7;
+
+INSERT INTO practices_poses (practice_id, pose_id, pose_time) VALUES (7,2,4) RETURNING *;
+
+------------------------------------
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2,
+    ...
+WHERE condition;
+---
+
 -- get practice_id and practice_name for a given user
 SELECT * FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=6 ORDER BY pr.id;
 -- ####################################################################################
