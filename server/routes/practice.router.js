@@ -6,7 +6,7 @@ const {
 } = require("../modules/authentication-middleware");
 
 router.get("/all", rejectUnauthenticated, async (req, res) => {
-  let { id } = req.user;
+  const { id } = req.user;
   try {
     const allPracticesForGivenUser = await pool.query(
       'SELECT pr.id as practice_id, pr.practice_name FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=$1 ORDER BY practice_id',
@@ -21,8 +21,8 @@ router.get("/all", rejectUnauthenticated, async (req, res) => {
 
 // GET Details of a Practice Route
 router.get("/details/:practice_id", rejectUnauthenticated, async (req, res) => {
-  let { id } = req.user;
-  let { practice_id } = req.params;
+  const { id } = req.user;
+  const { practice_id } = req.params;
   try {
     const practiceDetails = await pool.query(
       'SELECT pr.id as practice_id, ps.pose_name, pp.pose_time FROM "user" u JOIN practices pr ON u.id=pr.user_id JOIN practices_poses pp ON pr.id=pp.practice_id JOIN poses ps ON pp.pose_id=ps.id WHERE u.id=$1 AND pr.id=$2 ORDER BY pp.id ASC',
@@ -36,11 +36,10 @@ router.get("/details/:practice_id", rejectUnauthenticated, async (req, res) => {
 }); //End GET Details of a Practice Route
 
 // POST a Practice Route
-//TODO: THIS ONE NEEDS TO BE HOOKED UP TO THE FRONTEND and PARAMETERIZED
 router.post("/add", rejectUnauthenticated, async (req, res) => {
   try {
-    let { id } = req.user;
-    let { practice_name, poses } = req.body;
+    const { id } = req.user;
+    const { practice_name, poses } = req.body;
 
     const newPractice = await pool.query(
       "INSERT INTO practices (practice_name, user_id) VALUES ($1,$2) RETURNING *", //RETURNING * is used whenever you are updating, inserting, deleting data
@@ -48,42 +47,33 @@ router.post("/add", rejectUnauthenticated, async (req, res) => {
     );
 
     //grab newPractice.rows.id to get the PRACTICE_ID
-
     const practiceId = newPractice.rows[0].id;
-    //console.log(practiceId);
 
     //get pose_id
     //iterate over poses in array and add
     //for each pose in the pose array above,
     //select the poses ID from the poses table
-    //INSERT INTO JUNCTION TABLE with pose_id, practice_id, and pose_time.
-
-    //FOR EACH pose in the practice
+    //INSERT INTO JUNCTION TABLE with pose_id, practice_id, and pose_time
     poses.map(async (poseObj) => {
-      console.log(poseObj.pose_name, poseObj.time);
-      //SELECT poseId from poses table for each pose in incoming pose array of client
       const result = await pool.query(
         "SELECT id FROM poses WHERE pose_name=$1",
         [poseObj.pose_name]
       );
       const poseId = result.rows[0].id;
       const poseTimeForGivenPractice = poseObj.time;
-      //INSERT INTO practices_poses junction table using practiceId, poseId, and pose_time
       const newPracticePose = await pool.query(
         "INSERT INTO practices_poses (practice_id, pose_id, pose_time) VALUES ($1,$2,$3) RETURNING *",
         [practiceId, poseId, poseTimeForGivenPractice]
       );
-      console.log(newPracticePose);
     });
     res.sendStatus(201);
   } catch (err) {
     res.sendStatus(500);
     console.error(err.message);
   }
-});
+}); // End POST a Practice Route
 
 // DELETE a Practice Route
-
 router.delete(
   "/delete/:practice_id",
   rejectUnauthenticated,
@@ -108,6 +98,68 @@ router.delete(
       console.log(err.message);
     }
   }
-); //END DELETE Route
+); //END DELETE Practice Route
+
+// EDIT a Practice Route
+router.put("/edit/:practice_id", rejectUnauthenticated, async (req, res) => {
+  try {
+    // const { id } = req.params;
+    // let { title, description } = req.body;
+
+    //TODO: parameterize this in the future...
+    //let userId = 6; //this should be coming from req.user object
+    const { practice_id } = req.params;
+    // Simulate incoming practiceObj data from client
+    // THIS WILL BE THE REQ.BODY
+    console.log(practice_id);
+    let newPractice = {
+      practice_name: "EDIT_TEST",
+      poses: [
+        {
+          pose_name: "triangle pose",
+          time: 100,
+        },
+        {
+          pose_name: "tree pose",
+          time: 120,
+        },
+        {
+          pose_name: "downward dog",
+          time: 300,
+        },
+      ],
+    };
+    let { practice_name, poses } = newPractice;
+
+    //UPDATE practice name
+    const updatePracticeName = await pool.query(
+      "UPDATE practices SET practice_name = $1 WHERE id = $2",
+      [practice_name, practice_id]
+    );
+
+    //delete rows with practice id of to clear it out
+    const deleteCurrentPracticePoses = await pool.query(
+      "DELETE FROM practices_poses WHERE practice_id = $1",
+      [practice_id]
+    );
+    // ... then INSERT the new data with the SAME practice_id
+    poses.map(async (poseObj) => {
+      const result = await pool.query(
+        "SELECT id FROM poses WHERE pose_name=$1",
+        [poseObj.pose_name]
+      );
+      const poseId = result.rows[0].id;
+      const updatedPoseTimeForGivenPractice = poseObj.time;
+      const updatedPracticePose = await pool.query(
+        "INSERT INTO practices_poses (practice_id, pose_id, pose_time) VALUES ($1,$2,$3) RETURNING *",
+        [practice_id, poseId, updatedPoseTimeForGivenPractice]
+      );
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    res.sendStatus(500);
+    console.log(err.message);
+  }
+}); //END PUT Route
 
 module.exports = router;
