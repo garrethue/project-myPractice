@@ -13,7 +13,7 @@ import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 
-function CreatePractice(props) {
+function EditPractice(props) {
   const [availableSlots] = useState(10); //while slots does NOT equal zero, add a slot
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
   const [practiceName, setPracticeName] = useState("");
@@ -28,22 +28,6 @@ function CreatePractice(props) {
     console.log(pose1, time1);
     console.log(pose2, time2);
     console.log(practiceName);
-    axios
-      .post("/api/practices/add", {
-        practice_name: practiceName,
-        poses: [
-          {
-            pose_name: pose1,
-            time: time1,
-          },
-          { pose_name: pose2, time: time2 },
-        ],
-      })
-      .then(() => {
-        props.dispatch({ type: "FETCH_PRACTICES" });
-        //props.history.push("/create");
-      })
-      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -149,4 +133,4 @@ function CreatePractice(props) {
   );
 }
 
-export default connect(mapStoreToProps)(withRouter(CreatePractice));
+export default connect(mapStoreToProps)(withRouter(EditPractice));

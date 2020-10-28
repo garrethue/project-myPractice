@@ -23,6 +23,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import Timer from "../Timer/Timer";
 import PracticeDetails from "../PracticeDetails/PracticeDetails";
 import CreatePractice from "../CreatePractice/CreatePractice";
+import EditPractice from "../EditPractice/EditPractice";
 
 import "./App.css";
 
@@ -78,6 +79,13 @@ class App extends Component {
               exact
               path="/details"
               component={PracticeDetails}
+            />
+
+            <ProtectedRoute
+              // once a user clicks on a given practice, should take them to this page
+              exact
+              path="/edit"
+              component={EditPractice}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will

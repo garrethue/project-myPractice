@@ -13,6 +13,10 @@ function PracticeDetails(props) {
     //push user back to ALL PRACTICES! AFTER GETTING UPDATED LIST!
   };
 
+  const goToEdit = () => {
+    props.history.push("/edit");
+  };
+
   console.log(props.store);
   return (
     <div>
@@ -53,7 +57,8 @@ function PracticeDetails(props) {
         templateColumns="repeat(3, 1fr)"
         gap={2}
       >
-        <Button>Start</Button> <Button>Edit</Button>{" "}
+        <Button>Start</Button>
+        <Button onClick={goToEdit}>Edit</Button>{" "}
         <Button
           onClick={() =>
             handleDeletePractice(props.store.practiceDetails[0].practice_id)
