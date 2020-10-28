@@ -25,9 +25,6 @@ function CreatePractice(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(pose1, time1);
-    console.log(pose2, time2);
-    console.log(practiceName);
     axios
       .post("/api/practices/add", {
         practice_name: practiceName,

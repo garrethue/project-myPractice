@@ -135,6 +135,6 @@ router.put("/edit/:practice_id", rejectUnauthenticated, async (req, res) => {
     res.sendStatus(500);
     console.log(err.message);
   }
-}); //END PUT Route
+}); //END of EDIT a Practice Route
 
 module.exports = router;

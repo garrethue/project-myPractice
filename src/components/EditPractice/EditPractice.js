@@ -14,6 +14,7 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 
 function EditPractice(props) {
+  const [practiceId] = useState(props.store.practiceDetails[0].practice_id);
   const [availableSlots] = useState(10); //while slots does NOT equal zero, add a slot
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
   const [practiceName, setPracticeName] = useState("");
@@ -28,10 +29,27 @@ function EditPractice(props) {
     console.log(pose1, time1);
     console.log(pose2, time2);
     console.log(practiceName);
+    console.log(practiceId);
+
+    axios
+      .put(`/api/practices/edit/${practiceId}`, {
+        practice_name: practiceName,
+        poses: [
+          {
+            pose_name: pose1,
+            time: time1,
+          },
+          { pose_name: pose2, time: time2 },
+        ],
+      })
+      .then(() => {
+        props.dispatch({ type: "FETCH_PRACTICES" });
+        props.history.push("/all-practices");
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    //useEffect makes a fetch request to a restful api every time the component is rendered
     props.dispatch({ type: "FETCH_POSES" });
   }, []);
 
