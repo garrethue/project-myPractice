@@ -48,21 +48,22 @@ function CreatePractice(props) {
     //   .catch((err) => console.log(err));
   };
 
-  const handleChangePoseName = (i, event) => {
-    let values = [...poses]; //bring in the poses [...poses]
-    values[i].pose_name = event.target.value; //mutate whichever object in the array
-    this.setState({ values }); //reset the state with the newly mutated array
+  const handleChangePoseName = (i, value) => {
+    let newPoses = [...poses]; //bring in the poses [...poses]
+    newPoses[i].pose_name = value; //mutate whichever object in the array
+    setPoses(newPoses); //reset the state with the newly mutated array
   };
 
-  const handleChangePoseTime = (i, event) => {
-    let values = [...poses]; //bring in the poses [...poses]
-    values[i].time = event.target.value; //mutate whichever object in the array
-    this.setState({ values }); //reset the state with the newly mutated array
+  const handleChangePoseTime = (i, value) => {
+    let newPoses = [...poses]; //bring in the poses [...poses]
+    newPoses[i].time = value; //mutate whichever object in the array
+    console.log(newPoses);
+    setPoses(newPoses); //reset the state with the newly mutated array
   };
 
   const addClick = () => {
     // this.setState((prevState) => ({ values: [...prevState.values, ""] }));
-    setPoses([...poses, { pose_name: "", pose_time: 0 }]);
+    setPoses([...poses, { pose_name: "", time: 0 }]);
   };
 
   const removeClick = (i) => {
@@ -73,7 +74,6 @@ function CreatePractice(props) {
 
   const createUI = () => {
     // when a user clicks the add row button, check if we have reach the maximum number of ROWS (ie, Check availableRows)
-    console.log(availablePoses);
     //   if (availableRows >= 1) {
     //need to add a row to the grid somehow
     //can i put the props into its own state and append items to it?? def for the edit!
@@ -107,26 +107,6 @@ function CreatePractice(props) {
         </>
       );
     });
-    //   <>
-    //     <Select
-    //       value={pose1}
-    //       onChange={(e) => setPose1(e.target.value)}
-    //       placeholder="Pose"
-    //     >
-    //       {props.store.poses.map((poseObj) => (
-    //         <option value={poseObj.pose_name}>{poseObj.pose_name}</option>
-    //       ))}
-    //     </Select>
-    //     <Select
-    //       value={time1}
-    //       onChange={(e) => setTime1(e.target.value)}
-    //       placeholder="Time"
-    //     >
-    //       {availableTimes.map((time) => (
-    //         <option value={time}>{time} seconds</option>
-    //       ))}
-    //     </Select>
-    //   </>
     //     availableRows--;
     //   }
   };
