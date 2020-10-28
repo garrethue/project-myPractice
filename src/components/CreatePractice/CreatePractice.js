@@ -90,18 +90,18 @@ function CreatePractice(props) {
             onChange={(e) => handleChangePoseName(index, e.target.value)}
             placeholder="Pose"
           >
-            {/* {props.store.poses.map((poseObj) => (
+            {props.store.poses.map((poseObj) => (
               <option value={poseObj.pose_name}>{poseObj.pose_name}</option>
-            ))} */}
+            ))}
           </Select>
           <Select
             value={poseObj.time || ""}
             onChange={(e) => handleChangePoseTime(index, e.target.value)}
             placeholder="Time"
           >
-            {/* {availableTimes.map((time) => (
+            {availableTimes.map((time) => (
               <option value={time}>{time} seconds</option>
-            ))} */}
+            ))}
           </Select>
           <Button>Delete</Button>
         </>
