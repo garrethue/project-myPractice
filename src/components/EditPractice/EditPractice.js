@@ -16,7 +16,7 @@ function EditPractice(props) {
   const [availableRows, setAvailableRows] = useState(10);
   const [availableTimes] = useState([30, 60, 120]);
   const [availablePoses] = useState(props.availablePoses);
-  const [practiceName, setPracticeName] = useState("");
+  const [practiceName, setPracticeName] = useState(props.currentPracticeName);
   const [poses, setPoses] = useState(props.posesAndTimesInPractice);
   const [practiceId] = useState(props.practiceId);
 
@@ -193,14 +193,25 @@ function EditPractice(props) {
 }
 
 const mapStoreToProps = (store) => {
-  let { practiceDetails, poses } = store;
+  let { practiceDetails, poses, practices } = store;
   const posesAndTimesInPractice = practiceDetails.map((poseObj) => {
     return { pose_name: poseObj.pose_name, time: poseObj.pose_time };
   });
   const availablePoses = poses.map((poseObj) => poseObj.pose_name);
   const practiceId = practiceDetails[0].practice_id;
+  const currentPracticeName = practices.filter(
+    (practiceObj) => practiceObj.practice_id === practiceId
+  )[0].practice_name;
 
-  return { ...store, posesAndTimesInPractice, practiceId, availablePoses };
+  //do i need the rest of the store?
+  console.log(currentPracticeName);
+  return {
+    ...store,
+    posesAndTimesInPractice,
+    practiceId,
+    availablePoses,
+    currentPracticeName,
+  };
 };
 
 export default connect(mapStoreToProps)(withRouter(EditPractice));
