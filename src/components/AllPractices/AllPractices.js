@@ -17,6 +17,7 @@ function AllPractices(props) {
   useEffect(() => {
     //useEffect makes a fetch request to a restful api every time the component is rendered
     props.dispatch({ type: "FETCH_PRACTICES" });
+    props.dispatch({ type: "FETCH_POSES" });
   }, []);
 
   console.log(props.store.practices);

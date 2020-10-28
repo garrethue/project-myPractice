@@ -14,7 +14,9 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 
 function EditPractice(props) {
-  const [practiceId] = useState(props.store.practiceDetails[0].practice_id);
+  const [practiceId] = useState(
+    props.store.practiceDetails[0].practice_id || null
+  );
   const [availableSlots] = useState(10); //while slots does NOT equal zero, add a slot
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
   const [practiceName, setPracticeName] = useState("");
@@ -50,6 +52,7 @@ function EditPractice(props) {
   };
 
   useEffect(() => {
+    //not sure if i need this
     props.dispatch({ type: "FETCH_POSES" });
   }, []);
 
@@ -64,7 +67,7 @@ function EditPractice(props) {
             fontWeight="bold"
             fontSize="50px"
           >
-            Create a Practice
+            Edit this Practice
           </Text>
           <br />
           <Text
@@ -141,7 +144,7 @@ function EditPractice(props) {
                 </Select>
                 <Button>Delete</Button>
 
-                <Button type="submit">Create</Button>
+                <Button type="submit">Edit</Button>
               </Grid>
             </FormControl>
           </form>

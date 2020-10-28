@@ -14,39 +14,131 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 
 function CreatePractice(props) {
-  const [availableSlots] = useState(10); //while slots does NOT equal zero, add a slot
+  const [availablePoses, setAvailablePoses] = useState(props.store.poses);
+  const [availableRows] = useState(5); //while slots does NOT equal zero, add a slot
+  const [rowsInGrid, setRowsInGrid] = useState();
   const [availableTimes, setAvailableTimes] = useState([30, 60, 120]);
   const [practiceName, setPracticeName] = useState("");
   const [pose1, setPose1] = useState("");
   const [time1, setTime1] = useState("");
   const [pose2, setPose2] = useState("");
   const [time2, setTime2] = useState("");
+
+  const [poses, setPoses] = useState([]);
+  //poses needs to be an arrray of objects with pose_name and time
   //wrap up each pose into an object? like im doing in the POST route?
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("/api/practices/add", {
-        practice_name: practiceName,
-        poses: [
-          {
-            pose_name: pose1,
-            time: time1,
-          },
-          { pose_name: pose2, time: time2 },
-        ],
-      })
-      .then(() => {
-        props.dispatch({ type: "FETCH_PRACTICES" });
-        //props.history.push("/create");
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .post("/api/practices/add", {
+    //     practice_name: practiceName,
+    //     poses: [
+    //       {
+    //         pose_name: pose1,
+    //         time: time1,
+    //       },
+    //       { pose_name: pose2, time: time2 },
+    //     ],
+    //   })
+    //   .then(() => {
+    //     props.dispatch({ type: "FETCH_PRACTICES" });
+    //     //props.history.push("/create");
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    //useEffect makes a fetch request to a restful api every time the component is rendered
-    props.dispatch({ type: "FETCH_POSES" });
-  }, []);
+  const handleChangePoseName = (i, event) => {
+    let values = [...poses]; //bring in the poses [...poses]
+    values[i].pose_name = event.target.value; //mutate whichever object in the array
+    this.setState({ values }); //reset the state with the newly mutated array
+  };
+
+  const handleChangePoseTime = (i, event) => {
+    let values = [...poses]; //bring in the poses [...poses]
+    values[i].time = event.target.value; //mutate whichever object in the array
+    this.setState({ values }); //reset the state with the newly mutated array
+  };
+
+  const addClick = () => {
+    // this.setState((prevState) => ({ values: [...prevState.values, ""] }));
+    setPoses([...poses, { pose_name: "", pose_time: 0 }]);
+  };
+
+  const removeClick = (i) => {
+    let values = [...poses];
+    values.splice(i, 1);
+    this.setState({ values });
+  };
+
+  const createUI = () => {
+    // when a user clicks the add row button, check if we have reach the maximum number of ROWS (ie, Check availableRows)
+    console.log(availablePoses);
+    //   if (availableRows >= 1) {
+    //need to add a row to the grid somehow
+    //can i put the props into its own state and append items to it?? def for the edit!
+    //
+
+    //NEED TO MAP STATE AND RETURN THIS!!
+    //what needs to be a part of state
+    //pose1,
+    return poses.map((poseObj, index) => {
+      return (
+        <>
+          <Select
+            value={poseObj.pose_name || ""}
+            onChange={(e) => handleChangePoseName(index, e.target.value)}
+            placeholder="Pose"
+          >
+            {/* {props.store.poses.map((poseObj) => (
+              <option value={poseObj.pose_name}>{poseObj.pose_name}</option>
+            ))} */}
+          </Select>
+          <Select
+            value={poseObj.time || ""}
+            onChange={(e) => handleChangePoseTime(index, e.target.value)}
+            placeholder="Time"
+          >
+            {/* {availableTimes.map((time) => (
+              <option value={time}>{time} seconds</option>
+            ))} */}
+          </Select>
+          <Button>Delete</Button>
+        </>
+      );
+    });
+    //   <>
+    //     <Select
+    //       value={pose1}
+    //       onChange={(e) => setPose1(e.target.value)}
+    //       placeholder="Pose"
+    //     >
+    //       {props.store.poses.map((poseObj) => (
+    //         <option value={poseObj.pose_name}>{poseObj.pose_name}</option>
+    //       ))}
+    //     </Select>
+    //     <Select
+    //       value={time1}
+    //       onChange={(e) => setTime1(e.target.value)}
+    //       placeholder="Time"
+    //     >
+    //       {availableTimes.map((time) => (
+    //         <option value={time}>{time} seconds</option>
+    //       ))}
+    //     </Select>
+    //   </>
+    //     availableRows--;
+    //   }
+  };
+
+  //   const createUI = () => {
+  //     return this.state.values.map((el, i) =>
+  //         <div key={i}>
+  //            <input type="text" value={el||''} onChange={this.handleChange.bind(this, i)} />
+  //            <input type='button' value='remove' onClick={this.removeClick.bind(this, i)}/>
+  //         </div>
+  //     )
+  //  }
 
   return (
     <div>
@@ -92,7 +184,8 @@ function CreatePractice(props) {
               >
                 {/* Need to Implement dynamic adding of rows!!*/}
                 {/* row 1!!*/}
-                <Select
+
+                {/* <Select
                   value={pose1}
                   onChange={(e) => setPose1(e.target.value)}
                   placeholder="Pose"
@@ -112,34 +205,14 @@ function CreatePractice(props) {
                     <option value={time}>{time} seconds</option>
                   ))}
                 </Select>
-                <Button>Delete</Button>
-
-                <Select
-                  value={pose2}
-                  onChange={(e) => setPose2(e.target.value)}
-                  placeholder="Pose"
-                >
-                  {props.store.poses.map((poseObj) => (
-                    <option value={poseObj.pose_name}>
-                      {poseObj.pose_name}
-                    </option>
-                  ))}
-                </Select>
-                <Select
-                  value={time2}
-                  onChange={(e) => setTime2(e.target.value)}
-                  placeholder="Time"
-                >
-                  {availableTimes.map((time) => (
-                    <option value={time}>{time} seconds</option>
-                  ))}
-                </Select>
-                <Button>Delete</Button>
+                <Button>Delete</Button> */}
+                {createUI()}
 
                 <Button type="submit">Create</Button>
               </Grid>
             </FormControl>
           </form>
+          <Button onClick={addClick}>Add a Row</Button>
         </Box>
       </Grid>
     </div>
