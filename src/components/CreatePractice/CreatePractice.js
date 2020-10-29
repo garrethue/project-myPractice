@@ -12,8 +12,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
-import TimeFormatter from "../HelperFunctions/TimeFormatter";
-import GetTotalTime from "../HelperFunctions/GetTotalTime";
+import TimeFormatter from "../Helpers/TimeFormatter";
+import GetTotalTime from "../Helpers/GetTotalTime";
+import BackButton from "../Helpers/Buttons/BackButton";
 
 function CreatePractice(props) {
   const [availableRows, setAvailableRows] = useState(10); //while slots does NOT equal zero, add a slot
@@ -115,6 +116,7 @@ function CreatePractice(props) {
 
   return (
     <div>
+      <BackButton />
       <Grid justifyContent="center">
         <Box
           marginLeft={10}

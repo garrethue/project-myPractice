@@ -11,8 +11,9 @@ import {
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import TimeFormatter from "../HelperFunctions/TimeFormatter";
-import GetTotalTime from "../HelperFunctions/GetTotalTime";
+import TimeFormatter from "../Helpers/TimeFormatter";
+import GetTotalTime from "../Helpers/GetTotalTime";
+import BackButton from "../Helpers/Buttons/BackButton";
 
 function EditPractice(props) {
   const [availableRows, setAvailableRows] = useState(10);
@@ -121,10 +122,9 @@ function EditPractice(props) {
     }
   };
 
-  console.log("props", props);
-
   return (
     <div>
+      <BackButton />
       <Grid justifyContent="center">
         <Box textAlign="center" rounded={3} h="100%" w="100%">
           <Text

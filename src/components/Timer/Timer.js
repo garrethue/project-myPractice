@@ -40,10 +40,11 @@ function Timer(props) {
     //implement this as a STOP practice
     if (
       internalTimeInSec !== props.total_time &&
-      window.confirm("Are you sure you want to quit?")
+      window.confirm("Are you a quitter?")
     ) {
       // go back to home page?
       toggleTimer();
+      props.history.push("/all-practices");
     }
   }
 
