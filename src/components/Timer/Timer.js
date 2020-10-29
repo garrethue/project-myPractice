@@ -3,6 +3,7 @@ import { Howl } from "howler";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Button } from "@chakra-ui/core";
+import BackButton from "../Helpers/Buttons/BackButton";
 
 function Timer(props) {
   //the time driver
@@ -72,7 +73,7 @@ function Timer(props) {
 
     return timeToDisplay;
   }
-
+  //are you ready? <button> Yes - let's do this!</button>
   useEffect(() => {
     //getAudio(); //Garret: anytime this is called, the client makes a req to the server for the audio file!
     console.log(poseList);
@@ -104,51 +105,36 @@ function Timer(props) {
 
   return (
     <div className="app">
-      <div className="newTime">Timer: {displayTime}</div>
+      <div className="newTime">Time Remaining: {displayTime}</div>
       <div className="currentPose">
         {!isStopped && internalTimeInSec !== 0
           ? `Current Pose: ${currentPose}`
-          : `You finished your practice.`}
+          : `Congratulations! You finished your practice!`}
       </div>
       <div className="row">
-        <Button onClick={toggleTimer}>{isActive ? "Pause" : "Start"}</Button>
-        <Button className="button" onClick={quitPractice}>
-          Quit
-        </Button>
+        {internalTimeInSec !== 0 ? (
+          <>
+            <Button onClick={toggleTimer}>
+              {isActive ? "Pause" : "Start"}
+            </Button>
+            <Button className="button" onClick={quitPractice}>
+              Quit
+            </Button>
+          </>
+        ) : (
+          <BackButton />
+        )}
       </div>
     </div>
   );
 }
 
-const mapReduxStateToProps = (store) => {
+const mapReduxStateToProps = ({ practiceDetails }) => {
   //get necessary data
-
-  let test_data = [
-    {
-      pose_name: "triangle pose",
-      pose_time: 20,
-    },
-    {
-      pose_name: "tree pose",
-      pose_time: 20,
-    },
-    {
-      pose_name: "downward dog",
-      pose_time: 10,
-    },
-    {
-      pose_name: "corpse pose",
-      pose_time: 10,
-    },
-    {
-      pose_name: "another pose",
-      pose_time: 30,
-    },
-  ];
-  const poseTimes = getPoseTimes(test_data); //GAR --> should be store.currentPractice
+  const poseList = getPoseList(practiceDetails);
+  const poseTimes = getPoseTimes(practiceDetails);
   const TOTAL_TIME = getTotalPracticeTime(poseTimes);
   const arrOfInvertedPoseTimes = invertPoseTimes(TOTAL_TIME, poseTimes);
-  const poseList = getPoseList(test_data);
 
   console.log(arrOfInvertedPoseTimes);
 
