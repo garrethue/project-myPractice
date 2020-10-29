@@ -13,6 +13,7 @@ import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
 import TimeFormatter from "../HelperFunctions/TimeFormatter";
+import GetTotalTime from "../HelperFunctions/GetTotalTime";
 
 function CreatePractice(props) {
   const [availableRows, setAvailableRows] = useState(10); //while slots does NOT equal zero, add a slot
@@ -112,18 +113,22 @@ function CreatePractice(props) {
     });
   };
 
-  const getTotalTimeFromState = () => {
-    return poses.reduce((sum, poseObj) => {
-      return sum + Number(poseObj.time); //return total seconds
-    }, 0);
-  };
-
   return (
     <div>
       <Grid justifyContent="center">
-        <Box textAlign="center" rounded={3} h="100%" w="100%" bg="yellow.500">
+        <Box
+          marginLeft={10}
+          marginRight={10}
+          textAlign="center"
+          rounded={3}
+          h="100%"
+          w="100%"
+        >
           <Text
+            marginBottom={5}
             bg="black"
+            paddingLeft={2}
+            paddingRight={2}
             textAlign="center"
             color="white"
             fontWeight="bold"
@@ -131,41 +136,46 @@ function CreatePractice(props) {
           >
             Create a Practice
           </Text>
-          <br />
           <Text
-            marginRight={5}
-            marginLeft={5}
-            paddingRight={3}
+            paddingRight={1}
+            marginBottom={5}
             bg="black"
             textAlign="right"
             color="white"
             fontWeight="bold"
             fontSize="30px"
           >
-            Total Time: {TimeFormatter(getTotalTimeFromState())}
+            {availableRows < 10 &&
+              `Total Time: ${TimeFormatter(GetTotalTime(poses, true))}`}
           </Text>
-          <form onSubmit={handleSubmit}>
-            <FormControl>
-              <Input
-                value={practiceName}
-                onChange={(e) => setPracticeName(e.target.value)}
-                type="text"
-                placeholder="Your practice name here."
-              />
-              <Grid
-                bg="transparent"
-                margin={5}
-                justifyContent="center"
-                alignItems="center"
-                templateColumns="repeat(3, 1fr)"
-                gap={4}
-              >
-                {createUI()}
-                <Button type="submit">Create</Button>
-              </Grid>
-            </FormControl>
-          </form>
-          <Button onClick={addItem}>Add a Row</Button>
+          {availableRows < 10 && (
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <Input
+                  value={practiceName}
+                  onChange={(e) => setPracticeName(e.target.value)}
+                  type="text"
+                  placeholder="Your practice name here."
+                />
+                <Grid
+                  bg="transparent"
+                  marginTop={3}
+                  marginBottom={3}
+                  justifyContent="center"
+                  alignItems="center"
+                  templateColumns="repeat(3, 1fr)"
+                  gap={4}
+                >
+                  {createUI()}
+                  <Button type="submit">Create</Button>
+                </Grid>
+              </FormControl>
+            </form>
+          )}
+
+          <Button bg="black" color="white" onClick={addItem}>
+            Add a Row
+          </Button>
         </Box>
       </Grid>
     </div>

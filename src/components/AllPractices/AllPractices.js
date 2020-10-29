@@ -27,7 +27,7 @@ function AllPractices(props) {
     <Grid justifyContent="center">
       <Box w="100%" bg="blue.500">
         <Text bg="red" textAlign="center" fontWeight="bold" fontSize="50px">
-          All Practices:
+          All of Your Practices
         </Text>
       </Box>
       <Box rounded={3} h="100%" w="100%" bg="yellow">
@@ -64,7 +64,7 @@ function AllPractices(props) {
         </Grid>
       </Box>
       <Box textAlign="right">
-        <Button onClick={goToCreatePage}>Add Practice</Button>
+        <Button onClick={goToCreatePage}>Add a Practice</Button>
       </Box>
     </Grid>
   );

@@ -70,6 +70,13 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows a list of all of the user's practices
               exact
+              path="/timer"
+              component={Timer}
+            />
+
+            <ProtectedRoute
+              // logged in shows a list of all of the user's practices
+              exact
               path="/create"
               component={CreatePractice}
             />

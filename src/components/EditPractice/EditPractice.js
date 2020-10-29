@@ -126,7 +126,7 @@ function EditPractice(props) {
   return (
     <div>
       <Grid justifyContent="center">
-        <Box textAlign="center" rounded={3} h="100%" w="100%" bg="yellow.500">
+        <Box textAlign="center" rounded={3} h="100%" w="100%">
           <Text
             bg="black"
             textAlign="center"
@@ -147,7 +147,7 @@ function EditPractice(props) {
             fontWeight="bold"
             fontSize="30px"
           >
-            Total Time: {TimeFormatter(GetTotalTime(props.practiceDetails))}
+            Total Time: {TimeFormatter(GetTotalTime(poses, true))}
           </Text>
           <form onSubmit={handleSubmit}>
             <FormControl>
@@ -166,12 +166,14 @@ function EditPractice(props) {
                 gap={4}
               >
                 {createUI()}
-                <Button type="submit">Edit</Button>
+                <Button type="submit">Change Your Practice</Button>
               </Grid>
             </FormControl>
           </form>
-          <Button onClick={addItem}>Add a Row</Button>
         </Box>
+        <Button bg="black" color="white" onClick={addItem}>
+          Add a Row
+        </Button>
       </Grid>
     </div>
   );

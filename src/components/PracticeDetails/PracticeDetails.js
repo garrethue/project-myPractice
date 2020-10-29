@@ -15,6 +15,10 @@ function PracticeDetails(props) {
     //push user back to ALL PRACTICES! AFTER GETTING UPDATED LIST!
   };
 
+  const goToTimer = () => {
+    props.history.push("/timer");
+  };
+
   const goToEdit = () => {
     props.history.push("/edit");
   };
@@ -22,7 +26,8 @@ function PracticeDetails(props) {
   console.log(props.store);
   return (
     <div>
-      Total Time: {TimeFormatter(GetTotalTime(props.store.practiceDetails))}
+      Total Time:{" "}
+      {TimeFormatter(GetTotalTime(props.store.practiceDetails, false))}
       <Grid
         bg="blue.500"
         margin={5}
@@ -60,7 +65,7 @@ function PracticeDetails(props) {
         templateColumns="repeat(3, 1fr)"
         gap={2}
       >
-        <Button>Start</Button>
+        <Button onClick={goToTimer}>Start</Button>
         <Button onClick={goToEdit}>Edit</Button>{" "}
         <Button
           onClick={() =>
