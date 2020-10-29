@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Grid, Box, Button } from "@chakra-ui/core";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import TimeFormatter from "../HelperFunctions/TimeFormatter";
+import GetTotalTime from "../HelperFunctions/GetTotalTime";
 
 function PracticeDetails(props) {
   const handleDeletePractice = (practiceId) => {
@@ -20,6 +22,7 @@ function PracticeDetails(props) {
   console.log(props.store);
   return (
     <div>
+      Total Time: {TimeFormatter(GetTotalTime(props.store.practiceDetails))}
       <Grid
         bg="blue.500"
         margin={5}

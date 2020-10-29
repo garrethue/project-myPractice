@@ -11,6 +11,8 @@ import {
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import TimeFormatter from "../HelperFunctions/TimeFormatter";
+import GetTotalTime from "../HelperFunctions/GetTotalTime";
 
 function EditPractice(props) {
   const [availableRows, setAvailableRows] = useState(10);
@@ -90,7 +92,6 @@ function EditPractice(props) {
   };
 
   const createUI = () => {
-    console.log("inside createUI", poses);
     if (poses !== undefined) {
       return poses.map((poseObj, index) => {
         return (
@@ -120,7 +121,7 @@ function EditPractice(props) {
     }
   };
 
-  console.log("outside createUI", poses);
+  console.log("props", props);
 
   return (
     <div>
@@ -146,7 +147,7 @@ function EditPractice(props) {
             fontWeight="bold"
             fontSize="30px"
           >
-            Total Time: x
+            Total Time: {TimeFormatter(GetTotalTime(props.practiceDetails))}
           </Text>
           <form onSubmit={handleSubmit}>
             <FormControl>
