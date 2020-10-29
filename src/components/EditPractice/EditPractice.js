@@ -30,13 +30,8 @@ function EditPractice(props) {
     console.log(poses.length);
     console.log(allPosesValid);
     console.log(practiceNameValid);
-    console.log("out here!");
 
     if (practiceNameValid && poses.length > 0 && allPosesValid) {
-      console.log("in here!");
-      console.log("id", practiceId);
-      console.log("practiceName", practiceName);
-      console.log("poses", poses);
       axios
         .put(`/api/practices/edit/${practiceId}`, {
           practice_name: practiceName,
