@@ -30,34 +30,23 @@ function EditPractice(props) {
     console.log(poses.length);
     console.log(allPosesValid);
     console.log(practiceNameValid);
+    console.log("out here!");
 
     if (practiceNameValid && poses.length > 0 && allPosesValid) {
-      //   axios
-      //     .post("/api/practices/add", {
-      //       practice_name: practiceName,
-      //       poses: poses,
-      //     })
-      //     .then(() => {
-      //       props.dispatch({ type: "FETCH_PRACTICES" });
-      //       props.history.push("/all-practices");
-      //     })
-      //     .catch((err) => console.log(err));
-      //   axios
-      //   .put(`/api/practices/edit/${practiceId}`, {
-      //     practice_name: practiceName,
-      //     poses: [
-      //       {
-      //         pose_name: pose1,
-      //         time: time1,
-      //       },
-      //       { pose_name: pose2, time: time2 },
-      //     ],
-      //   })
-      //   .then(() => {
-      //     props.dispatch({ type: "FETCH_PRACTICES" });
-      //     props.history.push("/all-practices");
-      //   })
-      //   .catch((err) => console.log(err));
+      console.log("in here!");
+      console.log("id", practiceId);
+      console.log("practiceName", practiceName);
+      console.log("poses", poses);
+      axios
+        .put(`/api/practices/edit/${practiceId}`, {
+          practice_name: practiceName,
+          poses: poses,
+        })
+        .then(() => {
+          props.dispatch({ type: "FETCH_PRACTICES" });
+          props.history.push("/all-practices");
+        })
+        .catch((err) => console.log(err));
     } else if (!practiceNameValid && poses.length === 0) {
       alert("Error: You can't fill out an empty form!");
     } else if (!allPosesValid && !practiceNameValid) {
