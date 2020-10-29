@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
+import TimeFormatter from "../HelperFunctions/TimeFormatter";
 
 function CreatePractice(props) {
   const [availableRows, setAvailableRows] = useState(10); //while slots does NOT equal zero, add a slot
@@ -66,7 +67,6 @@ function CreatePractice(props) {
   };
 
   const addItem = () => {
-    // this.setState((prevState) => ({ values: [...prevState.values, ""] }));
     if (availableRows > 0) {
       setPoses([...poses, { pose_name: "", time: 0 }]);
       const newAvailableRows = availableRows - 1;
@@ -110,8 +110,12 @@ function CreatePractice(props) {
         </Fragment>
       );
     });
-    //     availableRows--;
-    //   }
+  };
+
+  const getTotalTimeFromState = () => {
+    return poses.reduce((sum, poseObj) => {
+      return sum + Number(poseObj.time); //return total seconds
+    }, 0);
   };
 
   return (
@@ -138,7 +142,7 @@ function CreatePractice(props) {
             fontWeight="bold"
             fontSize="30px"
           >
-            Total Time: x
+            Total Time: {TimeFormatter(getTotalTimeFromState())}
           </Text>
           <form onSubmit={handleSubmit}>
             <FormControl>
