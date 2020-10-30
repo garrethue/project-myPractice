@@ -13,7 +13,7 @@ const AppTitle = () => (
       borderBottom="transparent"
       borderTop="transparent"
     >
-      <Text textAlign="center" fontWeight="bold" fontSize="55px">
+      <Text textAlign="center" fontWeight="bold" fontSize="45px">
         myPractice
       </Text>
     </Box>

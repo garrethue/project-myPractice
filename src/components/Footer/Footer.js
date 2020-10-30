@@ -7,7 +7,7 @@ import { Box, Grid, Text } from "@chakra-ui/core";
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 const Footer = () => (
-  <Grid marginTop={6} justifyContent="center">
+  <Grid marginTop={20} justifyContent="center">
     <Box
       bg="transparent"
       rounded="md"

@@ -6,7 +6,7 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
   const { colorMode, toggleColorMode } = useColorMode();
-  const borderColor = { light: "teal.700", dark: "brand.700" };
+  const color = { light: "white", dark: "white" };
 
   const goToDetailsPage = (id) => {
     props.dispatch({ type: "FETCH_PRACTICE_DETAILS", payload: id });
@@ -28,14 +28,14 @@ function AllPractices(props) {
   //justifyContent is what makes the outer Grid in the center of the page
   return (
     <Grid justifyContent="center">
-      <Box w="100%" bg="brand.900">
+      <Box marginTop={5} w="100%" bg="black">
         <Text
           textAlign="center"
-          color="black"
+          color="white"
           fontWeight="bold"
           fontSize="50px"
         >
-          All of Your Practices
+          Your Practices
         </Text>
       </Box>
       <Box rounded={3} h="100%" w="100%" bg="yellow">
@@ -73,13 +73,9 @@ function AllPractices(props) {
       </Box>
       <Box textAlign="right">
         <Button
-          border="2px"
+          bg="black"
+          color={color[colorMode]}
           variantColor="teal"
-          color="teal"
-          borderColor={borderColor[colorMode]}
-          borderTop="transparent"
-          borderBottom="transparent"
-          bg="transparent"
           onClick={goToCreatePage}
         >
           Add a Practice

@@ -1,20 +1,11 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Heading,
-  Flex,
-  Text,
-  Button,
-  useColorMode,
-  Icon,
-} from "@chakra-ui/core";
+import { Box, Flex, Text, Button, useColorMode } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import LogOutButton from "../Helpers/Buttons/LogOutButton";
-import "./Nav.css";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import AppTitle from "../AppTitle/AppTitle";
 import ColorModeButton from "../Helpers/Buttons/ColorModeButton";
+import LogOutButton from "../Helpers/Buttons/LogOutButton";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">

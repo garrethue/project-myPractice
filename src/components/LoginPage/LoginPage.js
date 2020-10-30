@@ -1,28 +1,35 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
-import LoginForm from '../LoginForm/LoginForm';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import mapStoreToProps from "../../redux/mapStoreToProps";
+import LoginForm from "../LoginForm/LoginForm";
+import { Grid, Box, Button, useColorMode, Text } from "@chakra-ui/core";
 
-class LoginPage extends Component {
-  render() {
-    return (
-      <div>
-        <LoginForm />
+const LoginPage = (props) => {
+  const { colorMode } = useColorMode();
+  const color = { light: "white", dark: "white" };
 
-        <center>
-          <button
-            type="button"
-            className="btn btn_asLink"
-            onClick={() => {
-              this.props.history.push('/registration');
-            }}
-          >
-            Register
-          </button>
-        </center>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <LoginForm />
+      <Grid justifyContent="center">
+        <Box marginTop={5}>
+          <Text fontWeight="bold">Don't have any account?</Text>
+        </Box>
+        <Button
+          marginTop={2}
+          //type="button"
+          bg="black"
+          color={color[colorMode]}
+          variantColor="teal"
+          onClick={() => {
+            props.history.push("/registration");
+          }}
+        >
+          Register
+        </Button>
+      </Grid>
+    </div>
+  );
+};
 
 export default connect(mapStoreToProps)(LoginPage);
