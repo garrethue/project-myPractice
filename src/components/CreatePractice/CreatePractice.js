@@ -132,7 +132,7 @@ function CreatePractice(props) {
             Create a Practice
           </Text>
           <Text
-            paddingRight={1}
+            paddingRight={3}
             marginBottom={5}
             bg="black"
             textAlign="right"

@@ -16,7 +16,9 @@ import GetTotalTime from "../Helpers/GetTotalTime";
 import BackButton from "../Helpers/Buttons/BackButton";
 
 function EditPractice(props) {
-  const [availableRows, setAvailableRows] = useState(10);
+  const [availableRows, setAvailableRows] = useState(
+    10 - props.posesAndTimesInPractice.length
+  );
   const [availableTimes] = useState([30, 60, 120]);
   const [availablePoses] = useState(props.availablePoses);
   const [practiceName, setPracticeName] = useState(props.currentPracticeName);
@@ -138,42 +140,46 @@ function EditPractice(props) {
           </Text>
           <br />
           <Text
-            marginRight={5}
-            marginLeft={5}
             paddingRight={3}
             bg="black"
             textAlign="right"
             color="white"
             fontWeight="bold"
             fontSize="30px"
+            marginBottom={5}
           >
-            Total Time: {TimeFormatter(GetTotalTime(poses, true))}
+            {availableRows < 10 &&
+              `Total Time: ${TimeFormatter(GetTotalTime(poses, true))}`}
           </Text>
-          <form onSubmit={handleSubmit}>
-            <FormControl>
-              <Input
-                value={practiceName}
-                onChange={(e) => setPracticeName(e.target.value)}
-                type="text"
-                placeholder="Your practice name here."
-              />
-              <Grid
-                bg="transparent"
-                margin={5}
-                justifyContent="center"
-                alignItems="center"
-                templateColumns="repeat(3, 1fr)"
-                gap={4}
-              >
-                {createUI()}
-                <Button type="submit">Change Your Practice</Button>
-              </Grid>
-            </FormControl>
-          </form>
+          {availableRows < 10 && (
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <Input
+                  value={practiceName}
+                  onChange={(e) => setPracticeName(e.target.value)}
+                  type="text"
+                  placeholder="Your practice name here."
+                />
+                <Grid
+                  bg="transparent"
+                  justifyContent="center"
+                  alignItems="center"
+                  templateColumns="repeat(3, 1fr)"
+                  gap={4}
+                  bg="transparent"
+                  marginTop={3}
+                  marginBottom={3}
+                >
+                  {createUI()}
+                  <Button type="submit">Change Your Practice</Button>
+                </Grid>
+              </FormControl>
+            </form>
+          )}
+          <Button bg="black" color="white" onClick={addItem}>
+            Add a Row
+          </Button>
         </Box>
-        <Button bg="black" color="white" onClick={addItem}>
-          Add a Row
-        </Button>
       </Grid>
     </div>
   );

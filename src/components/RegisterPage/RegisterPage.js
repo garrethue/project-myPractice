@@ -7,32 +7,23 @@ import { Grid, Button, useColorMode } from "@chakra-ui/core";
 import RegisterForm from "../RegisterForm/RegisterForm";
 
 const RegisterPage = (props) => {
-  // state = {
-  //   username: '',
-  //   password: '',
-  // };
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
 
   return (
     <Fragment>
       <RegisterForm />
-
       <Grid justifyContent="center">
         <Button
           type="button"
           bg="black"
           color={color[colorMode]}
-          variantColor="teal"
+          variantColor="red"
           onClick={() => {
             props.history.push("/login");
           }}
         >
-          Back to Login
+          Cancel
         </Button>
       </Grid>
     </Fragment>

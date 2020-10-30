@@ -8,6 +8,8 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 const RegisterForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
@@ -19,6 +21,8 @@ const RegisterForm = (props) => {
       payload: {
         username: username,
         password: password,
+        first_name: firstName,
+        last_name: lastName,
       },
     });
   }; // end registerUser
@@ -46,6 +50,30 @@ const RegisterForm = (props) => {
             </h3>
           )}
           <Grid marginBottom={5} justifyContent="center">
+            <label htmlFor="first-name">
+              <Input
+                marginBottom={2}
+                placeholder="First Name"
+                type="text"
+                name="first-name"
+                value={firstName}
+                isRequired
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </label>
+
+            <label htmlFor="last-name">
+              <Input
+                marginBottom={2}
+                placeholder="Last Name"
+                type="text"
+                name="last-name"
+                value={lastName}
+                isRequired
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </label>
+
             <label htmlFor="username">
               <Input
                 marginBottom={2}
