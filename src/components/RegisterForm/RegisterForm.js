@@ -1,70 +1,141 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Grid, Box, Button, Text, Input, useColorMode } from "@chakra-ui/core";
 
-class RegisterForm extends Component {
-  state = {
-    username: '',
-    password: '',
-  };
+import mapStoreToProps from "../../redux/mapStoreToProps";
 
-  registerUser = (event) => {
+//class RegisterForm extends Component {
+const RegisterForm = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { colorMode } = useColorMode();
+  const color = { light: "white", dark: "white" };
+
+  const registerUser = (event) => {
     event.preventDefault();
-
-    this.props.dispatch({
-      type: 'REGISTER',
+    props.dispatch({
+      type: "REGISTER",
       payload: {
-        username: this.state.username,
-        password: this.state.password,
+        username: username,
+        password: password,
       },
     });
   }; // end registerUser
 
-  handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
-  };
-
-  render() {
-    return (
-      <form className="formPanel" onSubmit={this.registerUser}>
-        <h2>Register User</h2>
-        {this.props.store.errors.registrationMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.registrationMessage}
-          </h3>
-        )}
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              required
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              required
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label>
-        </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Register" />
-        </div>
-      </form>
-    );
-  }
-}
+  return (
+    <Grid justifyContent="center">
+      <Box textAlign="center" rounded={3} h="100%" w="100%">
+        <form className="formPanel" onSubmit={registerUser}>
+          <Text
+            marginTop={5}
+            marginBottom={5}
+            bg="black"
+            paddingLeft={2}
+            paddingRight={2}
+            textAlign="center"
+            color="white"
+            fontWeight="bold"
+            fontSize="50px"
+          >
+            Start Your Practice Here
+          </Text>
+          {props.store.errors.registrationMessage && (
+            <h3 className="alert" role="alert">
+              {props.store.errors.registrationMessage}
+            </h3>
+          )}
+          <Grid marginBottom={5} justifyContent="center">
+            <label htmlFor="username">
+              <Input
+                marginBottom={2}
+                placeholder="Username"
+                type="text"
+                name="username"
+                value={username}
+                isRequired
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </label>
+            <label htmlFor="password">
+              <Input
+                w="100%"
+                placeholder="Password"
+                type="password"
+                name="password"
+                value={password}
+                isRequired
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+            <Button
+              marginTop={5}
+              bg="black"
+              color={color[colorMode]}
+              variantColor="teal"
+              type="submit"
+              name="submit"
+              value="Register"
+            >
+              Create
+            </Button>
+          </Grid>
+        </form>
+      </Box>
+    </Grid>
+  );
+};
 
 export default connect(mapStoreToProps)(RegisterForm);
+
+/* <Grid justifyContent="center">
+      <Box textAlign="center" rounded={3} h="100%" w="100%">
+        <form onSubmit={login}>
+          <Text
+            marginTop={5}
+            marginBottom={5}
+            bg="black"
+            paddingLeft={2}
+            paddingRight={2}
+            textAlign="center"
+            color="white"
+            fontWeight="bold"
+            fontSize="50px"
+          >
+            Login to Your Practice
+          </Text>
+          {props.store.errors.loginMessage && (
+            <h3 className="alert" role="alert">
+              {props.store.errors.loginMessage}
+            </h3>
+          )}
+          <Grid marginBottom={5} justifyContent="center">
+            <Box>
+              <label htmlFor="username">
+                <Input
+                  marginBottom={2}
+                  placeholder="Username"
+                  type="text"
+                  name="username"
+                  isRequired
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </label>
+            </Box>
+
+            
+          </Grid>
+          <Button
+            bg="black"
+            color={color[colorMode]}
+            variantColor="teal"
+            type="submit"
+            name="submit"
+            value="Log In"
+          >
+            Login
+          </Button>
+        </form>
+      </Box>
+    </Grid> */
