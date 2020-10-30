@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { Box, Grid, Text, Image, Button } from "@chakra-ui/core";
+import { Box, Grid, Text, Image, Button, useColorMode } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const borderColor = { light: "teal.700", dark: "brand.700" };
+
   const goToDetailsPage = (id) => {
     props.dispatch({ type: "FETCH_PRACTICE_DETAILS", payload: id });
     props.history.push("/details");
@@ -69,7 +72,18 @@ function AllPractices(props) {
         </Grid>
       </Box>
       <Box textAlign="right">
-        <Button onClick={goToCreatePage}>Add a Practice</Button>
+        <Button
+          border="2px"
+          variantColor="teal"
+          color="teal"
+          borderColor={borderColor[colorMode]}
+          borderTop="transparent"
+          borderBottom="transparent"
+          bg="transparent"
+          onClick={goToCreatePage}
+        >
+          Add a Practice
+        </Button>
       </Box>
     </Grid>
   );

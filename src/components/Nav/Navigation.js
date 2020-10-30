@@ -10,9 +10,11 @@ import {
 } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import LogOutButton from "../LogOutButton/LogOutButton";
+import LogOutButton from "../Helpers/Buttons/LogOutButton";
 import "./Nav.css";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import AppTitle from "../AppTitle/AppTitle";
+import ColorModeButton from "../Helpers/Buttons/ColorModeButton";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -23,8 +25,8 @@ const MenuItems = ({ children }) => (
 const Navigation = (props) => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
-
   const { colorMode, toggleColorMode } = useColorMode();
+  const borderColor = { light: "yellow.600", dark: "brand.900" };
 
   //from nav
   let loginLinkData = {
@@ -50,9 +52,7 @@ const Navigation = (props) => {
     >
       <Flex align="center" mr={5}>
         <Link to="/all-practices">
-          <Heading as="h1" size="lg">
-            myPractice
-          </Heading>
+          <AppTitle />
         </Link>
       </Flex>
 
@@ -68,28 +68,19 @@ const Navigation = (props) => {
         </svg>
       </Box>
 
-      {/* <Box
-        display={{ sm: show ? "block" : "none", md: "flex" }}
-        width={{ sm: "full", md: "auto" }}
-        alignItems="center"
-        flexGrow={1}
-      >
-        <MenuItems>
-          <Link to="/all-practices">Your Practices</Link>
-        </MenuItems>
-        <MenuItems>Examples</MenuItems>
-        <MenuItems>Blog</MenuItems>
-      </Box> */}
-
       <Box
         display={{ sm: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
         <Button
           marginLeft={2}
+          border="2px"
+          variantColor="yellow"
+          color="yellow"
+          borderColor={borderColor[colorMode]}
+          borderTop="transparent"
+          borderBottom="transparent"
           bg="transparent"
-          border="1px"
-          borderColor="brand.900"
         >
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
@@ -105,15 +96,7 @@ const Navigation = (props) => {
             <LogOutButton />
           </>
         )}
-        <Button
-          marginLeft={2}
-          bg="transparent"
-          border="1px"
-          borderColor="brand.900"
-          onClick={toggleColorMode}
-        >
-          {colorMode === "light" ? <Icon name="moon" /> : <Icon name="sun" />}
-        </Button>
+        <ColorModeButton />
       </Box>
     </Flex>
   );
