@@ -25,8 +25,13 @@ function AllPractices(props) {
   //justifyContent is what makes the outer Grid in the center of the page
   return (
     <Grid justifyContent="center">
-      <Box w="100%" bg="blue.500">
-        <Text bg="red" textAlign="center" fontWeight="bold" fontSize="50px">
+      <Box w="100%" bg="brand.900">
+        <Text
+          textAlign="center"
+          color="black"
+          fontWeight="bold"
+          fontSize="50px"
+        >
           All of Your Practices
         </Text>
       </Box>

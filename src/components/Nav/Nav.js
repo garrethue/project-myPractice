@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import LogOutButton from "../LogOutButton/LogOutButton";
-import "./Nav.css";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 const Nav = (props) => {
@@ -38,9 +37,9 @@ const Nav = (props) => {
           </>
         )}
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
+        {/* <Link className="nav-link" to="/about">
           About
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

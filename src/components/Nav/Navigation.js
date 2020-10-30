@@ -1,0 +1,122 @@
+import React, { useState } from "react";
+import {
+  Box,
+  Heading,
+  Flex,
+  Text,
+  Button,
+  useColorMode,
+  Icon,
+} from "@chakra-ui/core";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import LogOutButton from "../LogOutButton/LogOutButton";
+import "./Nav.css";
+import mapStoreToProps from "../../redux/mapStoreToProps";
+
+const MenuItems = ({ children }) => (
+  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
+    {children}
+  </Text>
+);
+
+const Navigation = (props) => {
+  const [show, setShow] = useState(false);
+  const handleToggle = () => setShow(!show);
+
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  //from nav
+  let loginLinkData = {
+    path: "/login",
+    text: "Login / Register",
+  };
+
+  if (props.store.user.id != null) {
+    loginLinkData.path = "/all-practices"; ///user";
+    loginLinkData.text = "My Practices";
+  }
+
+  return (
+    <Flex
+      as="nav"
+      align="center"
+      justify="space-between"
+      wrap="wrap"
+      padding="1.5rem"
+      bg="black"
+      color="white"
+      {...props}
+    >
+      <Flex align="center" mr={5}>
+        <Link to="/all-practices">
+          <Heading as="h1" size="lg">
+            myPractice
+          </Heading>
+        </Link>
+      </Flex>
+
+      <Box display={{ sm: "block", md: "none" }} onClick={handleToggle}>
+        <svg
+          fill="white"
+          width="12px"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Menu</title>
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        </svg>
+      </Box>
+
+      {/* <Box
+        display={{ sm: show ? "block" : "none", md: "flex" }}
+        width={{ sm: "full", md: "auto" }}
+        alignItems="center"
+        flexGrow={1}
+      >
+        <MenuItems>
+          <Link to="/all-practices">Your Practices</Link>
+        </MenuItems>
+        <MenuItems>Examples</MenuItems>
+        <MenuItems>Blog</MenuItems>
+      </Box> */}
+
+      <Box
+        display={{ sm: show ? "block" : "none", md: "block" }}
+        mt={{ base: 4, md: 0 }}
+      >
+        <Button
+          marginLeft={2}
+          bg="transparent"
+          border="1px"
+          borderColor="brand.900"
+        >
+          {/* Show this link if they are logged in or not,
+          but call this link 'Home' if they are logged in,
+          and call this link 'Login / Register' if they are not */}
+          <Link to={loginLinkData.path}>{loginLinkData.text}</Link>
+        </Button>
+        {/* Show the link to the info page and the logout button if the user is logged in */}
+        {props.store.user.id && (
+          <>
+            {/* <Button bg="transparent" border="1px">
+               <Link to="/all-practices">Your Practices</Link>
+            </Button> */}
+            <LogOutButton />
+          </>
+        )}
+        <Button
+          marginLeft={2}
+          bg="transparent"
+          border="1px"
+          borderColor="brand.900"
+          onClick={toggleColorMode}
+        >
+          {colorMode === "light" ? <Icon name="moon" /> : <Icon name="sun" />}
+        </Button>
+      </Box>
+    </Flex>
+  );
+};
+
+export default connect(mapStoreToProps)(Navigation);

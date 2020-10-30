@@ -10,6 +10,7 @@ import rootSaga from "./redux/sagas/_root.saga"; // imports ./redux/sagas/index.
 
 //garret's imports
 import { ThemeProvider, CSSReset, ColorModeProvider } from "@chakra-ui/core";
+import customTheme from "./theme/theme";
 
 import App from "./components/App/App";
 
@@ -37,9 +38,11 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider>
-      <CSSReset />
-      <App />
+    <ThemeProvider theme={customTheme}>
+      <ColorModeProvider>
+        <CSSReset />
+        <App />
+      </ColorModeProvider>
     </ThemeProvider>
   </Provider>,
   document.getElementById("react-root")
