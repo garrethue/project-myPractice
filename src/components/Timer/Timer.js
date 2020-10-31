@@ -177,7 +177,7 @@ function Timer(props) {
   return (
     <Grid justifyContent="center">
       {internalTimeInSec === props.total_time && !isActive ? (
-        <>
+        <Box textAlign="center">
           <Text
             marginTop={5}
             paddingLeft={3}
@@ -192,6 +192,7 @@ function Timer(props) {
             Are you ready {props.user.first_name}?
           </Text>
           <Button
+            w="40%"
             size="lg"
             bg="black"
             color={color[colorMode]}
@@ -200,7 +201,7 @@ function Timer(props) {
           >
             Ready!
           </Button>
-        </>
+        </Box>
       ) : (
         renderTimer()
       )}
