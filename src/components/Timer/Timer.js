@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Howl } from "howler";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Button } from "@chakra-ui/core";
 import BackButton from "../Helpers/Buttons/BackButton";
+import { Grid, Box, Button, Text, useColorMode } from "@chakra-ui/core";
 
 function Timer(props) {
   //the time driver
@@ -31,6 +31,9 @@ function Timer(props) {
   const [currentPose, setCurrentPose] = useState(props.poseList[0]);
   const [poseListIndex, setPoseListIndex] = useState(0); //this allows one to iterate through the array to display the correct counter
   const [isStopped, setIsStopped] = useState(false);
+
+  const { colorMode } = useColorMode();
+  const color = { light: "white", dark: "white" };
 
   //turns on/off the timer
   function toggleTimer() {
@@ -104,28 +107,68 @@ function Timer(props) {
   }, [isActive, internalTimeInSec]);
 
   return (
-    <div className="app">
-      <div className="newTime">Time Remaining: {displayTime}</div>
-      <div className="currentPose">
-        {!isStopped && internalTimeInSec !== 0
-          ? `Current Pose: ${currentPose}`
-          : `Congratulations! You finished your practice!`}
-      </div>
-      <div className="row">
+    <Grid justifyContent="center">
+      <Box textAlign="center">
+        <Text
+          marginTop={5}
+          paddingLeft={3}
+          paddingRight={3}
+          bg="black"
+          textAlign="center"
+          color="white"
+          fontWeight="bold"
+          fontSize="60px"
+          marginBottom={5}
+        >
+          {" "}
+          Time Remaining: {displayTime}
+        </Text>
+      </Box>
+      <Box className="currentPose">
+        <Text
+          paddingLeft={3}
+          paddingRight={3}
+          bg="black"
+          textAlign="center"
+          color="white"
+          fontWeight="bold"
+          fontSize="40px"
+          marginBottom={5}
+        >
+          {!isStopped && internalTimeInSec !== 0
+            ? `Current Pose: ${currentPose}`
+            : `Congratulations! You finished your practice!`}
+        </Text>
+      </Box>
+      <Box textAlign="center" className="row">
         {internalTimeInSec !== 0 ? (
           <>
-            <Button onClick={toggleTimer}>
+            <Button
+              marginRight={3}
+              size="lg"
+              bg="black"
+              color={color[colorMode]}
+              variantColor="green"
+              onClick={toggleTimer}
+            >
               {isActive ? "Pause" : "Start"}
             </Button>
-            <Button className="button" onClick={quitPractice}>
-              Quit
+            <Button
+              marginLeft={3}
+              size="sm"
+              bg="black"
+              color={color[colorMode]}
+              variantColor="red"
+              onClick={quitPractice}
+            >
+              I Quit
             </Button>
           </>
         ) : (
-          <BackButton />
+          <BackButton viewTitle="All Practices" toWhere="/all-practices" />
         )}
-      </div>
-    </div>
+      </Box>
+    </Grid>
   );
 }
 
@@ -133,13 +176,13 @@ const mapReduxStateToProps = ({ practiceDetails }) => {
   //get necessary data
   const poseList = getPoseList(practiceDetails);
   const poseTimes = getPoseTimes(practiceDetails);
-  const TOTAL_TIME = getTotalPracticeTime(poseTimes);
-  const arrOfInvertedPoseTimes = invertPoseTimes(TOTAL_TIME, poseTimes);
+  const totalTime = getTotalPracticeTime(poseTimes);
+  const arrOfInvertedPoseTimes = invertPoseTimes(totalTime, poseTimes);
 
   console.log(arrOfInvertedPoseTimes);
 
   return {
-    total_time: TOTAL_TIME,
+    total_time: totalTime,
     timesToRingBellArr: arrOfInvertedPoseTimes,
     poseList: poseList,
   };

@@ -3,15 +3,11 @@ import { Button, useColorMode } from "@chakra-ui/core";
 import { withRouter } from "react-router-dom";
 
 function BackButton(props) {
-  // "/all-practices"
-
   const goToPractices = (toWhere) => {
     props.history.push(toWhere);
   };
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
-
-  console.log(props.toWhere);
   return (
     <Button
       bg="black"

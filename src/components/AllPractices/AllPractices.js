@@ -79,7 +79,7 @@ function AllPractices(props) {
           })}
         </Grid>
       </Box>
-      <Box textAlign="right">
+      <Box textAlign="center">
         <IconButton
           isRound
           aria-label="Search database"
