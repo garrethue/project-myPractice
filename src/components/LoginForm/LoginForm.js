@@ -51,7 +51,7 @@ const LoginForm = (props) => {
             fontWeight="bold"
             fontSize="50px"
           >
-            Ready to Practice?
+            Welcome to Your Practice.
           </Text>
           {props.store.errors.loginMessage && (
             <h3 className="alert" role="alert">
@@ -91,7 +91,7 @@ const LoginForm = (props) => {
               name="submit"
               value="Log In"
             >
-              Ready
+              Let Me In
             </Button>
           </Grid>
         </form>
