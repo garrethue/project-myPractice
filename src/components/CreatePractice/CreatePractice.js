@@ -117,8 +117,8 @@ function CreatePractice(props) {
   return (
     <div>
       <BackButton />
-      <Grid justifyContent="center">
-        <Box textAlign="center" rounded={3} h="100%" w="100%">
+      <Grid w="100%" justifyContent="center">
+        <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
             marginBottom={5}
             bg="black"

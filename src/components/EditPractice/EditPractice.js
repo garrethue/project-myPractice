@@ -128,7 +128,7 @@ function EditPractice(props) {
     <div>
       <BackButton />
       <Grid justifyContent="center">
-        <Box textAlign="center" rounded={3} h="100%" w="100%">
+        <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
             bg="black"
             textAlign="center"
