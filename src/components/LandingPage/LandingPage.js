@@ -1,74 +1,74 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
-
-import './LandingPage.css';
+import React from "react";
+import { connect } from "react-redux";
+import mapStoreToProps from "../../redux/mapStoreToProps";
+import {
+  Grid,
+  Heading,
+  Box,
+  Button,
+  useColorMode,
+  Text,
+} from "@chakra-ui/core";
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
+import RegisterForm from "../RegisterForm/RegisterForm";
 
-class LandingPage extends Component {
-  state = {
-    heading: 'Class Component',
+const LandingPage = (props) => {
+  const { colorMode } = useColorMode();
+  const color = { light: "white", dark: "white" };
+  const onLogin = (event) => {
+    props.history.push("/login");
   };
 
-  onLogin = (event) => {
-    this.props.history.push('/login');
-  };
-
-  render() {
-    return (
-      <div className="container">
-        <h2>{this.state.heading}</h2>
-
-        <div className="grid">
-          <div className="grid-col grid-col_8">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra
-              lacus ut ex molestie blandit. Etiam et turpis sit amet risus
-              mollis interdum. Suspendisse et justo vitae metus bibendum
-              fringilla sed sed justo. Aliquam sollicitudin dapibus lectus,
-              vitae consequat odio elementum eget. Praesent efficitur eros vitae
-              nunc interdum, eu interdum justo facilisis. Sed pulvinar nulla ac
-              dignissim efficitur. Quisque eget eros metus. Vestibulum bibendum
-              fringilla nibh a luctus. Duis a sapien metus.
-            </p>
-
-            <p>
-              Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-              id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-              consectetur placerat pharetra. Aenean gravida ex ut erat commodo,
-              ut finibus metus facilisis. Nullam eget lectus non urna rhoncus
-              accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-              euismod, augue at condimentum rhoncus, massa lorem semper lacus,
-              sed lobortis augue mi vel felis. Duis ultrices sapien at est
-              convallis congue.
-            </p>
-
-            <p>
-              Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-              Suspendisse posuere dapibus maximus. Aliquam vitae felis libero.
-              In vehicula sapien at semper ultrices. Vivamus sed feugiat libero.
-              Sed sagittis neque id diam euismod, ut egestas felis ultricies.
-              Nullam non fermentum mauris. Sed in enim ac turpis faucibus
-              pretium in sit amet nisi.
-            </p>
-          </div>
-          <div className="grid-col grid-col_4">
-            <RegisterForm />
-
-            <center>
-              <h4>Already a Member?</h4>
-              <button className="btn btn_sizeSm" onClick={this.onLogin}>
-                Login
-              </button>
-            </center>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <Grid
+      bg="transparent"
+      justifyContent="center"
+      templateColumns="1fr 1fr"
+      gap={1}
+      bg="transparent"
+    >
+      <Box
+        marginTop={5}
+        alignContent="center"
+        alignItems="center"
+        textAlign="center"
+        bg="transparent"
+      >
+        <Text
+          marginLeft={5}
+          marginBottom={5}
+          bg="black"
+          textAlign="center"
+          color="white"
+          fontWeight="bold"
+          fontSize="50px"
+        >
+          Welcome to your practice.
+        </Text>
+        <Box margin="auto" maxW="50%" bg="black">
+          <Text fontSize="xl" fontWeight="bold">
+            Future you says thanks.
+          </Text>
+        </Box>
+      </Box>
+      <Box textAlign="center">
+        <RegisterForm />
+        <Text marginBottom={2} fontWeight="bold">
+          Already a Member?
+        </Text>
+        <Button
+          bg="black"
+          color={color[colorMode]}
+          variantColor="teal"
+          className="btn btn_sizeSm"
+          onClick={onLogin}
+        >
+          Login
+        </Button>
+      </Box>
+    </Grid>
+  );
+};
 
 export default connect(mapStoreToProps)(LandingPage);
