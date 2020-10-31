@@ -194,7 +194,7 @@ function EditPractice(props) {
                     variantColor="green"
                     type="submit"
                   >
-                    Make Changes
+                    Edit Practice
                   </Button>
                 </Grid>
               </FormControl>

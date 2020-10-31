@@ -52,6 +52,73 @@ function Timer(props) {
     }
   }
 
+  function renderTimer() {
+    return (
+      <>
+        {" "}
+        <Box w="65rem" textAlign="center">
+          <Text
+            marginTop={5}
+            paddingLeft={3}
+            paddingRight={3}
+            bg="black"
+            textAlign="center"
+            color="white"
+            fontWeight="bold"
+            fontSize="60px"
+            marginBottom={5}
+          >
+            Time Remaining: {displayTime}
+          </Text>
+        </Box>
+        <Box className="currentPose">
+          <Text
+            paddingLeft={3}
+            paddingRight={3}
+            bg="black"
+            textAlign="center"
+            color="white"
+            fontWeight="bold"
+            fontSize="40px"
+            marginBottom={5}
+          >
+            {!isStopped && internalTimeInSec !== 0
+              ? `Current Pose: ${currentPose}`
+              : `Congratulations! You finished your practice!`}
+          </Text>
+        </Box>
+        <Box textAlign="center" className="row">
+          {internalTimeInSec !== 0 ? (
+            <>
+              <Button
+                marginRight={3}
+                size="lg"
+                bg="black"
+                color={color[colorMode]}
+                variantColor="green"
+                onClick={toggleTimer}
+              >
+                {isActive ? "Pause" : "Start"}
+              </Button>
+              <Button
+                marginLeft={3}
+                size="lg"
+                bg="black"
+                color={color[colorMode]}
+                variantColor="red"
+                onClick={quitPractice}
+              >
+                I Quit
+              </Button>
+            </>
+          ) : (
+            <BackButton viewTitle="All Practices" toWhere="/all-practices" />
+          )}
+        </Box>
+      </>
+    );
+  }
+
   function formatTime() {
     // Quotient-Remainder Theorem: Given any integer, n, and positive, integer, d,
     // I can find integers q and r s.t.
@@ -78,6 +145,7 @@ function Timer(props) {
   }
   //are you ready? <button> Yes - let's do this!</button>
   useEffect(() => {
+    console.log(props.user.first_name);
     //getAudio(); //Garret: anytime this is called, the client makes a req to the server for the audio file!
     console.log(poseList);
     console.log(timesToRingBell);
@@ -108,7 +176,35 @@ function Timer(props) {
 
   return (
     <Grid justifyContent="center">
-      <Box w="65rem" textAlign="center">
+      {internalTimeInSec === props.total_time && !isActive ? (
+        <>
+          <Text
+            marginTop={5}
+            paddingLeft={3}
+            paddingRight={3}
+            bg="black"
+            textAlign="center"
+            color="white"
+            fontWeight="bold"
+            fontSize="60px"
+            marginBottom={5}
+          >
+            Are you ready {props.user.first_name}?
+          </Text>
+          <Button
+            size="lg"
+            bg="black"
+            color={color[colorMode]}
+            variantColor="green"
+            onClick={toggleTimer}
+          >
+            Ready!
+          </Button>
+        </>
+      ) : (
+        renderTimer()
+      )}
+      {/* <Box w="65rem" textAlign="center">
         <Text
           marginTop={5}
           paddingLeft={3}
@@ -166,12 +262,12 @@ function Timer(props) {
         ) : (
           <BackButton viewTitle="All Practices" toWhere="/all-practices" />
         )}
-      </Box>
+      </Box> */}
     </Grid>
   );
 }
 
-const mapReduxStateToProps = ({ practiceDetails }) => {
+const mapReduxStateToProps = ({ user, practiceDetails }) => {
   //get necessary data
   const poseList = getPoseList(practiceDetails);
   const poseTimes = getPoseTimes(practiceDetails);
@@ -181,6 +277,7 @@ const mapReduxStateToProps = ({ practiceDetails }) => {
   console.log(arrOfInvertedPoseTimes);
 
   return {
+    user,
     total_time: totalTime,
     timesToRingBellArr: arrOfInvertedPoseTimes,
     poseList: poseList,
