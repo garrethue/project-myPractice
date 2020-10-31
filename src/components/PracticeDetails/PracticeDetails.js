@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Grid, Text, Box, Button } from "@chakra-ui/core";
+import { Grid, Text, Box, Button, useColorMode } from "@chakra-ui/core";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import TimeFormatter from "../Helpers/TimeFormatter";
 import GetTotalTime from "../Helpers/GetTotalTime";
@@ -15,6 +15,9 @@ function PracticeDetails(props) {
     }
     //push user back to ALL PRACTICES! AFTER GETTING UPDATED LIST!
   };
+
+  const { colorMode } = useColorMode();
+  const color = { light: "white", dark: "white" };
 
   const goToTimer = () => {
     props.history.push("/timer");
@@ -70,27 +73,55 @@ function PracticeDetails(props) {
         {props.store.practiceDetails.map((poseObj) => {
           return (
             <>
-              <Box textAlign="center" bg="black">
-                {poseObj.pose_name}
+              <Box fontSize="18px" textAlign="center" bg="black">
+                <Text fontWeight="bold" color="white">
+                  {poseObj.pose_name}
+                </Text>
               </Box>
               <Box textAlign="center" bg="black">
-                {poseObj.pose_time}
+                <Text fontSize="18px" fontWeight="bold" color="white">
+                  {poseObj.pose_time}
+                </Text>
               </Box>
             </>
           );
         })}
       </Grid>
       <Grid
-        margin={5}
-        padding={2}
+        marginTop={5}
+        marginLeft={5}
+        marginRight={5}
         justifyContent="center"
         alignItems="center"
         templateColumns="repeat(3, 1fr)"
         gap={2}
       >
-        <Button onClick={goToTimer}>Start</Button>
-        <Button onClick={goToEdit}>Edit</Button>{" "}
         <Button
+          bg="black"
+          color="white"
+          bg="black"
+          color={color[colorMode]}
+          variantColor="green"
+          onClick={goToTimer}
+        >
+          Start
+        </Button>
+        <Button
+          bg="black"
+          color="white"
+          bg="black"
+          color={color[colorMode]}
+          variantColor="yellow"
+          onClick={goToEdit}
+        >
+          Edit
+        </Button>{" "}
+        <Button
+          bg="black"
+          color="white"
+          bg="black"
+          color={color[colorMode]}
+          variantColor="red"
           onClick={() =>
             handleDeletePractice(props.store.practiceDetails[0].practice_id)
           }
