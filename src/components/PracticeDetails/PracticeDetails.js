@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Grid, Box, Button } from "@chakra-ui/core";
+import { Grid, Text, Box, Button } from "@chakra-ui/core";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import TimeFormatter from "../Helpers/TimeFormatter";
 import GetTotalTime from "../Helpers/GetTotalTime";
@@ -26,36 +26,54 @@ function PracticeDetails(props) {
 
   console.log(props.store);
   return (
-    <div>
-      <BackButton viewTitle="All Practices" toWhere="/all-practices" />
-
+    <Grid justifyContent="center">
+      <Box marginTop={5} marginBottom={5} w="50%">
+        <BackButton viewTitle="All Practices" toWhere="/all-practices" />
+      </Box>
       <Grid
-        bg="blue.500"
-        margin={5}
+        w="100%"
         padding={2}
         justifyContent="center"
         alignItems="center"
         templateColumns="repeat(2, 1fr)"
-        gap={2}
+        gap={3}
       >
-        <Box>
+        <Text
+          paddingRight={2}
+          paddingLeft={2}
+          bg="black"
+          textAlign="right"
+          color="white"
+          fontWeight="bold"
+          fontSize="30px"
+        >
           Total Time:{" "}
           {TimeFormatter(GetTotalTime(props.store.practiceDetails, false))}
-        </Box>
+        </Text>
         <Box />
-        <Box textAlign="center" bg="green.500">
+        <Box
+          fontWeight="bold"
+          fontSize="30px"
+          textAlign="center"
+          bg="brand.700"
+        >
           Pose
         </Box>
-        <Box textAlign="center" bg="green.500">
+        <Box
+          fontWeight="bold"
+          fontSize="30px"
+          textAlign="center"
+          bg="brand.700"
+        >
           Duration
         </Box>
         {props.store.practiceDetails.map((poseObj) => {
           return (
             <>
-              <Box textAlign="center" bg="yellow.500">
+              <Box textAlign="center" bg="black">
                 {poseObj.pose_name}
               </Box>
-              <Box textAlign="center" bg="yellow.500">
+              <Box textAlign="center" bg="black">
                 {poseObj.pose_time}
               </Box>
             </>
@@ -63,7 +81,6 @@ function PracticeDetails(props) {
         })}
       </Grid>
       <Grid
-        bg="blue.500"
         margin={5}
         padding={2}
         justifyContent="center"
@@ -81,7 +98,7 @@ function PracticeDetails(props) {
           Delete
         </Button>
       </Grid>
-    </div>
+    </Grid>
   );
 }
 

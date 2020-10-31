@@ -181,7 +181,7 @@ function CreatePractice(props) {
                     bg="black"
                     size="lg"
                     color={color[colorMode]}
-                    variantColor="teal"
+                    variantColor="green"
                     type="submit"
                   >
                     Create Practice

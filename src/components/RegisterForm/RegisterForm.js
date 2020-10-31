@@ -42,7 +42,7 @@ const RegisterForm = (props) => {
             fontWeight="bold"
             fontSize="50px"
           >
-            Start Your Practice Here
+            Your Practice Begins Here.
           </Text>
           {props.store.errors.registrationMessage && (
             <h3 className="alert" role="alert">
@@ -100,7 +100,7 @@ const RegisterForm = (props) => {
               marginTop={5}
               bg="black"
               color={color[colorMode]}
-              variantColor="teal"
+              variantColor="green"
               type="submit"
               name="submit"
               value="Register"

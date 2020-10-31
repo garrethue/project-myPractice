@@ -191,7 +191,7 @@ function EditPractice(props) {
                     bg="black"
                     size="lg"
                     color={color[colorMode]}
-                    variantColor="teal"
+                    variantColor="green"
                     type="submit"
                   >
                     Make Changes
