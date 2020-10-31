@@ -4,9 +4,11 @@ import {
   Box,
   Select,
   Button,
+  IconButton,
   Text,
   FormControl,
   Input,
+  useColorMode,
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -24,6 +26,9 @@ function EditPractice(props) {
   const [practiceName, setPracticeName] = useState(props.currentPracticeName);
   const [poses, setPoses] = useState(props.posesAndTimesInPractice);
   const [practiceId] = useState(props.practiceId);
+
+  const { colorMode } = useColorMode();
+  const color = { light: "white", dark: "white" };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -117,7 +122,16 @@ function EditPractice(props) {
                 <option value={time}>{time} seconds</option>
               ))}
             </Select>
-            <Button onClick={() => removeItem(index)}>Delete</Button>
+            <IconButton
+              isRound
+              aria-label="Delete a Row"
+              icon="delete"
+              bg="black"
+              size="lg"
+              color={color[colorMode]}
+              variantColor="red"
+              onClick={() => removeItem(index)}
+            />
           </Fragment>
         );
       });
@@ -126,8 +140,10 @@ function EditPractice(props) {
 
   return (
     <div>
-      <BackButton />
       <Grid justifyContent="center">
+        <Box marginTop={5} marginBottom={5} w="50%">
+          <BackButton viewTitle="Practice Details" toWhere="/details" />
+        </Box>
         <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
             bg="black"
@@ -164,21 +180,37 @@ function EditPractice(props) {
                   bg="transparent"
                   justifyContent="center"
                   alignItems="center"
-                  templateColumns="repeat(3, 1fr)"
+                  templateColumns="6fr 6fr 1fr"
                   gap={4}
                   bg="transparent"
                   marginTop={3}
                   marginBottom={3}
                 >
                   {createUI()}
-                  <Button type="submit">Change Your Practice</Button>
+                  <Button
+                    bg="black"
+                    size="lg"
+                    color={color[colorMode]}
+                    variantColor="teal"
+                    type="submit"
+                  >
+                    Make Changes
+                  </Button>
                 </Grid>
               </FormControl>
             </form>
           )}
-          <Button bg="black" color="white" onClick={addItem}>
-            Add a Row
-          </Button>
+
+          <IconButton
+            isRound
+            aria-label="Add a Row"
+            icon="add"
+            bg="black"
+            size="lg"
+            color={color[colorMode]}
+            variantColor="teal"
+            onClick={addItem}
+          />
         </Box>
       </Grid>
     </div>

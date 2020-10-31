@@ -27,7 +27,7 @@ function PracticeDetails(props) {
   console.log(props.store);
   return (
     <div>
-      <BackButton />
+      <BackButton viewTitle="All Practices" toWhere="/all-practices" />
 
       <Grid
         bg="blue.500"

@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Box, Grid, Text, Image, Button, useColorMode } from "@chakra-ui/core";
+import {
+  Box,
+  Grid,
+  Text,
+  Image,
+  IconButton,
+  useColorMode,
+} from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
@@ -34,6 +41,7 @@ function AllPractices(props) {
           color="white"
           fontWeight="bold"
           fontSize="50px"
+          w="35rem"
         >
           Your Practices
         </Text>
@@ -72,14 +80,18 @@ function AllPractices(props) {
         </Grid>
       </Box>
       <Box textAlign="right">
-        <Button
+        <IconButton
+          isRound
+          aria-label="Search database"
+          icon="add"
           bg="black"
+          size="lg"
           color={color[colorMode]}
           variantColor="teal"
           onClick={goToCreatePage}
         >
           Add a Practice
-        </Button>
+        </IconButton>
       </Box>
     </Grid>
   );
