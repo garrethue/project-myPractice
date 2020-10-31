@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Button,
   Box,
   Grid,
   Text,
-  Image,
   IconButton,
   useColorMode,
 } from "@chakra-ui/core";
@@ -12,7 +12,8 @@ import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const [colorArr] = useState(["green", "yellow", "red"]);
+  const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
 
   const goToDetailsPage = (id) => {
@@ -29,8 +30,6 @@ function AllPractices(props) {
     props.dispatch({ type: "FETCH_PRACTICES" });
     props.dispatch({ type: "FETCH_POSES" });
   }, []);
-
-  console.log(props.store.practices);
 
   //justifyContent is what makes the outer Grid in the center of the page
   return (
@@ -57,24 +56,22 @@ function AllPractices(props) {
         >
           {props.store.practices.map((practiceObj) => {
             return (
-              <Box
+              <Button
+                as="button"
+                rounded="md"
                 textAlign="center"
-                bg="green"
+                bg="black"
                 padding={1}
                 w="100%"
-                h="100%"
+                h="10rem"
+                variantColor={colorArr[practiceObj.practice_id % 3]}
                 fontSize="1.5em"
                 onClick={() => goToDetailsPage(practiceObj.practice_id)}
               >
-                <Image
-                  rounded="full"
-                  size="150px"
-                  src="https://bit.ly/sage-adebayo"
-                  alt="Segun Adebayo"
-                />
-                <br />
-                {practiceObj.practice_name}
-              </Box>
+                <Text as="u" fontWeight="bold" color="white">
+                  {practiceObj.practice_name}
+                </Text>
+              </Button>
             );
           })}
         </Grid>
