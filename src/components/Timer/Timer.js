@@ -108,7 +108,7 @@ function Timer(props) {
 
   return (
     <Grid justifyContent="center">
-      <Box textAlign="center">
+      <Box w="65rem" textAlign="center">
         <Text
           marginTop={5}
           paddingLeft={3}
@@ -120,7 +120,6 @@ function Timer(props) {
           fontSize="60px"
           marginBottom={5}
         >
-          {" "}
           Time Remaining: {displayTime}
         </Text>
       </Box>

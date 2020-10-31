@@ -51,7 +51,7 @@ const LoginForm = (props) => {
             fontWeight="bold"
             fontSize="50px"
           >
-            Login to Your Practice
+            Ready to Practice?
           </Text>
           {props.store.errors.loginMessage && (
             <h3 className="alert" role="alert">
@@ -86,12 +86,12 @@ const LoginForm = (props) => {
               marginTop={5}
               bg="black"
               color={color[colorMode]}
-              variantColor="teal"
+              variantColor="green"
               type="submit"
               name="submit"
               value="Log In"
             >
-              Login
+              Ready
             </Button>
           </Grid>
         </form>
