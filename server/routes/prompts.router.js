@@ -52,7 +52,7 @@ function getPromptText(firstName, nextPose) {
   let arrOfPrompts = [
     `${firstName} your next pose is ${nextPose}`,
     `Hey ${firstName}, in the next few moments, you'll transition to ${nextPose}.`,
-    `${firstName}, ${nextPose} is your next pose.`,
+    `${firstName}, ${nextPose} is next.`,
     `${nextPose} is next.`,
     `You will be transitioning into ${nextPose}`,
   ];
