@@ -6,12 +6,9 @@ const getAudioContext = () => {
   return audioContent;
 };
 
-const getAudio = async () => {
-  //"http://localhost:5000/prompts/
-  //let url = "/api/prompts/";
-
+const getAudio = async (next_pose) => {
   // load audio file from server
-  const response = await axios.get("/api/prompts/", {
+  const response = await axios.get(`/api/prompts/${next_pose}`, {
     responseType: "arraybuffer",
   });
 

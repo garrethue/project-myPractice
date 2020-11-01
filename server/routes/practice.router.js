@@ -46,6 +46,8 @@ router.post("/add", rejectUnauthenticated, async (req, res) => {
       [practice_name, id]
     );
 
+    console.log(poses);
+
     //grab newPractice.rows.id to get the PRACTICE_ID
     const practiceId = newPractice.rows[0].id;
 
