@@ -13,7 +13,7 @@ const LoginPage = (props) => {
       <LoginForm />
       <Grid justifyContent="center">
         <Box marginTop={5}>
-          <Text fontWeight="bold">Don't have any account?</Text>
+          <Text fontWeight="bold">Don't have an account?</Text>
         </Box>
         <Button
           marginTop={2}

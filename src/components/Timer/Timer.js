@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Howl } from "howler";
 import { connect } from "react-redux";
-import axios from "axios";
 import BackButton from "../Helpers/Buttons/BackButton";
 import { Grid, Box, Button, Text, useColorMode } from "@chakra-ui/core";
+import getAudio from "../Helpers/GetAudio";
 
 function Timer(props) {
   //the time driver
@@ -167,6 +167,7 @@ function Timer(props) {
           setCurrentPose(poseList[poseListIndex]);
         }
         setPoseListIndex((poseListIndex) => poseListIndex + 1);
+        getAudio();
       }
     } else if (!isActive && internalTimeInSec !== 0) {
       clearInterval(interval);
@@ -205,65 +206,6 @@ function Timer(props) {
       ) : (
         renderTimer()
       )}
-      {/* <Box w="65rem" textAlign="center">
-        <Text
-          marginTop={5}
-          paddingLeft={3}
-          paddingRight={3}
-          bg="black"
-          textAlign="center"
-          color="white"
-          fontWeight="bold"
-          fontSize="60px"
-          marginBottom={5}
-        >
-          Time Remaining: {displayTime}
-        </Text>
-      </Box>
-      <Box className="currentPose">
-        <Text
-          paddingLeft={3}
-          paddingRight={3}
-          bg="black"
-          textAlign="center"
-          color="white"
-          fontWeight="bold"
-          fontSize="40px"
-          marginBottom={5}
-        >
-          {!isStopped && internalTimeInSec !== 0
-            ? `Current Pose: ${currentPose}`
-            : `Congratulations! You finished your practice!`}
-        </Text>
-      </Box>
-      <Box textAlign="center" className="row">
-        {internalTimeInSec !== 0 ? (
-          <>
-            <Button
-              marginRight={3}
-              size="lg"
-              bg="black"
-              color={color[colorMode]}
-              variantColor="green"
-              onClick={toggleTimer}
-            >
-              {isActive ? "Pause" : "Start"}
-            </Button>
-            <Button
-              marginLeft={3}
-              size="sm"
-              bg="black"
-              color={color[colorMode]}
-              variantColor="red"
-              onClick={quitPractice}
-            >
-              I Quit
-            </Button>
-          </>
-        ) : (
-          <BackButton viewTitle="All Practices" toWhere="/all-practices" />
-        )}
-      </Box> */}
     </Grid>
   );
 }
