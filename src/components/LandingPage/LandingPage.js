@@ -1,14 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import {
-  Grid,
-  Heading,
-  Box,
-  Button,
-  useColorMode,
-  Text,
-} from "@chakra-ui/core";
+import { Grid, Box, Button, useColorMode, Text } from "@chakra-ui/core";
 
 // CUSTOM COMPONENTS
 import RegisterForm from "../RegisterForm/RegisterForm";

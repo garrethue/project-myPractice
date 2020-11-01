@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import LoginForm from "../LoginForm/LoginForm";
@@ -13,7 +13,7 @@ const LoginPage = (props) => {
       <LoginForm />
       <Grid justifyContent="center">
         <Box marginTop={5}>
-          <Text fontWeight="bold">Don't have any account?</Text>
+          <Text fontWeight="bold">Don't have an account?</Text>
         </Box>
         <Button
           marginTop={2}

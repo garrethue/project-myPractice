@@ -100,6 +100,22 @@ VALUES ('garrethue','password','Garret', 'Larson'),
 --poses
 INSERT INTO poses ("pose_name")
 VALUES ('downward dog'), ('tree pose'), ('plank'), ('triangle pose');
+
+--poses
+INSERT INTO poses ("pose_name")
+VALUES ('half moon pose'), ('warrior one pose'), ('warrior two pose'), ('bridge pose'), ('upward facing bow pose'), ('dolphin pose');
+
+
+--poses
+INSERT INTO poses ("pose_name")
+VALUES ('scorpion pose'), ('corpse pose'), ('seated forward fold pose'), ('warrior three pose'), ('crow pose'), ('tripod headstand'),('extended side angle pose');
+
+--poses
+INSERT INTO poses ("pose_name")
+VALUES ('bird of paradise pose');
+
+
+select * from poses;
 ------------------------------------
 --practices_poses junction table
 INSERT INTO practices_poses ("practice_id","pose_id","pose_time")

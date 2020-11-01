@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Howl } from "howler";
 import { connect } from "react-redux";
-import axios from "axios";
 import BackButton from "../Helpers/Buttons/BackButton";
 import { Grid, Box, Button, Text, useColorMode } from "@chakra-ui/core";
+import getAudio from "../Helpers/GetAudio";
 
 function Timer(props) {
   //the time driver
@@ -26,6 +26,8 @@ function Timer(props) {
   const [timesToRingBell, setTimesToRingBell] = useState(
     props.timesToRingBellArr
   );
+  //when the internal timer reaches a number in this array, the prompt will play
+  const [promptUserTimes] = useState(props.timesToPromptUser);
   //poseList is an array of pose names that are used in conjunction with currentPose and poseListIndex to render the current pose in the practice
   const [poseList, setPoseList] = useState(props.poseList);
   const [currentPose, setCurrentPose] = useState(props.poseList[0]);
@@ -145,10 +147,10 @@ function Timer(props) {
   }
   //are you ready? <button> Yes - let's do this!</button>
   useEffect(() => {
-    console.log(props.user.first_name);
     //getAudio(); //Garret: anytime this is called, the client makes a req to the server for the audio file!
     console.log(poseList);
     console.log(timesToRingBell);
+
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
@@ -156,6 +158,19 @@ function Timer(props) {
       }, 1000); //the 1000 defines how long each interval should be
 
       setDisplayTime(formatTime()); //where formatting time occurs on DOM
+
+      //get prompts for user
+      if (promptUserTimes.includes(internalTimeInSec)) {
+        let indexOfNextPose = poseListIndex; // the index of the next pose is already set due to line 184, thus I do not have to do poseListIndex + 1 to get next pose
+        let nextPose = poseList[indexOfNextPose];
+        console.log("poseList.length", poseList.length);
+        console.log("length - 1, ", poseList.length - 1);
+        console.log("IN IF: indexOfNextPose", indexOfNextPose);
+        console.log("IN IF: nextPose", nextPose);
+        getAudio(nextPose);
+      }
+
+      //check if practice is over OR if it is time to ring next bell
       if (internalTimeInSec === 0) {
         //Practice is over!
         bell.play();
@@ -205,65 +220,6 @@ function Timer(props) {
       ) : (
         renderTimer()
       )}
-      {/* <Box w="65rem" textAlign="center">
-        <Text
-          marginTop={5}
-          paddingLeft={3}
-          paddingRight={3}
-          bg="black"
-          textAlign="center"
-          color="white"
-          fontWeight="bold"
-          fontSize="60px"
-          marginBottom={5}
-        >
-          Time Remaining: {displayTime}
-        </Text>
-      </Box>
-      <Box className="currentPose">
-        <Text
-          paddingLeft={3}
-          paddingRight={3}
-          bg="black"
-          textAlign="center"
-          color="white"
-          fontWeight="bold"
-          fontSize="40px"
-          marginBottom={5}
-        >
-          {!isStopped && internalTimeInSec !== 0
-            ? `Current Pose: ${currentPose}`
-            : `Congratulations! You finished your practice!`}
-        </Text>
-      </Box>
-      <Box textAlign="center" className="row">
-        {internalTimeInSec !== 0 ? (
-          <>
-            <Button
-              marginRight={3}
-              size="lg"
-              bg="black"
-              color={color[colorMode]}
-              variantColor="green"
-              onClick={toggleTimer}
-            >
-              {isActive ? "Pause" : "Start"}
-            </Button>
-            <Button
-              marginLeft={3}
-              size="sm"
-              bg="black"
-              color={color[colorMode]}
-              variantColor="red"
-              onClick={quitPractice}
-            >
-              I Quit
-            </Button>
-          </>
-        ) : (
-          <BackButton viewTitle="All Practices" toWhere="/all-practices" />
-        )}
-      </Box> */}
     </Grid>
   );
 }
@@ -274,14 +230,14 @@ const mapReduxStateToProps = ({ user, practiceDetails }) => {
   const poseTimes = getPoseTimes(practiceDetails);
   const totalTime = getTotalPracticeTime(poseTimes);
   const arrOfInvertedPoseTimes = invertPoseTimes(totalTime, poseTimes);
-
-  console.log(arrOfInvertedPoseTimes);
+  const arrPromptTimes = offSetPoseTimes(arrOfInvertedPoseTimes);
 
   return {
     user,
     total_time: totalTime,
     timesToRingBellArr: arrOfInvertedPoseTimes,
     poseList: poseList,
+    timesToPromptUser: arrPromptTimes,
   };
 };
 
@@ -320,6 +276,10 @@ const getTotalPracticeTime = (arrofPoseTimes) => {
   return arrofPoseTimes.reduce((accumulator, time) => {
     return accumulator + time;
   }, 0);
+};
+
+const offSetPoseTimes = (invertedArrOfPoseTimes) => {
+  return invertedArrOfPoseTimes.map((time) => time + 15);
 };
 
 export default connect(mapReduxStateToProps)(Timer);

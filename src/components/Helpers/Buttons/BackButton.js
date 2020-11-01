@@ -7,14 +7,13 @@ function BackButton(props) {
     props.history.push(toWhere);
   };
   const { colorMode } = useColorMode();
-  const color = { light: "white", dark: "white" };
+  const colorObj = { light: "white", dark: "white" };
   return (
     <Button
       bg="black"
       color="white"
-      bg="black"
       size="lg"
-      color={color[colorMode]}
+      color={colorObj[colorMode]}
       variantColor="teal"
       onClick={() => goToPractices(props.toWhere)}
     >
