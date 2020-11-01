@@ -12,12 +12,10 @@ const {
 } = require("../modules/authentication-middleware");
 
 router.get("/:next_pose", rejectUnauthenticated, async (req, res) => {
-  console.log("in get!");
   let { next_pose } = req.params;
   let { first_name } = req.user;
-  console.log(next_pose, first_name);
   try {
-    getAudioFromText(res, first_name, next_pose);
+    getAudioFromText(res, getPromptText(first_name, next_pose));
   } catch (err) {
     console.log(err.message);
     res.sendStatus(500);
@@ -25,13 +23,13 @@ router.get("/:next_pose", rejectUnauthenticated, async (req, res) => {
 });
 
 // HELPER FUNCTION
-async function getAudioFromText(res, firstName, nextPose) {
+async function getAudioFromText(res, prompt) {
   // The text to synthesize
-  const text = `Hey ${firstName}, in the next few moments, you'll transition to ${nextPose}. `; //make table of prompts and randomly pick to make it more organic!
+  //const prompt = `Hey ${firstName}, in the next few moments, you'll transition to ${nextPose}. `; //make table of prompts and randomly pick to make it more organic!
 
   // Construct the request
   const request = {
-    input: { text: text },
+    input: { text: prompt },
     // Select the language and SSML voice gender (optional)
     voice: { languageCode: "en-US-Standard-H", ssmlGender: "MALE" },
     // select the type of audio encoding
@@ -45,11 +43,20 @@ async function getAudioFromText(res, firstName, nextPose) {
       "Content-Type": "audio/mpeg",
       "Content-Length": buffer.length,
     });
-
     // write and send to client
     res.write(buffer, "binary");
     res.end(null, "binary");
   });
+}
+function getPromptText(firstName, nextPose) {
+  let arrOfPrompts = [
+    `${firstName} your next pose is ${nextPose}`,
+    `Hey ${firstName}, in the next few moments, you'll transition to ${nextPose}.`,
+    `${firstName}, ${nextPose} is your next pose.`,
+    `${nextPose} is next.`,
+    `Transition into ${nextPose}`,
+  ];
+  return arrOfPrompts[Math.floor(Math.random() * arrOfPrompts.length)];
 }
 
 module.exports = router;
