@@ -24,9 +24,6 @@ router.get("/:next_pose", rejectUnauthenticated, async (req, res) => {
 
 // HELPER FUNCTION
 async function getAudioFromText(res, prompt) {
-  // The text to synthesize
-  //const prompt = `Hey ${firstName}, in the next few moments, you'll transition to ${nextPose}. `; //make table of prompts and randomly pick to make it more organic!
-
   // Construct the request
   const request = {
     input: { text: prompt },
@@ -37,16 +34,19 @@ async function getAudioFromText(res, prompt) {
   };
 
   // Performs the text-to-speech request
-  const [response] = await client.synthesizeSpeech(request).then((response) => {
-    const buffer = response[0].audioContent;
-    res.writeHead(200, {
-      "Content-Type": "audio/mpeg",
-      "Content-Length": buffer.length,
-    });
-    // write and send to client
-    res.write(buffer, "binary");
-    res.end(null, "binary");
-  });
+  const [response] = await client
+    .synthesizeSpeech(request)
+    .then((response) => {
+      const buffer = response[0].audioContent;
+      res.writeHead(200, {
+        "Content-Type": "audio/mpeg",
+        "Content-Length": buffer.length,
+      });
+      // write and send to client
+      res.write(buffer, "binary");
+      res.end(null, "binary");
+    })
+    .catch((err) => console.log(err));
 }
 function getPromptText(firstName, nextPose) {
   let arrOfPrompts = [
@@ -54,7 +54,7 @@ function getPromptText(firstName, nextPose) {
     `Hey ${firstName}, in the next few moments, you'll transition to ${nextPose}.`,
     `${firstName}, ${nextPose} is your next pose.`,
     `${nextPose} is next.`,
-    `Transition into ${nextPose}`,
+    `You will be transitioning into ${nextPose}`,
   ];
   return arrOfPrompts[Math.floor(Math.random() * arrOfPrompts.length)];
 }
