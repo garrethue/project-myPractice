@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Howl } from "howler";
 import { connect } from "react-redux";
 import BackButton from "../Helpers/Buttons/BackButton";
-import { Grid, Box, Button, Text, useColorMode } from "@chakra-ui/core";
+import {
+  Grid,
+  Box,
+  Button,
+  Text,
+  useColorMode,
+  CircularProgress,
+  CircularProgressLabel,
+} from "@chakra-ui/core";
 import getAudio from "../Helpers/GetAudio";
 
 function Timer(props) {
@@ -64,42 +72,39 @@ function Timer(props) {
 
   function renderTimer() {
     return (
-      <>
-        {" "}
-        <Box w="65rem" textAlign="center">
+      <Box marginTop={5} w="100%">
+        <Box textAlign="center">
           <Text
-            marginTop={5}
-            paddingLeft={3}
-            paddingRight={3}
+            padding={3}
             bg="black"
             textAlign="center"
             color="white"
             fontWeight="bold"
-            fontSize="60px"
-            marginBottom={5}
+            fontSize="2rem"
+            marginBottom={3}
           >
-            Time Remaining: {displayTime}
+            Time Remaining: <Text>{displayTime}</Text>
           </Text>
         </Box>
-        <Box className="currentPose">
-          <Text
-            paddingLeft={3}
-            paddingRight={3}
-            bg="black"
-            textAlign="center"
-            color="white"
-            fontWeight="bold"
-            fontSize="40px"
-            marginBottom={5}
-          >
-            {!isStopped && internalTimeInSec !== 0
-              ? `Current Pose: ${currentPose}`
-              : `Congratulations! You finished your practice!`}
-          </Text>
-        </Box>
-        <Box textAlign="center" className="row">
-          {internalTimeInSec !== 0 ? (
+        <Text
+          padding={3}
+          bg="black"
+          textAlign="center"
+          color="white"
+          fontWeight="bold"
+          fontSize="2rem"
+        >
+          {!isStopped && internalTimeInSec !== 0 ? (
             <>
+              Current Pose: <Text>{currentPose}</Text>
+            </>
+          ) : (
+            `Congratulations! You finished your practice!`
+          )}
+        </Text>
+        <Box textAlign="center">
+          {internalTimeInSec !== 0 ? (
+            <Box margin={0}>
               <Button
                 marginRight={3}
                 size="lg"
@@ -120,12 +125,12 @@ function Timer(props) {
               >
                 I Quit
               </Button>
-            </>
+            </Box>
           ) : (
             <BackButton viewTitle="All Practices" toWhere="/all-practices" />
           )}
         </Box>
-      </>
+      </Box>
     );
   }
 
@@ -153,12 +158,12 @@ function Timer(props) {
 
     return timeToDisplay;
   }
-  //are you ready? <button> Yes - let's do this!</button>
-  useEffect(() => {
-    //getAudio(); //Garret: anytime this is called, the client makes a req to the server for the audio file!
-    console.log(poseList);
-    console.log(timesToRingBell);
 
+  function getProgressValue() {
+    return Math.floor((internalTimeInSec / props.total_time) * 100);
+  }
+
+  useEffect(() => {
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
@@ -226,7 +231,15 @@ function Timer(props) {
           </Button>
         </Box>
       ) : (
-        renderTimer()
+        <CircularProgress
+          marginTop={8}
+          color="teal"
+          thickness="0.05"
+          size="40rem"
+          value={getProgressValue()}
+        >
+          <CircularProgressLabel>{renderTimer()}</CircularProgressLabel>
+        </CircularProgress>
       )}
     </Grid>
   );
@@ -287,7 +300,7 @@ const getTotalPracticeTime = (arrofPoseTimes) => {
 };
 
 const offSetPoseTimes = (invertedArrOfPoseTimes) => {
-  return invertedArrOfPoseTimes.map((time) => time + 15);
+  return invertedArrOfPoseTimes.map((time) => time + 12);
 };
 
 export default connect(mapReduxStateToProps)(Timer);
