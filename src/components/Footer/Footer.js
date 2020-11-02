@@ -17,7 +17,12 @@ const Footer = () => (
       borderBottom="transparent"
       borderTop="transparent"
     >
-      <Text textAlign="center" fontWeight="bold" fontSize="15px">
+      <Text
+        fontFamily="monospace"
+        textAlign="center"
+        fontWeight="bold"
+        fontSize="1.2rem"
+      >
         &copy; yoGarret Productions
       </Text>
     </Box>
