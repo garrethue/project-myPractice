@@ -34,12 +34,11 @@ function PracticeDetails(props) {
         <BackButton viewTitle="All Practices" toWhere="/all-practices" />
       </Box>
       <Grid
-        w="100%"
+        w="60rem"
         padding={2}
         justifyContent="center"
         alignItems="center"
-        templateColumns="repeat(2, 1fr)"
-        gap={3}
+        templateColumns="1fr"
       >
         <Text
           paddingRight={2}
@@ -48,39 +47,47 @@ function PracticeDetails(props) {
           textAlign="right"
           color="white"
           fontWeight="bold"
-          fontSize="30px"
+          fontSize="2.5rem"
         >
           Total Time:{" "}
           {TimeFormatter(GetTotalTime(props.store.practiceDetails, false))}
         </Text>
-        <Box />
+      </Grid>
+      <Grid
+        w="100%"
+        padding={2}
+        justifyContent="center"
+        alignItems="center"
+        templateColumns="repeat(2, 1fr)"
+        gap={3}
+      >
         <Box
           fontWeight="bold"
-          fontSize="30px"
+          fontSize="2rem"
           textAlign="center"
-          bg="brand.700"
+          bg="brand.600"
         >
           Pose
         </Box>
         <Box
           fontWeight="bold"
-          fontSize="30px"
+          fontSize="2rem"
           textAlign="center"
-          bg="brand.700"
+          bg="brand.600"
         >
           Duration
         </Box>
         {props.store.practiceDetails.map((poseObj) => {
           return (
             <>
-              <Box fontSize="18px" textAlign="center" bg="black">
+              <Box fontSize="1.2rem" textAlign="center" bg="black">
                 <Text fontWeight="bold" color="white">
                   {poseObj.pose_name}
                 </Text>
               </Box>
               <Box textAlign="center" bg="black">
-                <Text fontSize="18px" fontWeight="bold" color="white">
-                  {poseObj.pose_time}
+                <Text fontSize="1.2rem" fontWeight="bold" color="white">
+                  {poseObj.pose_time} seconds
                 </Text>
               </Box>
             </>

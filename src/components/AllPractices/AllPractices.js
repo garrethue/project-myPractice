@@ -34,8 +34,9 @@ function AllPractices(props) {
   //justifyContent is what makes the outer Grid in the center of the page
   return (
     <Grid justifyContent="center">
-      <Box marginTop={5} w="100%" bg="black">
+      <Box alignItems="center" marginTop={5} w="100%" bg="black">
         <Text
+          margin="auto"
           textAlign="center"
           color="white"
           fontWeight="bold"
@@ -61,14 +62,14 @@ function AllPractices(props) {
                 rounded="md"
                 textAlign="center"
                 bg="black"
-                padding={1}
-                w="100%"
-                h="10rem"
+                padding={5}
+                w="15rem"
+                h="15rem"
                 variantColor={colorArr[practiceObj.practice_id % 3]}
                 fontSize="1.5em"
                 onClick={() => goToDetailsPage(practiceObj.practice_id)}
               >
-                <Text as="u" fontWeight="bold" color="white">
+                <Text as="u" isTruncated fontWeight="bold" color="white">
                   {practiceObj.practice_name}
                 </Text>
               </Button>

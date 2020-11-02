@@ -22,6 +22,14 @@ function Timer(props) {
       ],
     })
   );
+  const [woodBlock] = useState(
+    new Howl({
+      src: [
+        "./sounds/wood-block.wav",
+        //PATH: "/Users/garret.larson/Desktop/node-projects/yogarretsapp/server/sounds/output.mp3",
+      ],
+    })
+  );
   //timesToRingBell is an array of integers that are used to signal transitions by playing the bell mp3 file
   const [timesToRingBell, setTimesToRingBell] = useState(
     props.timesToRingBellArr
@@ -163,10 +171,10 @@ function Timer(props) {
       if (promptUserTimes.includes(internalTimeInSec)) {
         let indexOfNextPose = poseListIndex; // the index of the next pose is already set due to line 184, thus I do not have to do poseListIndex + 1 to get next pose
         let nextPose = poseList[indexOfNextPose];
-        console.log("poseList.length", poseList.length);
-        console.log("length - 1, ", poseList.length - 1);
-        console.log("IN IF: indexOfNextPose", indexOfNextPose);
-        console.log("IN IF: nextPose", nextPose);
+        // console.log("poseList.length", poseList.length);
+        // console.log("length - 1, ", poseList.length - 1);
+        // console.log("IN IF: indexOfNextPose", indexOfNextPose);
+        // console.log("IN IF: nextPose", nextPose);
         getAudio(nextPose);
       }
 
@@ -176,7 +184,7 @@ function Timer(props) {
         bell.play();
         toggleTimer();
       } else if (timesToRingBell.includes(internalTimeInSec)) {
-        bell.play();
+        woodBlock.play();
         if (poseListIndex > 0) {
           //avoids the pose changing upon starting the practice
           setCurrentPose(poseList[poseListIndex]);

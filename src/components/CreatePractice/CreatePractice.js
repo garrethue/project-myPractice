@@ -20,7 +20,7 @@ import BackButton from "../Helpers/Buttons/BackButton";
 
 function CreatePractice(props) {
   const [availableRows, setAvailableRows] = useState(10); //while slots does NOT equal zero, add a slot
-  const [availableTimes] = useState([30, 60, 120]);
+  const [availableTimes] = useState([30, 60, 90, 120]);
   const [practiceName, setPracticeName] = useState("");
   const [poses, setPoses] = useState([]);
   const { colorMode } = useColorMode();

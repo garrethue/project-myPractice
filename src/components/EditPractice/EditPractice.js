@@ -21,7 +21,7 @@ function EditPractice(props) {
   const [availableRows, setAvailableRows] = useState(
     10 - props.posesAndTimesInPractice.length
   );
-  const [availableTimes] = useState([30, 60, 120]);
+  const [availableTimes] = useState([30, 60, 90, 120]);
   const [availablePoses] = useState(props.availablePoses);
   const [practiceName, setPracticeName] = useState(props.currentPracticeName);
   const [poses, setPoses] = useState(props.posesAndTimesInPractice);
