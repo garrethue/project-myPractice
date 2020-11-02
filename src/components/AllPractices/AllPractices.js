@@ -63,8 +63,8 @@ function AllPractices(props) {
                 textAlign="center"
                 bg="black"
                 padding={5}
-                w="15rem"
-                h="15rem"
+                w="13rem"
+                h="13rem"
                 variantColor={colorArr[practiceObj.practice_id % 3]}
                 fontSize="1.5em"
                 onClick={() => goToDetailsPage(practiceObj.practice_id)}
