@@ -6,6 +6,7 @@ function* fetchPracticeDetails(action) {
   try {
     const response = yield axios.get(`/api/practices/details/${practice_id}`);
     yield put({ type: "GET_PRACTICE_DETAILS", payload: response.data });
+    yield put({ type: "NOT_LOADING" }); //removes skeleton effect
   } catch (error) {
     console.error(error);
   }

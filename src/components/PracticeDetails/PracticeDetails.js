@@ -1,7 +1,14 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Grid, Text, Box, Button, useColorMode } from "@chakra-ui/core";
+import {
+  Grid,
+  Text,
+  Box,
+  Button,
+  useColorMode,
+  Skeleton,
+} from "@chakra-ui/core";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import TimeFormatter from "../Helpers/TimeFormatter";
 import GetTotalTime from "../Helpers/GetTotalTime";
@@ -10,6 +17,7 @@ import BackButton from "../Helpers/Buttons/BackButton";
 function PracticeDetails(props) {
   const handleDeletePractice = (practiceId) => {
     if (window.confirm("Are you sure you want to delete this practice?")) {
+      props.dispatch({ type: "LOADING" });
       props.dispatch({ type: "DELETE_A_PRACTICE", payload: practiceId });
       props.history.push("/all-practices");
     }
@@ -40,18 +48,20 @@ function PracticeDetails(props) {
         alignItems="center"
         templateColumns="1fr"
       >
-        <Text
-          paddingRight={2}
-          paddingLeft={2}
-          bg="black"
-          textAlign="right"
-          color="white"
-          fontWeight="bold"
-          fontSize="2.5rem"
-        >
-          Total Time:{" "}
-          {TimeFormatter(GetTotalTime(props.store.practiceDetails, false))}
-        </Text>
+        <Skeleton isLoaded={!props.store.isLoading}>
+          <Text
+            paddingRight={2}
+            paddingLeft={2}
+            bg="black"
+            textAlign="right"
+            color="white"
+            fontWeight="bold"
+            fontSize="2.5rem"
+          >
+            Total Time:{" "}
+            {TimeFormatter(GetTotalTime(props.store.practiceDetails, false))}
+          </Text>
+        </Skeleton>
       </Grid>
       <Grid
         w="100%"
@@ -61,35 +71,43 @@ function PracticeDetails(props) {
         templateColumns="repeat(2, 1fr)"
         gap={3}
       >
-        <Box
-          fontWeight="bold"
-          fontSize="2rem"
-          textAlign="center"
-          bg="brand.600"
-        >
-          Pose
-        </Box>
-        <Box
-          fontWeight="bold"
-          fontSize="2rem"
-          textAlign="center"
-          bg="brand.600"
-        >
-          Duration
-        </Box>
+        <Skeleton isLoaded={!props.store.isLoading}>
+          <Box
+            fontWeight="bold"
+            fontSize="2rem"
+            textAlign="center"
+            bg="brand.600"
+          >
+            Pose
+          </Box>
+        </Skeleton>
+        <Skeleton isLoaded={!props.store.isLoading}>
+          <Box
+            fontWeight="bold"
+            fontSize="2rem"
+            textAlign="center"
+            bg="brand.600"
+          >
+            Duration
+          </Box>
+        </Skeleton>
         {props.store.practiceDetails.map((poseObj) => {
           return (
             <>
-              <Box fontSize="1.2rem" textAlign="center" bg="black">
-                <Text fontWeight="bold" color="white">
-                  {poseObj.pose_name}
-                </Text>
-              </Box>
-              <Box textAlign="center" bg="black">
-                <Text fontSize="1.2rem" fontWeight="bold" color="white">
-                  {poseObj.pose_time} seconds
-                </Text>
-              </Box>
+              <Skeleton isLoaded={!props.store.isLoading}>
+                <Box fontSize="1.2rem" textAlign="center" bg="black">
+                  <Text fontWeight="bold" color="white">
+                    {poseObj.pose_name}
+                  </Text>
+                </Box>
+              </Skeleton>
+              <Skeleton isLoaded={!props.store.isLoading}>
+                <Box textAlign="center" bg="black">
+                  <Text fontSize="1.2rem" fontWeight="bold" color="white">
+                    {poseObj.pose_time} seconds
+                  </Text>
+                </Box>
+              </Skeleton>
             </>
           );
         })}
@@ -104,6 +122,7 @@ function PracticeDetails(props) {
         gap={2}
       >
         <Button
+          isDisabled={props.store.isLoading}
           bg="black"
           color="white"
           bg="black"
@@ -114,6 +133,7 @@ function PracticeDetails(props) {
           Start
         </Button>
         <Button
+          isDisabled={props.store.isLoading}
           bg="black"
           color="white"
           bg="black"
@@ -124,6 +144,7 @@ function PracticeDetails(props) {
           Edit
         </Button>{" "}
         <Button
+          isDisabled={props.store.isLoading}
           bg="black"
           color="white"
           bg="black"

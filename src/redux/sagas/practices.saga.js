@@ -5,6 +5,7 @@ function* fetchPractices(action) {
   try {
     const response = yield axios.get("/api/practices/all/");
     yield put({ type: "SET_PRACTICES", payload: response.data });
+    yield put({ type: "NOT_LOADING" });
   } catch (error) {
     console.error(error);
   }
