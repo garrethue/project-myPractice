@@ -59,6 +59,7 @@ const Navigation = (props) => {
       >
         <Button
           marginLeft={2}
+          opacity={0.9}
           border="1px"
           variantColor="yellow"
           color="yellow"
@@ -67,17 +68,10 @@ const Navigation = (props) => {
           borderBottom="transparent"
           bg="transparent"
         >
-          {/* Show this link if they are logged in or not,
-          but call this link 'Home' if they are logged in,
-          and call this link 'Login / Register' if they are not */}
           <Link to={loginLinkData.path}>{loginLinkData.text}</Link>
         </Button>
-        {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
-            {/* <Button bg="transparent" border="1px">
-               <Link to="/all-practices">Your Practices</Link>
-            </Button> */}
             <LogOutButton />
           </>
         )}

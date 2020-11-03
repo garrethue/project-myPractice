@@ -8,14 +8,8 @@ const LogOutButton = (props) => {
 
   return (
     <Button
+      opacity={0.9}
       marginLeft={2}
-      // variantColor="yellow"
-      // bg="transparent"
-      // border="1px"
-      // borderColor={borderColor[colorMode]}
-      // borderTopColor="transparent"
-      // borderBottomColor="transparent"
-
       border="1px"
       variantColor="yellow"
       color="yellow"
@@ -30,8 +24,4 @@ const LogOutButton = (props) => {
   );
 };
 
-// This component doesn't need 'mapStateToProps'
-// because it doesn't care what the current state is.
-// No matter what the redux state is, this button will always be a log out button
-// this component still needs 'connect' though, because it is going to dispatch a redux action
 export default connect()(LogOutButton);
