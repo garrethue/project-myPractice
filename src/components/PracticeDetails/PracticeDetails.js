@@ -35,7 +35,7 @@ function PracticeDetails(props) {
 
   console.log(props.store);
   return (
-    <Grid justifyContent="center">
+    <Grid marginBottom={10} justifyContent="center">
       <Box marginTop={5} marginBottom={5} w="50%">
         <BackButton viewTitle="All Practices" toWhere="/all-practices" />
       </Box>
@@ -123,7 +123,6 @@ function PracticeDetails(props) {
           isDisabled={props.store.isLoading}
           bg="black"
           color="white"
-          bg="black"
           color={color[colorMode]}
           variantColor="green"
           onClick={goToTimer}
@@ -134,26 +133,12 @@ function PracticeDetails(props) {
           isDisabled={props.store.isLoading}
           bg="black"
           color="white"
-          bg="black"
           color={color[colorMode]}
           variantColor="yellow"
           onClick={goToEdit}
         >
           Edit
-        </Button>{" "}
-        {/* <Button
-          isDisabled={props.store.isLoading}
-          bg="black"
-          color="white"
-          bg="black"
-          color={color[colorMode]}
-          variantColor="red"
-          onClick={() =>
-            handleDeletePractice(props.store.practiceDetails[0].practice_id)
-          }
-        >
-          Delete
-        </Button> */}
+        </Button>
         <DeletePracticeButton
           isLoadingProp={props.store.isLoading}
           buttonHeader={"Delete Practice"}

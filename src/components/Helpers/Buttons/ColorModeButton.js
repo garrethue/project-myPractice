@@ -11,7 +11,7 @@ const ColorModeButton = (props) => {
       opacity={0.75}
       marginLeft={2}
       variantColor="yellow"
-      color="yellow"
+      color="white"
       borderColor={borderColor[colorMode]}
       bg="transparent"
       onClick={toggleColorMode}

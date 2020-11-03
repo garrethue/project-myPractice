@@ -1,33 +1,21 @@
 import React from "react";
 import { Box, Grid, Text } from "@chakra-ui/core";
-
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+import "./Footer.css";
 
 const Footer = () => (
-  <Grid marginTop={20} justifyContent="center">
-    <Box
-      opacity={0.65}
-      bg="transparent"
-      rounded="md"
-      padding={2}
-      border="1px"
-      borderColor="brand.700"
-      borderBottom="transparent"
-      borderTop="transparent"
-    >
+  <Box marginTop={10} className="footer">
+    <Box opacity={0.3} bg="transparent" padding={3}>
       <Text
+        paddingLeft={1}
         fontFamily="mudrakshar, courier"
-        textAlign="center"
+        textAlign="left"
         fontWeight="bold"
-        fontSize="1.2rem"
+        fontSize="1rem"
       >
-        YOGARRET PRODUCTIONS
+        YOGARRET d PRODUCTIONS
       </Text>
     </Box>
-  </Grid>
+  </Box>
 );
 
 export default Footer;

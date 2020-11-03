@@ -5,6 +5,7 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 
+// GET All Practices Route
 router.get("/all", rejectUnauthenticated, async (req, res) => {
   const { id } = req.user;
   try {
@@ -58,11 +59,9 @@ router.post("/add", rejectUnauthenticated, async (req, res) => {
       return poseObj;
     });
 
-    //get pose_id
-    //iterate over poses in array and add
     //for each pose in the pose array above,
     //select the poses ID from the poses table
-    //INSERT INTO JUNCTION TABLE with pose_id, practice_id, and pose_time
+    //INSERT INTO junction table with pose_id, practice_id, and pose_time
     poses.map(async (poseObj) => {
       const result = await pool.query(
         "SELECT id FROM poses WHERE pose_name=$1",

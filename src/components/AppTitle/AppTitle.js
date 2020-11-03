@@ -4,6 +4,7 @@ import { Box, Grid, Text } from "@chakra-ui/core";
 const AppTitle = () => (
   <Grid marginTop={6} justifyContent="center">
     <Box
+      opacity={0.9}
       bg="transparent"
       rounded="md"
       paddingLeft={3}
@@ -17,7 +18,7 @@ const AppTitle = () => (
         fontFamily="mudrakshar, courier"
         textAlign="center"
         fontWeight="bold"
-        fontSize="45px"
+        fontSize="40px"
       >
         MYPRACTICE a
       </Text>

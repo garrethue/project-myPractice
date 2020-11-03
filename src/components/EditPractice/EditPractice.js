@@ -19,7 +19,7 @@ import BackButton from "../Helpers/Buttons/BackButton";
 
 function EditPractice(props) {
   const [availableRows, setAvailableRows] = useState(
-    10 - props.posesAndTimesInPractice.length
+    30 - props.posesAndTimesInPractice.length
   );
   const [availableTimes] = useState([30, 60, 90, 120]);
   const [availablePoses] = useState(props.availablePoses);
@@ -64,7 +64,7 @@ function EditPractice(props) {
       const newAvailableRows = availableRows - 1;
       setAvailableRows(newAvailableRows);
     } else {
-      alert("Error: the max number of poses is 10!");
+      alert("Error: you've reached the maximum number of poses!");
     }
   };
 
@@ -117,7 +117,7 @@ function EditPractice(props) {
 
   return (
     <div>
-      <Grid justifyContent="center">
+      <Grid marginBottom={10} justifyContent="center">
         <Box marginTop={5} marginBottom={5} w="50%">
           <BackButton viewTitle="Practice Details" toWhere="/details" />
         </Box>
@@ -141,10 +141,11 @@ function EditPractice(props) {
             fontSize="30px"
             marginBottom={5}
           >
-            {availableRows < 10 &&
+            {/* if availableRows is equal to 30, then there is no user-inputted data */}
+            {availableRows < 30 &&
               `Total Time: ${TimeFormatter(GetTotalTime(poses, true))}`}
           </Text>
-          {availableRows < 10 && (
+          {availableRows < 30 && (
             <form onSubmit={handleSubmit}>
               <FormControl isRequired>
                 <Input

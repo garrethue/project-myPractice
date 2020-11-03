@@ -179,7 +179,7 @@ function Timer(props) {
         bell.play();
         toggleTimer();
       } else if (timesToRingBell.includes(internalTimeInSec)) {
-        woodBlock.play();
+        bell.play();
         if (poseListIndex > 0) {
           //avoids the pose changing upon starting the practice
           setCurrentPose(poseList[poseListIndex]);
@@ -193,7 +193,7 @@ function Timer(props) {
   }, [isActive, internalTimeInSec]);
 
   return (
-    <Grid justifyContent="center">
+    <Grid marginBottom={5} justifyContent="center">
       {internalTimeInSec === props.total_time && !isActive ? (
         <Box textAlign="center">
           <Text
