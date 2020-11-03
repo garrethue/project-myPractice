@@ -13,8 +13,13 @@ const AppTitle = () => (
       borderBottom="transparent"
       borderTop="transparent"
     >
-      <Text textAlign="center" fontWeight="bold" fontSize="45px">
-        myPractice
+      <Text
+        fontFamily="mudrakshar, courier"
+        textAlign="center"
+        fontWeight="bold"
+        fontSize="45px"
+      >
+        MYPRACTICE a
       </Text>
     </Box>
   </Grid>

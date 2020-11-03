@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, useColorMode } from "@chakra-ui/core";
 import { withRouter } from "react-router-dom";
+import mapStoreToProps from "../../../redux/mapStoreToProps";
+import { connect } from "react-redux";
 
 function BackButton(props) {
   const goToPractices = (toWhere) => {
@@ -10,6 +12,7 @@ function BackButton(props) {
   const colorObj = { light: "white", dark: "white" };
   return (
     <Button
+      isDisabled={props.store.isLoading}
       bg="black"
       color="white"
       size="lg"
@@ -21,4 +24,4 @@ function BackButton(props) {
     </Button>
   );
 }
-export default withRouter(BackButton);
+export default connect(mapStoreToProps)(withRouter(BackButton));
