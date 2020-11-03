@@ -12,6 +12,7 @@ import {
   CircularProgressLabel,
 } from "@chakra-ui/core";
 import getAudio from "../Helpers/GetAudio";
+import QuitButton from "../Helpers/Buttons/QuitButton";
 
 function Timer(props) {
   //the time driver
@@ -59,15 +60,7 @@ function Timer(props) {
   }
 
   function quitPractice() {
-    //implement this as a STOP practice
-    if (
-      internalTimeInSec !== props.total_time &&
-      window.confirm("Are you a quitter?")
-    ) {
-      // go back to home page?
-      toggleTimer();
-      props.history.push("/all-practices");
-    }
+    props.history.push("/all-practices");
   }
 
   function renderTimer() {
@@ -115,16 +108,13 @@ function Timer(props) {
               >
                 {isActive ? "Pause" : "Start"}
               </Button>
-              <Button
-                marginLeft={3}
-                size="lg"
-                bg="black"
-                color={color[colorMode]}
-                variantColor="red"
-                onClick={quitPractice}
-              >
-                I Quit
-              </Button>
+              <QuitButton
+                buttonHeader={"Quit Practice"}
+                buttonDescription={"I Quit"}
+                buttonMessage={"Are you a quitter?"}
+                onClickFunc={quitPractice}
+                toggleTimerFunc={toggleTimer}
+              />
             </Box>
           ) : (
             <BackButton viewTitle="All Practices" toWhere="/all-practices" />
@@ -215,7 +205,7 @@ function Timer(props) {
             color="white"
             fontWeight="bold"
             fontSize="60px"
-            marginBottom={5}
+            marginBottom={10}
           >
             Are you ready {props.user.first_name}?
           </Text>
@@ -233,7 +223,7 @@ function Timer(props) {
       ) : (
         <CircularProgress
           marginTop={8}
-          color="teal"
+          color="red"
           thickness="0.05"
           size="40rem"
           value={getProgressValue()}

@@ -59,7 +59,7 @@ const Navigation = (props) => {
       >
         <Button
           marginLeft={2}
-          border="2px"
+          border="1px"
           variantColor="yellow"
           color="yellow"
           borderColor={borderColor[colorMode]}

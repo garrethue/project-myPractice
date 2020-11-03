@@ -13,15 +13,13 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import TimeFormatter from "../Helpers/TimeFormatter";
 import GetTotalTime from "../Helpers/GetTotalTime";
 import BackButton from "../Helpers/Buttons/BackButton";
+import DeletePracticeButton from "../Helpers/Buttons/DeletePracticeButton";
 
 function PracticeDetails(props) {
   const handleDeletePractice = (practiceId) => {
-    if (window.confirm("Are you sure you want to delete this practice?")) {
-      props.dispatch({ type: "LOADING" });
-      props.dispatch({ type: "DELETE_A_PRACTICE", payload: practiceId });
-      props.history.push("/all-practices");
-    }
-    //push user back to ALL PRACTICES! AFTER GETTING UPDATED LIST!
+    props.dispatch({ type: "LOADING" });
+    props.dispatch({ type: "DELETE_A_PRACTICE", payload: practiceId });
+    props.history.push("/all-practices"); //push user back to ALL PRACTICES! AFTER GETTING UPDATED LIST!
   };
 
   const { colorMode } = useColorMode();
@@ -143,7 +141,7 @@ function PracticeDetails(props) {
         >
           Edit
         </Button>{" "}
-        <Button
+        {/* <Button
           isDisabled={props.store.isLoading}
           bg="black"
           color="white"
@@ -155,7 +153,16 @@ function PracticeDetails(props) {
           }
         >
           Delete
-        </Button>
+        </Button> */}
+        <DeletePracticeButton
+          isLoadingProp={props.store.isLoading}
+          buttonHeader={"Delete Practice"}
+          buttonDescription={"Delete"}
+          buttonMessage={"Are you sure you want to delete this practice?"}
+          onClickFunc={() =>
+            handleDeletePractice(props.store.practiceDetails[0].practice_id)
+          }
+        />
       </Grid>
     </Grid>
   );

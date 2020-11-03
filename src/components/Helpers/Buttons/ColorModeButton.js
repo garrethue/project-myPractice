@@ -7,14 +7,12 @@ const ColorModeButton = (props) => {
   const borderColor = { light: "yellow.600", dark: "brand.900" };
   return (
     <Button
+      opacity={0.75}
       rounded="full"
       marginLeft={2}
-      border="2px"
       variantColor="yellow"
       color="yellow"
       borderColor={borderColor[colorMode]}
-      borderTop="transparent"
-      borderBottom="transparent"
       bg="transparent"
       onClick={toggleColorMode}
     >

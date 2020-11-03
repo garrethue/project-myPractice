@@ -16,7 +16,7 @@ const LogOutButton = (props) => {
       // borderTopColor="transparent"
       // borderBottomColor="transparent"
 
-      border="2px"
+      border="1px"
       variantColor="yellow"
       color="yellow"
       borderColor={borderColor[colorMode]}
