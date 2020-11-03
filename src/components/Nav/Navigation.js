@@ -20,8 +20,8 @@ const Navigation = (props) => {
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = "/all-practices"; ///user";
-    loginLinkData.text = "My Practices";
+    loginLinkData.path = "/all-practices";
+    loginLinkData.text = "Practices";
   }
 
   return (
