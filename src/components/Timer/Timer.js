@@ -193,7 +193,7 @@ function Timer(props) {
   }, [isActive, internalTimeInSec]);
 
   return (
-    <Grid justifyContent="center">
+    <Grid marginBottom={5} justifyContent="center">
       {internalTimeInSec === props.total_time && !isActive ? (
         <Box textAlign="center">
           <Text

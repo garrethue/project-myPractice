@@ -123,7 +123,6 @@ function PracticeDetails(props) {
           isDisabled={props.store.isLoading}
           bg="black"
           color="white"
-          bg="black"
           color={color[colorMode]}
           variantColor="green"
           onClick={goToTimer}
@@ -134,7 +133,6 @@ function PracticeDetails(props) {
           isDisabled={props.store.isLoading}
           bg="black"
           color="white"
-          bg="black"
           color={color[colorMode]}
           variantColor="yellow"
           onClick={goToEdit}

@@ -9,7 +9,6 @@ import {
   FormControl,
   Input,
   useColorMode,
-  FormLabel,
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -20,7 +19,7 @@ import GetTotalTime from "../Helpers/GetTotalTime";
 import BackButton from "../Helpers/Buttons/BackButton";
 
 function CreatePractice(props) {
-  const [availableRows, setAvailableRows] = useState(10); //while slots does NOT equal zero, add a slot
+  const [availableRows, setAvailableRows] = useState(30); //while slots does NOT equal zero, add a slot
   const [availableTimes] = useState([30, 60, 90, 120]);
   const [practiceName, setPracticeName] = useState("");
   const [poses, setPoses] = useState([]);
@@ -60,7 +59,7 @@ function CreatePractice(props) {
       const newAvailableRows = availableRows - 1;
       setAvailableRows(newAvailableRows);
     } else {
-      alert("Error: the max number of poses is 10!");
+      alert("Error: you've reached the maximum number of poses!");
     }
   };
 
@@ -111,7 +110,7 @@ function CreatePractice(props) {
 
   return (
     <div>
-      <Grid w="100%" justifyContent="center">
+      <Grid marginBottom={10} w="100%" justifyContent="center">
         <Box marginTop={5} marginBottom={5} w="50%">
           <BackButton viewTitle="All Practices" toWhere="all-practices" />
         </Box>
@@ -137,10 +136,10 @@ function CreatePractice(props) {
             fontWeight="bold"
             fontSize="30px"
           >
-            {availableRows < 10 &&
+            {availableRows < 30 &&
               `Total Time: ${TimeFormatter(GetTotalTime(poses, true))}`}
           </Text>
-          {availableRows < 10 && (
+          {availableRows < 30 && (
             <form onSubmit={handleSubmit}>
               <FormControl isRequired>
                 <Input

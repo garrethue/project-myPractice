@@ -10,7 +10,7 @@ import LogOutButton from "../Helpers/Buttons/LogOutButton";
 const Navigation = (props) => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const borderColor = { light: "yellow.600", dark: "brand.900" };
 
   //from nav
@@ -59,10 +59,10 @@ const Navigation = (props) => {
       >
         <Button
           marginLeft={2}
-          opacity={0.9}
+          opacity={0.85}
           border="1px"
           variantColor="yellow"
-          color="yellow"
+          color="white"
           borderColor={borderColor[colorMode]}
           borderTop="transparent"
           borderBottom="transparent"
