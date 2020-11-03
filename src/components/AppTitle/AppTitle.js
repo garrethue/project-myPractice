@@ -14,7 +14,7 @@ const AppTitle = () => (
       borderTop="transparent"
     >
       <Text
-        fontFamily="mudrakshar"
+        fontFamily="mudrakshar, courier"
         textAlign="center"
         fontWeight="bold"
         fontSize="45px"
