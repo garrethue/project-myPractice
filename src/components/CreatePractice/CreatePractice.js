@@ -9,6 +9,7 @@ import {
   FormControl,
   Input,
   useColorMode,
+  FormLabel,
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -28,35 +29,16 @@ function CreatePractice(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const allPosesValid = poses.every(
-      (poseObj) => poseObj.pose_name && poseObj.time
-    );
-    const practiceNameValid = practiceName ? true : false;
-
-    if (practiceNameValid && poses.length > 0 && allPosesValid) {
-      axios
-        .post("/api/practices/add", {
-          practice_name: practiceName,
-          poses: poses,
-        })
-        .then(() => {
-          props.dispatch({ type: "FETCH_PRACTICES" });
-          props.history.push("/all-practices");
-        })
-        .catch((err) => console.log(err));
-    } else if (!practiceNameValid && poses.length === 0) {
-      alert("Error: You can't fill out an empty form!");
-    } else if (!allPosesValid && !practiceNameValid) {
-      alert(
-        "Error: Give your practice a name and make sure all poses have a name and a time! "
-      );
-    } else if (!allPosesValid) {
-      alert("Error: make sure all poses have a name and a time!");
-    } else if (!practiceNameValid) {
-      alert("Error: give your practice a name!");
-    } else {
-      alert("Error: something unexpected occurred.");
-    }
+    axios
+      .post("/api/practices/add", {
+        practice_name: practiceName,
+        poses: poses,
+      })
+      .then(() => {
+        props.dispatch({ type: "FETCH_PRACTICES" });
+        props.history.push("/all-practices");
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleChangePoseName = (i, value) => {
@@ -160,12 +142,12 @@ function CreatePractice(props) {
           </Text>
           {availableRows < 10 && (
             <form onSubmit={handleSubmit}>
-              <FormControl>
+              <FormControl isRequired>
                 <Input
                   value={practiceName}
                   onChange={(e) => setPracticeName(e.target.value)}
                   type="text"
-                  placeholder="Your practice name here."
+                  placeholder="Practice Name"
                 />
                 <Grid
                   bg="transparent"
@@ -190,10 +172,6 @@ function CreatePractice(props) {
               </FormControl>
             </form>
           )}
-
-          {/* <Button bg="black" color="white" onClick={addItem}>
-                      Add a Row
-          </Button> */}
           <IconButton
             isRound
             aria-label="Add a Row"

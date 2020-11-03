@@ -60,7 +60,6 @@ function Timer(props) {
   }
 
   function quitPractice() {
-    //toggleTimer();
     props.history.push("/all-practices");
   }
 

@@ -11,49 +11,30 @@ import {
   AlertDialog,
 } from "@chakra-ui/core";
 
-export default function QuitButton(props) {
-  const { isOpen, onToggle } = useDisclosure();
+export default function DeletePracticeButton(props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   const cancelRef = useRef();
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
 
-  const onOpenOverride = () => {
-    onToggle();
-    if (props.toggleTimerFunc) {
-      //if the component is called from Timer component
-      console.log("testing onOpen in IF");
-
-      props.toggleTimerFunc();
-    }
-  };
-
-  const onCloseOverride = () => {
-    onToggle();
-    if (props.toggleTimerFunc) {
-      //if the component is called from Timer component
-      console.log("testing onClose in IF");
-      props.toggleTimerFunc();
-    }
-  };
-
   return (
     <>
       <Button
-        marginLeft={3}
-        size="lg"
         bg="black"
         color={color[colorMode]}
         variantColor="red"
         ref={btnRef}
-        onClick={onOpenOverride}
+        onClick={onOpen}
+        isDisabled={props.isLoadingProp}
+        variantColor="red"
       >
         {props.buttonDescription}
       </Button>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onCloseOverride}
+        onClose={onClose}
       >
         <AlertDialogOverlay />
         <AlertDialogContent>
@@ -64,7 +45,7 @@ export default function QuitButton(props) {
           <AlertDialogBody>{props.buttonMessage}</AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onCloseOverride}>
+            <Button ref={cancelRef} onClick={onClose}>
               No
             </Button>
             <Button variantColor="red" onClick={props.onClickFunc} ml={3}>
