@@ -233,7 +233,7 @@ function Timer(props) {
       ) : (
         <CircularProgress
           marginTop={8}
-          color="teal"
+          color="red"
           thickness="0.05"
           size="40rem"
           value={getProgressValue()}
