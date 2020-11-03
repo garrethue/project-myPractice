@@ -18,7 +18,7 @@ const AppTitle = () => (
         fontFamily="mudrakshar, courier"
         textAlign="center"
         fontWeight="bold"
-        fontSize="45px"
+        fontSize="40px"
       >
         MYPRACTICE a
       </Text>

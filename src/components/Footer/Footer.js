@@ -10,7 +10,7 @@ const Footer = () => (
         fontFamily="mudrakshar, courier"
         textAlign="left"
         fontWeight="bold"
-        fontSize="1.4rem"
+        fontSize="1.1rem"
       >
         YOGARRET d PRODUCTIONS
       </Text>

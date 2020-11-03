@@ -179,7 +179,7 @@ function Timer(props) {
         bell.play();
         toggleTimer();
       } else if (timesToRingBell.includes(internalTimeInSec)) {
-        woodBlock.play();
+        bell.play();
         if (poseListIndex > 0) {
           //avoids the pose changing upon starting the practice
           setCurrentPose(poseList[poseListIndex]);
