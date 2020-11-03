@@ -9,21 +9,22 @@ import { Box, Grid, Text } from "@chakra-ui/core";
 const Footer = () => (
   <Grid marginTop={20} justifyContent="center">
     <Box
+      opacity={0.65}
       bg="transparent"
       rounded="md"
       padding={2}
-      border="2px"
+      border="1px"
       borderColor="brand.700"
       borderBottom="transparent"
       borderTop="transparent"
     >
       <Text
-        fontFamily="monospace"
+        fontFamily="mudrakshar, courier"
         textAlign="center"
         fontWeight="bold"
         fontSize="1.2rem"
       >
-        &copy; yoGarret Productions
+        YOGARRET PRODUCTIONS
       </Text>
     </Box>
   </Grid>
