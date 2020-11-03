@@ -7,7 +7,7 @@ const customTheme = {
     ...theme.colors,
     brand: {
       900: "#fce675",
-      800: "#fe938c",
+      800: "#b8144d",
       700: "#55d6be",
       600: "#06837f",
     },
