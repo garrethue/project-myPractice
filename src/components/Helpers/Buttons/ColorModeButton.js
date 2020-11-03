@@ -7,6 +7,7 @@ const ColorModeButton = (props) => {
   const borderColor = { light: "yellow.600", dark: "brand.900" };
   return (
     <Button
+      rounded="full"
       marginLeft={2}
       border="2px"
       variantColor="yellow"
