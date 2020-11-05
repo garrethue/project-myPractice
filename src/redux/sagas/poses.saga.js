@@ -1,6 +1,7 @@
 import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
+// this fetches all of the available poses a user can choose from
 function* fetchAvailablePoses(action) {
   try {
     const response = yield axios.get("api/poses/all");
