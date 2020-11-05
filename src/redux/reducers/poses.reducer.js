@@ -1,3 +1,4 @@
+// this reducer holds all of the available poses a user can choose from when creating or editing a practice
 const allPoses = (state = [], action) => {
   switch (action.type) {
     case "SET_POSES":
@@ -7,5 +8,4 @@ const allPoses = (state = [], action) => {
   }
 };
 
-// user will be on the redux state at:
 export default allPoses;

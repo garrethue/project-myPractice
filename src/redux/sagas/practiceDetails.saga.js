@@ -1,6 +1,7 @@
 import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
+// this saga fetches all of the practice details for a given practice for a user
 function* fetchPracticeDetails(action) {
   const practice_id = action.payload;
   try {

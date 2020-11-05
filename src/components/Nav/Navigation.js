@@ -30,12 +30,13 @@ const Navigation = (props) => {
       align="center"
       justify="space-between"
       wrap="wrap"
-      padding="1.5rem"
       bg="black"
       color="white"
+      paddingRight={3}
+      paddingLeft={5}
       {...props}
     >
-      <Flex align="center" mr={5}>
+      <Flex align="center" mb={5}>
         <Link to="/all-practices">
           <AppTitle />
         </Link>

@@ -1,3 +1,4 @@
+// this reducer holds all of the practices info for a given user
 const allPracticersForUser = (state = [], action) => {
   switch (action.type) {
     case "SET_PRACTICES": //this loads in all the practices for a given user

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
+// this saga removes a practice from the database for a given user
 function* deletePractice(action) {
   const practice_id = action.payload;
   try {

@@ -20,20 +20,18 @@ export default function QuitButton(props) {
 
   const onOpenOverride = () => {
     onToggle();
-    if (props.toggleTimerFunc) {
+    if (props.turnOffTimer) {
       //if the component is called from Timer component
       console.log("testing onOpen in IF");
-
-      props.toggleTimerFunc();
+      props.turnOffTimer();
     }
   };
 
   const onCloseOverride = () => {
     onToggle();
-    if (props.toggleTimerFunc) {
+    if (props.turnOnTimer) {
       //if the component is called from Timer component
-      console.log("testing onClose in IF");
-      props.toggleTimerFunc();
+      props.turnOnTimer();
     }
   };
 
