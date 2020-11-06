@@ -70,6 +70,7 @@ function Timer(props) {
     }
   }
   function quitPractice() {
+    props.dispatch({ type: "NOT_AT_TIMER" });
     props.history.push("/all-practices");
   }
   function renderTimer() {

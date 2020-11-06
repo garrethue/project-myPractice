@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Button, useColorMode } from "@chakra-ui/core";
+import mapStoreToProps from "../../../redux/mapStoreToProps";
 
 const LogOutButton = (props) => {
   const { colorMode } = useColorMode();
@@ -8,6 +9,7 @@ const LogOutButton = (props) => {
 
   return (
     <Button
+      isDisabled={props.store.isAtTimer}
       opacity={0.85}
       marginLeft={2}
       border="1px"
@@ -24,4 +26,4 @@ const LogOutButton = (props) => {
   );
 };
 
-export default connect()(LogOutButton);
+export default connect(mapStoreToProps)(LogOutButton);

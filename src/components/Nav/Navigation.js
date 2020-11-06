@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Box, Flex, Button, useColorMode } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import AppTitle from "../AppTitle/AppTitle";
 import ColorModeButton from "../Helpers/Buttons/ColorModeButton";
 import LogOutButton from "../Helpers/Buttons/LogOutButton";
+import { withRouter } from "react-router-dom";
 
 const Navigation = (props) => {
   const [show, setShow] = useState(false);
@@ -24,6 +25,8 @@ const Navigation = (props) => {
     loginLinkData.text = "Practices";
   }
 
+  console.log(props.store.isAtTimer);
+
   return (
     <Flex
       as="nav"
@@ -37,9 +40,7 @@ const Navigation = (props) => {
       {...props}
     >
       <Flex align="center" mb={5}>
-        <Link to="/all-practices">
-          <AppTitle />
-        </Link>
+        <AppTitle />
       </Flex>
 
       <Box display={{ sm: "block", md: "none" }} onClick={handleToggle}>
@@ -59,6 +60,7 @@ const Navigation = (props) => {
         mt={{ base: 4, md: 0 }}
       >
         <Button
+          isDisabled={props.store.isAtTimer}
           marginLeft={2}
           opacity={0.85}
           border="1px"
@@ -68,12 +70,15 @@ const Navigation = (props) => {
           borderTop="transparent"
           borderBottom="transparent"
           bg="transparent"
+          onClick={() => props.history.push(loginLinkData.path)}
         >
-          <Link to={loginLinkData.path}>{loginLinkData.text}</Link>
+          {/* <Link to={loginLinkData.path}> */}
+          {loginLinkData.text}
+          {/* </Link> */}
         </Button>
         {props.store.user.id && (
           <>
-            <LogOutButton />
+            <LogOutButton isAtTimer={props.store.isAtTimer} />
           </>
         )}
         <ColorModeButton />
@@ -82,4 +87,4 @@ const Navigation = (props) => {
   );
 };
 
-export default connect(mapStoreToProps)(Navigation);
+export default connect(mapStoreToProps)(withRouter(Navigation));

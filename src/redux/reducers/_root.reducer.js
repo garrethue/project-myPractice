@@ -5,6 +5,7 @@ import practices from "./practices.reducer";
 import practiceDetails from "./practiceDetails.reducer";
 import poses from "./poses.reducer";
 import isLoading from "./isLoading.reducer";
+import isAtTimer from "./isAtTimer.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // it bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   practiceDetails,
   poses,
   isLoading,
+  isAtTimer,
 });
 
 export default rootReducer;

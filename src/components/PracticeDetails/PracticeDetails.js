@@ -26,6 +26,7 @@ function PracticeDetails(props) {
   const color = { light: "white", dark: "white" };
 
   const goToTimer = () => {
+    props.dispatch({ type: "AT_TIMER" });
     props.history.push("/timer");
   };
 
