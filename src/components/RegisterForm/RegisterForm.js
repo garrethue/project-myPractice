@@ -34,12 +34,15 @@ const RegisterForm = (props) => {
           <Text
             marginTop={5}
             marginBottom={5}
+            rounded={3}
             bg="black"
-            paddingLeft={2}
-            paddingRight={2}
+            pl={4}
+            pr={4}
+            pt={1}
+            pb={1}
             textAlign="center"
             color="white"
-            fontSize="50px"
+            fontSize="4rem"
           >
             Your Practice Begins Here.
           </Text>

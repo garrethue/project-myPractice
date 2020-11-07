@@ -7,8 +7,8 @@ const Footer = () => {
   const bgColor = { light: "black", dark: "#000000d9" };
 
   return (
-    <Box opacity={0.9} mb={2} ml={2} className="footer">
-      <Box rounded={2} bg={bgColor[colorMode]}>
+    <Box mb={2} ml={2} className="footer">
+      <Box opacity={0.85} rounded={2} w="8rem" bg={bgColor[colorMode]}>
         <Text
           paddingLeft={1}
           fontFamily="Bjorn Light"

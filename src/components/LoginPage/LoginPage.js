@@ -12,9 +12,9 @@ const LoginPage = (props) => {
     <div>
       <LoginForm />
       <Grid justifyContent="center">
-        <Box marginTop={5}>
-          <Text fontWeight="bold">Don't have an account?</Text>
-        </Box>
+        <Text fontWeight="bold" marginTop={5}>
+          Don't have an account?
+        </Text>
         <Button
           marginTop={2}
           //type="button"

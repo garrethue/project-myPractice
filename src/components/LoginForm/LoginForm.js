@@ -38,19 +38,20 @@ const LoginForm = (props) => {
 
   return (
     <Grid justifyContent="center">
-      <Box textAlign="center" rounded={3} h="100%" w="100%">
+      <Box textAlign="center" rounded={5} h="100%" w="100%">
         <form onSubmit={login}>
           <Text
             marginTop={5}
             marginBottom={5}
+            rounded={3}
             bg="black"
-            pl={2}
-            pr={2}
+            pl={4}
+            pr={4}
             pt={1}
             pb={1}
             textAlign="center"
             color="white"
-            fontSize="50px"
+            fontSize="4rem"
           >
             Welcome to Your Practice.
           </Text>

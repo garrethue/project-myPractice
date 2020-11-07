@@ -24,6 +24,7 @@ function PracticeDetails(props) {
 
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "#0000004a", dark: "transparent" };
 
   const goToTimer = () => {
     props.dispatch({ type: "AT_TIMER" });
@@ -41,6 +42,8 @@ function PracticeDetails(props) {
         <BackButton viewTitle="All Practices" toWhere="/all-practices" />
       </Box>
       <Grid
+        roundedTop={3}
+        bg={bgColor[colorMode]}
         w="60rem"
         padding={2}
         justifyContent="center"
@@ -49,8 +52,10 @@ function PracticeDetails(props) {
       >
         <Skeleton isLoaded={!props.store.isLoading}>
           <Text
-            paddingRight={2}
-            paddingLeft={2}
+            pt={1}
+            pb={1}
+            pr={2}
+            pl={2}
             bg="black"
             textAlign="right"
             color="white"
@@ -63,19 +68,22 @@ function PracticeDetails(props) {
         </Skeleton>
       </Grid>
       <Grid
+        bg={bgColor[colorMode]}
         w="100%"
         padding={2}
+        roundedBottom={3}
         justifyContent="center"
         alignItems="center"
         templateColumns="repeat(2, 1fr)"
-        gap={3}
+        gap={2}
       >
         <Skeleton isLoaded={!props.store.isLoading}>
           <Box
             fontWeight="bold"
             fontSize="2rem"
             textAlign="center"
-            bg="brand.600"
+            bg="brand.800"
+            rounded={3}
           >
             Pose
           </Box>
@@ -85,7 +93,8 @@ function PracticeDetails(props) {
             fontWeight="bold"
             fontSize="2rem"
             textAlign="center"
-            bg="brand.600"
+            bg="brand.800"
+            rounded={3}
           >
             Duration
           </Box>
@@ -94,18 +103,28 @@ function PracticeDetails(props) {
           return (
             <>
               <Skeleton isLoaded={!props.store.isLoading}>
-                <Box fontSize="1.2rem" textAlign="center" bg="black">
-                  <Text fontWeight="bold" color="white">
-                    {poseObj.pose_name}
-                  </Text>
-                </Box>
+                <Text
+                  rounded={3}
+                  fontSize="1.2rem"
+                  p={1}
+                  textAlign="center"
+                  bg="black"
+                  color="white"
+                >
+                  {poseObj.pose_name}
+                </Text>
               </Skeleton>
               <Skeleton isLoaded={!props.store.isLoading}>
-                <Box textAlign="center" bg="black">
-                  <Text fontSize="1.2rem" fontWeight="bold" color="white">
-                    {poseObj.pose_time} seconds
-                  </Text>
-                </Box>
+                <Text
+                  rounded={3}
+                  p={1}
+                  textAlign="center"
+                  bg="black"
+                  fontSize="1.2rem"
+                  color="white"
+                >
+                  {poseObj.pose_time} seconds
+                </Text>
               </Skeleton>
             </>
           );

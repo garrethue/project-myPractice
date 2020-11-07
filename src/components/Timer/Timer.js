@@ -28,6 +28,7 @@ function Timer(props) {
         "./sounds/bell-1.mp3",
         //PATH: "/Users/garret.larson/Desktop/node-projects/yogarretsapp/server/sounds/output.mp3",
       ],
+      volume: 0.9,
     })
   );
   const [timesToRingBell] = useState(props.timesToRingBellArr); //timesToRingBell is an array of integers that are used to signal transitions by playing the bell mp3 file
@@ -53,7 +54,7 @@ function Timer(props) {
         position: "bottom",
         duration: 5000,
         render: () => (
-          <Box m={3} color="white" p={5} bg="black">
+          <Box m={3} rounded={3} color="white" p={5} bg="black">
             {" "}
             <Text fontSize="lg" fontWeight="bold">
               Find your mat!
@@ -76,25 +77,23 @@ function Timer(props) {
   function renderTimer() {
     return (
       <Box marginTop={5} w="100%">
-        <Box textAlign="center">
-          <Text
-            padding={3}
-            bg="black"
-            textAlign="center"
-            color="white"
-            fontWeight="bold"
-            fontSize="2rem"
-            marginBottom={3}
-          >
-            Time Remaining: <Text>{displayTime}</Text>
-          </Text>
-        </Box>
         <Text
+          rounded={3}
           padding={3}
           bg="black"
           textAlign="center"
           color="white"
-          fontWeight="bold"
+          fontSize="2rem"
+          marginBottom={3}
+        >
+          Time Remaining: <Text>{displayTime}</Text>
+        </Text>
+        <Text
+          rounded={3}
+          padding={3}
+          bg="black"
+          textAlign="center"
+          color="white"
           fontSize="2rem"
         >
           {internalTimeInSec !== 0 ? (
@@ -180,14 +179,14 @@ function Timer(props) {
       {internalTimeInSec === props.total_time && !isActive ? (
         <Box textAlign="center">
           <Text
+            rounded={3}
             marginTop={5}
             paddingLeft={3}
             paddingRight={3}
             bg="black"
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="60px"
+            fontSize="4rem"
             marginBottom={10}
           >
             Are you ready {props.user.first_name}?
