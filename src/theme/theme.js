@@ -12,6 +12,11 @@ const customTheme = {
       600: "#06837f",
     },
   },
+  // fonts: {
+  //   body: "Lato, sans-serif",
+  //   heading: "Georgia, serif",
+  //   mono: "Menlo, monospace",
+  // },
 };
 
 export default customTheme;
