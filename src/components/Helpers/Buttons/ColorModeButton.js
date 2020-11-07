@@ -4,17 +4,16 @@ import { Button, useColorMode, Icon } from "@chakra-ui/core";
 
 const ColorModeButton = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const borderColor = { light: "yellow.600", dark: "brand.900" };
   return (
     <Button
       size="md"
       rounded="full"
-      opacity={0.7}
+      opacity={0.5}
       marginLeft={2}
-      variantColor="yellow"
       color="white"
-      borderColor={borderColor[colorMode]}
       bg="transparent"
+      variant="ghost"
+      _hover={{ color: "black", bg: "white" }}
       onClick={toggleColorMode}
     >
       {colorMode === "light" ? <Icon name="moon" /> : <Icon name="sun" />}

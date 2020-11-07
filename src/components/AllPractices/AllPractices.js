@@ -44,8 +44,16 @@ function AllPractices(props) {
   return (
     <Grid justifyContent="center">
       <Skeleton isLoaded={!props.store.isLoading}>
-        <Box rounded={3} alignItems="center" marginTop={5} w="100%" bg="black">
+        <Box
+          boxShadow="lg"
+          rounded={3}
+          alignItems="center"
+          marginTop={5}
+          w="100%"
+          bg="black"
+        >
           <Text
+            textShadow="md"
             margin="auto"
             textAlign="center"
             color="white"
@@ -77,10 +85,13 @@ function AllPractices(props) {
                   onClick={() => goToDetailsPage(practiceObj.practice_id)}
                 >
                   <Image
+                    rounded={2}
                     src="./screenshots/scorpion.jpeg"
                     alt="Example Cover"
                   />
-                  <Box p={5}>{practiceObj.practice_name}</Box>
+                  <Box bg="#e6e6e6" p={5} color="#6f6f6f">
+                    {practiceObj.practice_name}
+                  </Box>
                 </Box>
               </Skeleton>
             );
@@ -95,6 +106,7 @@ function AllPractices(props) {
           icon="add"
           bg="black"
           size="lg"
+          boxShadow="lg"
           color={color[colorMode]}
           _hover={{ color: "black", bg: "white" }}
           onClick={goToCreatePage}

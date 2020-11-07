@@ -4,7 +4,7 @@ import "./Footer.css";
 
 const Footer = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: "#6f6f6f", dark: "#6f6f6f" };
+  const bgColor = { light: "#808080", dark: "#808080" };
 
   return (
     <Box mb={2} ml={2} className="footer">
