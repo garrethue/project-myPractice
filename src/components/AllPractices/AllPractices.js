@@ -7,6 +7,8 @@ import {
   IconButton,
   useColorMode,
   Skeleton,
+  Image,
+  Badge,
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -66,22 +68,20 @@ function AllPractices(props) {
           {props.store.practices.map((practiceObj) => {
             return (
               <Skeleton isLoaded={!props.store.isLoading}>
-                <Button
+                <Box
                   as="button"
-                  rounded="md"
-                  textAlign="center"
-                  bg="black"
-                  padding={5}
-                  w="13rem"
-                  h="13rem"
-                  _hover={{ bg: colorArr[practiceObj.practice_id % 3] }}
-                  fontSize="1.4em"
+                  rounded="20px"
+                  w="275px"
+                  overflow="hidden"
+                  boxShadow="md"
                   onClick={() => goToDetailsPage(practiceObj.practice_id)}
                 >
-                  <Text isTruncated color="white">
-                    {practiceObj.practice_name}
-                  </Text>
-                </Button>
+                  <Image
+                    src="./screenshots/scorpion.jpeg"
+                    alt="Example Cover"
+                  />
+                  <Box p={5}>{practiceObj.practice_name}</Box>
+                </Box>
               </Skeleton>
             );
           })}
@@ -96,7 +96,7 @@ function AllPractices(props) {
           bg="black"
           size="lg"
           color={color[colorMode]}
-          variantColor="teal"
+          _hover={{ color: "black", bg: "white" }}
           onClick={goToCreatePage}
         />
       </Box>

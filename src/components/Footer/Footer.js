@@ -4,21 +4,23 @@ import "./Footer.css";
 
 const Footer = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: "black", dark: "#000000d9" };
+  const bgColor = { light: "#6f6f6f", dark: "#6f6f6f" };
 
   return (
     <Box mb={2} ml={2} className="footer">
-      <Box opacity={0.85} rounded={2} w="8rem" bg={bgColor[colorMode]}>
-        <Text
-          paddingLeft={1}
-          fontFamily="Bjorn Light"
-          textAlign="left"
-          fontSize="1.1rem"
-          color="brand.600"
-        >
-          yoGarret Productions
-        </Text>
-      </Box>
+      <Text
+        boxShadow="lg"
+        rounded={2}
+        w="8rem"
+        bg={bgColor[colorMode]}
+        paddingLeft={1}
+        fontFamily="Bjorn Light"
+        textAlign="left"
+        fontSize="1.1rem"
+        color="brand.600"
+      >
+        yoGarret Productions
+      </Text>
     </Box>
   );
 };

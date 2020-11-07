@@ -13,6 +13,7 @@ const Navigation = (props) => {
   const handleToggle = () => setShow(!show);
   const { colorMode } = useColorMode();
   const borderColor = { light: "yellow.600", dark: "brand.900" };
+  const bgColor = { light: "#6f6f6f", dark: "#6f6f6f" };
 
   //from nav
   let loginLinkData = {
@@ -33,8 +34,10 @@ const Navigation = (props) => {
       align="center"
       justify="space-between"
       wrap="wrap"
-      bg="black"
+      bg={bgColor[colorMode]}
       color="white"
+      boxShadow="md"
+      textShadow="sm"
       paddingRight={3}
       paddingLeft={5}
       {...props}
