@@ -5,12 +5,21 @@ const customTheme = {
   ...theme,
   colors: {
     ...theme.colors,
+    white: "#fbf9fa",
+    // gray: ,
     brand: {
-      900: "#fce675",
-      800: "#b8144d",
-      700: "#55d6be",
-      600: "#06837f",
+      900: "#72A534", //darker shade of green
+      800: "#99BF71", //olive
+      700: "#FDFFCF", //cream color
+      600: "#F4EC96", //cream color darker
+      500: "#F4C430", //orange-ish
+      400: "#00CCBB", //ocean color
     },
+  },
+  fonts: {
+    body: "P22 Johnston Underground, sans-serif",
+    heading: "P22 Johnston Underground, sans-serif",
+    mono: "P22 Johnston Underground, sans-serif",
   },
 };
 

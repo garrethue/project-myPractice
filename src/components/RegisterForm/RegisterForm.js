@@ -39,7 +39,6 @@ const RegisterForm = (props) => {
             paddingRight={2}
             textAlign="center"
             color="white"
-            fontWeight="bold"
             fontSize="50px"
           >
             Your Practice Begins Here.

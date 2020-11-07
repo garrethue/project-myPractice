@@ -13,7 +13,10 @@ import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
-  const [colorArr] = useState(["green", "yellow", "red"]);
+  const [welcomePrompts, setWelcomePrompt] = useState([
+    `Hiya, ${props.store.user.first_name}!`,
+  ]);
+  const [colorArr] = useState(["brand.900", "brand.800", "brand.500"]);
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
 
@@ -39,16 +42,15 @@ function AllPractices(props) {
   return (
     <Grid justifyContent="center">
       <Skeleton isLoaded={!props.store.isLoading}>
-        <Box alignItems="center" marginTop={5} w="100%" bg="black">
+        <Box rounded={3} alignItems="center" marginTop={5} w="100%" bg="black">
           <Text
             margin="auto"
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="50px"
+            fontSize="4.5rem"
             w="35rem"
           >
-            Your Practices
+            {welcomePrompts}
           </Text>
         </Box>
       </Skeleton>
@@ -72,11 +74,11 @@ function AllPractices(props) {
                   padding={5}
                   w="13rem"
                   h="13rem"
-                  variantColor={colorArr[practiceObj.practice_id % 3]}
-                  fontSize="1.5em"
+                  _hover={{ bg: colorArr[practiceObj.practice_id % 3] }}
+                  fontSize="1.4em"
                   onClick={() => goToDetailsPage(practiceObj.practice_id)}
                 >
-                  <Text as="u" isTruncated fontWeight="bold" color="white">
+                  <Text isTruncated color="white">
                     {practiceObj.practice_name}
                   </Text>
                 </Button>

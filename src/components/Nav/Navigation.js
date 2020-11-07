@@ -22,7 +22,7 @@ const Navigation = (props) => {
 
   if (props.store.user.id != null) {
     loginLinkData.path = "/all-practices";
-    loginLinkData.text = "Practices";
+    loginLinkData.text = "All Practices";
   }
 
   console.log(props.store.isAtTimer);
@@ -62,14 +62,10 @@ const Navigation = (props) => {
         <Button
           isDisabled={props.store.isAtTimer}
           marginLeft={2}
-          opacity={0.85}
-          border="1px"
-          variantColor="yellow"
           color="white"
-          borderColor={borderColor[colorMode]}
-          borderTop="transparent"
-          borderBottom="transparent"
           bg="transparent"
+          variant="ghost"
+          _hover={{ color: "black", bg: "white" }}
           onClick={() => props.history.push(loginLinkData.path)}
         >
           {/* <Link to={loginLinkData.path}> */}

@@ -10,9 +10,7 @@ const LogOutButton = (props) => {
   return (
     <Button
       isDisabled={props.store.isAtTimer}
-      opacity={0.85}
       marginLeft={2}
-      border="1px"
       variantColor="yellow"
       color="white"
       borderColor={borderColor[colorMode]}

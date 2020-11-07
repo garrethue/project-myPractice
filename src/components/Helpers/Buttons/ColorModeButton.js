@@ -8,7 +8,8 @@ const ColorModeButton = (props) => {
   return (
     <Button
       size="md"
-      opacity={0.75}
+      rounded="full"
+      opacity={0.7}
       marginLeft={2}
       variantColor="yellow"
       color="white"

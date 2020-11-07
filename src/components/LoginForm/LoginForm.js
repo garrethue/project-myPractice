@@ -44,11 +44,12 @@ const LoginForm = (props) => {
             marginTop={5}
             marginBottom={5}
             bg="black"
-            paddingLeft={2}
-            paddingRight={2}
+            pl={2}
+            pr={2}
+            pt={1}
+            pb={1}
             textAlign="center"
             color="white"
-            fontWeight="bold"
             fontSize="50px"
           >
             Welcome to Your Practice.
