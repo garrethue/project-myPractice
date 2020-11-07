@@ -32,10 +32,13 @@ const RegisterForm = (props) => {
       <Box textAlign="center" rounded={3} h="100%" w="100%">
         <form className="formPanel" onSubmit={registerUser}>
           <Text
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
             marginTop={5}
             marginBottom={5}
             rounded={3}
-            bg="black"
+            bg="header"
             pl={4}
             pr={4}
             pt={1}

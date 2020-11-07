@@ -15,6 +15,13 @@ import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
+  const [picArr] = useState([
+    "./screenshots/scorpion.png",
+    "./screenshots/sideplank.png",
+    "./screenshots/halfmoon.png",
+    "./screenshots/merman.png",
+    "./screenshots/downwarddog.png",
+  ]);
   const [welcomePrompts, setWelcomePrompt] = useState([
     `Hiya, ${props.store.user.first_name}!`,
   ]);
@@ -42,7 +49,7 @@ function AllPractices(props) {
   console.log(props.store);
 
   return (
-    <Grid justifyContent="center">
+    <Grid mb={10} justifyContent="center">
       <Skeleton isLoaded={!props.store.isLoading}>
         <Box
           boxShadow="lg"
@@ -50,7 +57,7 @@ function AllPractices(props) {
           alignItems="center"
           marginTop={5}
           w="100%"
-          bg="black"
+          bg="header"
         >
           <Text
             textShadow="md"
@@ -73,23 +80,19 @@ function AllPractices(props) {
           templateColumns="repeat(3, 1fr)"
           gap={4}
         >
-          {props.store.practices.map((practiceObj) => {
+          {props.store.practices.map((practiceObj, i) => {
             return (
               <Skeleton isLoaded={!props.store.isLoading}>
                 <Box
                   as="button"
                   rounded="20px"
-                  w="275px"
+                  maxW="18rem"
                   overflow="hidden"
                   boxShadow="md"
                   onClick={() => goToDetailsPage(practiceObj.practice_id)}
                 >
-                  <Image
-                    rounded={2}
-                    src="./screenshots/scorpion.jpeg"
-                    alt="Example Cover"
-                  />
-                  <Box bg="#e6e6e6" p={5} color="#6f6f6f">
+                  <Image rounded={2} src={picArr[i]} alt="Example Cover" />
+                  <Box bg="header" p={5} color="white">
                     {practiceObj.practice_name}
                   </Box>
                 </Box>
@@ -107,6 +110,7 @@ function AllPractices(props) {
           bg="black"
           size="lg"
           boxShadow="lg"
+          textShadow="lg"
           color={color[colorMode]}
           _hover={{ color: "black", bg: "white" }}
           onClick={goToCreatePage}

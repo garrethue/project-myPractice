@@ -41,10 +41,13 @@ const LoginForm = (props) => {
       <Box textAlign="center" rounded={5} h="100%" w="100%">
         <form onSubmit={login}>
           <Text
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
             marginTop={5}
             marginBottom={5}
             rounded={3}
-            bg="black"
+            bg="header"
             pl={4}
             pr={4}
             pt={1}

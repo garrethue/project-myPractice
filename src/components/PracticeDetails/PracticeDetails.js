@@ -24,7 +24,7 @@ function PracticeDetails(props) {
 
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
-  const bgColor = { light: "#0000004a", dark: "transparent" };
+  const bgColor = { light: "transparent", dark: "transparent" };
 
   const goToTimer = () => {
     props.dispatch({ type: "AT_TIMER" });
@@ -52,15 +52,18 @@ function PracticeDetails(props) {
       >
         <Skeleton isLoaded={!props.store.isLoading}>
           <Text
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
             pt={1}
             pb={1}
             pr={2}
             pl={2}
-            bg="black"
+            bg="brand.900"
             textAlign="right"
             color="white"
-            fontWeight="bold"
             fontSize="2.5rem"
+            rounded={3}
           >
             Total Time:{" "}
             {TimeFormatter(GetTotalTime(props.store.practiceDetails, false))}
@@ -71,7 +74,6 @@ function PracticeDetails(props) {
         bg={bgColor[colorMode]}
         w="100%"
         padding={2}
-        roundedBottom={3}
         justifyContent="center"
         alignItems="center"
         templateColumns="repeat(2, 1fr)"
@@ -79,7 +81,10 @@ function PracticeDetails(props) {
       >
         <Skeleton isLoaded={!props.store.isLoading}>
           <Box
-            fontWeight="bold"
+            shadow="md"
+            boxShadow="md"
+            textShadow="md"
+            color="white"
             fontSize="2rem"
             textAlign="center"
             bg="brand.800"
@@ -90,11 +95,14 @@ function PracticeDetails(props) {
         </Skeleton>
         <Skeleton isLoaded={!props.store.isLoading}>
           <Box
-            fontWeight="bold"
+            shadow="md"
+            boxShadow="md"
+            textShadow="md"
             fontSize="2rem"
             textAlign="center"
             bg="brand.800"
             rounded={3}
+            color="white"
           >
             Duration
           </Box>
@@ -104,6 +112,9 @@ function PracticeDetails(props) {
             <>
               <Skeleton isLoaded={!props.store.isLoading}>
                 <Text
+                  shadow="md"
+                  boxShadow="md"
+                  textShadow="md"
                   rounded={3}
                   fontSize="1.2rem"
                   p={1}
@@ -116,6 +127,9 @@ function PracticeDetails(props) {
               </Skeleton>
               <Skeleton isLoaded={!props.store.isLoading}>
                 <Text
+                  shadow="md"
+                  boxShadow="md"
+                  textShadow="md"
                   rounded={3}
                   p={1}
                   textAlign="center"
@@ -141,9 +155,11 @@ function PracticeDetails(props) {
       >
         <Button
           isDisabled={props.store.isLoading}
+          shadow="md"
+          boxShadow="md"
+          textShadow="md"
           bg="black"
           color="white"
-          color={color[colorMode]}
           variantColor="green"
           onClick={goToTimer}
         >
@@ -151,6 +167,9 @@ function PracticeDetails(props) {
         </Button>
         <Button
           isDisabled={props.store.isLoading}
+          shadow="md"
+          boxShadow="md"
+          textShadow="md"
           bg="black"
           color="white"
           color={color[colorMode]}

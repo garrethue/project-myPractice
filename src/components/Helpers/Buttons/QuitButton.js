@@ -38,6 +38,9 @@ export default function QuitButton(props) {
   return (
     <>
       <Button
+        shadow="lg"
+        boxShadow="lg"
+        textShadow="lg"
         marginLeft={3}
         size="lg"
         bg="black"

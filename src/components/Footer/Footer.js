@@ -4,7 +4,7 @@ import "./Footer.css";
 
 const Footer = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: "#808080", dark: "#808080" };
+  const bgColor = { light: "black", dark: "header" };
 
   return (
     <Box mb={2} ml={2} className="footer">
@@ -17,7 +17,7 @@ const Footer = () => {
         fontFamily="Bjorn Light"
         textAlign="left"
         fontSize="1.1rem"
-        color="brand.600"
+        color="white"
       >
         yoGarret Productions
       </Text>

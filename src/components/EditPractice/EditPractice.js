@@ -122,23 +122,17 @@ function EditPractice(props) {
           <BackButton viewTitle="Practice Details" toWhere="/details" />
         </Box>
         <Box textAlign="center" rounded={3} h="100%" w="35em">
-          <Text
-            bg="black"
-            textAlign="center"
-            color="white"
-            fontWeight="bold"
-            fontSize="50px"
-          >
+          <Text bg="header" textAlign="center" color="white" fontSize="3rem">
             Edit This Practice
           </Text>
           <br />
           <Text
             paddingRight={3}
-            bg="black"
+            bg="header"
             textAlign="right"
             color="white"
             fontWeight="bold"
-            fontSize="30px"
+            fontSize="2rem"
             marginBottom={5}
           >
             {/* if availableRows is equal to 30, then there is no user-inputted data */}

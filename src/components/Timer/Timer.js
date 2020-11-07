@@ -78,6 +78,9 @@ function Timer(props) {
     return (
       <Box marginTop={5} w="100%">
         <Text
+          shadow="lg"
+          boxShadow="lg"
+          textShadow="lg"
           rounded={3}
           padding={3}
           bg="black"
@@ -89,6 +92,9 @@ function Timer(props) {
           Time Remaining: <Text>{displayTime}</Text>
         </Text>
         <Text
+          shadow="lg"
+          boxShadow="lg"
+          textShadow="lg"
           rounded={3}
           padding={3}
           bg="black"
@@ -111,6 +117,9 @@ function Timer(props) {
           {internalTimeInSec !== 0 ? (
             <Box margin={0}>
               <Button
+                shadow="lg"
+                boxShadow="lg"
+                textShadow="lg"
                 marginRight={3}
                 size="lg"
                 bg="black"
@@ -179,11 +188,14 @@ function Timer(props) {
       {internalTimeInSec === props.total_time && !isActive ? (
         <Box textAlign="center">
           <Text
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
             rounded={3}
             marginTop={5}
             paddingLeft={3}
             paddingRight={3}
-            bg="black"
+            bg="brand.800"
             textAlign="center"
             color="white"
             fontSize="4rem"
@@ -192,6 +204,9 @@ function Timer(props) {
             Are you ready {props.user.first_name}?
           </Text>
           <Button
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
             w="40%"
             size="lg"
             bg="black"

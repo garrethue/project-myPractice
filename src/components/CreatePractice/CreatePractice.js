@@ -117,13 +117,12 @@ function CreatePractice(props) {
         <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
             marginBottom={5}
-            bg="black"
+            bg="header"
             paddingLeft={2}
             paddingRight={2}
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="50px"
+            fontSize="3rem"
           >
             Create a Practice
           </Text>
@@ -134,7 +133,7 @@ function CreatePractice(props) {
             textAlign="right"
             color="white"
             fontWeight="bold"
-            fontSize="30px"
+            fontSize="2rem"
           >
             {availableRows < 30 &&
               `Total Time: ${TimeFormatter(GetTotalTime(poses, true))}`}
@@ -177,6 +176,9 @@ function CreatePractice(props) {
             icon="add"
             bg="black"
             size="lg"
+            boxShadow="lg"
+            textShadow="lg"
+            _hover={{ color: "black", bg: "white" }}
             color={color[colorMode]}
             variantColor="teal"
             onClick={addItem}

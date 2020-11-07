@@ -16,8 +16,11 @@ function BackButton(props) {
       bg="black"
       color="white"
       size="lg"
+      shadow="lg"
+      boxShadow="lg"
+      textShadow="lg"
       color={colorObj[colorMode]}
-      variantColor="teal"
+      _hover={{ color: "black", bg: "white" }}
       onClick={() => goToPractices(props.toWhere)}
     >
       Back to {props.viewTitle}
