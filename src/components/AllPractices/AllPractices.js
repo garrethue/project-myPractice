@@ -9,6 +9,7 @@ import {
   Skeleton,
   Image,
   Badge,
+  PseudoBox,
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -21,9 +22,13 @@ function AllPractices(props) {
     "./screenshots/halfmoon.png",
     "./screenshots/merman.png",
     "./screenshots/downwarddog.png",
+    "./screenshots/upwardfacingbow.png",
   ]);
-  const [welcomePrompts, setWelcomePrompt] = useState([
+  const [welcomePromptsArr] = useState([
     `Hiya, ${props.store.user.first_name}!`,
+    `Good to see you, ${props.store.user.first_name}!`,
+    `Here are your practices.`,
+    `Future you says thanks!`,
   ]);
   const [colorArr] = useState(["brand.900", "brand.800", "brand.500"]);
   const { colorMode } = useColorMode();
@@ -64,10 +69,14 @@ function AllPractices(props) {
             margin="auto"
             textAlign="center"
             color="white"
-            fontSize="4.5rem"
-            w="35rem"
+            fontSize="3.5rem"
+            w="40rem"
           >
-            {welcomePrompts}
+            {
+              welcomePromptsArr[
+                Math.floor(Math.random() * welcomePromptsArr.length)
+              ]
+            }
           </Text>
         </Box>
       </Skeleton>
@@ -83,19 +92,24 @@ function AllPractices(props) {
           {props.store.practices.map((practiceObj, i) => {
             return (
               <Skeleton isLoaded={!props.store.isLoading}>
-                <Box
+                <PseudoBox
                   as="button"
                   rounded="20px"
                   maxW="18rem"
                   overflow="hidden"
                   boxShadow="md"
+                  _hover={{ opacity: "0.8", transition: "0.5s" }}
                   onClick={() => goToDetailsPage(practiceObj.practice_id)}
                 >
-                  <Image rounded={2} src={picArr[i]} alt="Example Cover" />
-                  <Box bg="header" p={5} color="white">
+                  <Image
+                    rounded={2}
+                    src={picArr[i % picArr.length]}
+                    alt="Example Cover"
+                  />
+                  <PseudoBox bg="header" p={5} color="white">
                     {practiceObj.practice_name}
-                  </Box>
-                </Box>
+                  </PseudoBox>
+                </PseudoBox>
               </Skeleton>
             );
           })}
@@ -112,7 +126,7 @@ function AllPractices(props) {
           boxShadow="lg"
           textShadow="lg"
           color={color[colorMode]}
-          _hover={{ color: "black", bg: "white" }}
+          _hover={{ color: "black", bg: "white", transition: "0.5s" }}
           onClick={goToCreatePage}
         />
       </Box>

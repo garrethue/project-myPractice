@@ -12,7 +12,7 @@ const LogOutButton = (props) => {
       color="white"
       bg="transparent"
       variant="ghost"
-      _hover={{ color: "black", bg: "white" }}
+      _hover={{ color: "white", bg: "button" }}
       onClick={() => props.dispatch({ type: "LOGOUT" })}
     >
       Log Out
