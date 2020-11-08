@@ -26,6 +26,10 @@ Future features I am planning to implement include:
 
 ![alt text](public/screenshots/all-practices.png "All Practices 'Home' Page")
 
+### Create Practice Page
+
+![alt text](public/screenshots/create-practice.png "Create a Practice Page")
+
 ### Practice Details Page
 
 ![alt text](public/screenshots/details.png "Practice Details Page")
