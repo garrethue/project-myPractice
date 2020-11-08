@@ -10,16 +10,11 @@ import { connect } from "react-redux";
 
 // import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import UserPage from "../UserPage/UserPage";
 import AllPractices from "../AllPractices/AllPractices";
-import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-
-//garret's additions
 import Timer from "../Timer/Timer";
 import PracticeDetails from "../PracticeDetails/PracticeDetails";
 import CreatePractice from "../CreatePractice/CreatePractice";
@@ -122,7 +117,7 @@ class App extends Component {
               // - else shows LandingPage at "/home"
               exact
               path="/home"
-              component={LandingPage}
+              component={LoginPage}
               authRedirect="/all-practices"
             />
 

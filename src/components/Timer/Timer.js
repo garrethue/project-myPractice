@@ -238,6 +238,7 @@ function Timer(props) {
           bg="transparent"
           thickness="0.035"
           size="40rem"
+          color="yellow"
           value={getProgressValue()}
         >
           <CircularProgressLabel>{renderTimer()}</CircularProgressLabel>
