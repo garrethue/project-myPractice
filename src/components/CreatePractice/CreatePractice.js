@@ -129,7 +129,7 @@ function CreatePractice(props) {
           <Text
             paddingRight={3}
             marginBottom={5}
-            bg="black"
+            bg="header"
             textAlign="right"
             color="white"
             fontWeight="bold"
@@ -158,7 +158,7 @@ function CreatePractice(props) {
                 >
                   {createUI()}
                   <Button
-                    bg="black"
+                    bg="button"
                     size="lg"
                     color={color[colorMode]}
                     variantColor="green"
@@ -174,11 +174,11 @@ function CreatePractice(props) {
             isRound
             aria-label="Add a Row"
             icon="add"
-            bg="black"
+            bg="button"
             size="lg"
             boxShadow="lg"
             textShadow="lg"
-            _hover={{ color: "black", bg: "white" }}
+            _hover={{ color: "black", bg: "white", transition: "0.5s" }}
             color={color[colorMode]}
             variantColor="teal"
             onClick={addItem}

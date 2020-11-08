@@ -29,10 +29,15 @@ function AllPractices(props) {
     `Good to see you, ${props.store.user.first_name}!`,
     `Here are your practices.`,
     `Future you says thanks!`,
+    `Thanks for showing up!`,
   ]);
-  const [colorArr] = useState(["brand.900", "brand.800", "brand.500"]);
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
+  const opacity = {
+    light: { opacity: "0.8", transition: "0.5s" },
+    dark: { opacity: "0.65", transition: "0.5s" },
+  };
 
   const goToDetailsPage = (id) => {
     props.dispatch({ type: "LOADING" });
@@ -57,12 +62,13 @@ function AllPractices(props) {
     <Grid mb={10} justifyContent="center">
       <Skeleton isLoaded={!props.store.isLoading}>
         <Box
+          pt={2}
           boxShadow="lg"
           rounded={3}
           alignItems="center"
           marginTop={5}
           w="100%"
-          bg="header"
+          bg={bgColor[colorMode]}
         >
           <Text
             textShadow="md"
@@ -98,7 +104,7 @@ function AllPractices(props) {
                   maxW="18rem"
                   overflow="hidden"
                   boxShadow="md"
-                  _hover={{ opacity: "0.8", transition: "0.5s" }}
+                  _hover={opacity[colorMode]}
                   onClick={() => goToDetailsPage(practiceObj.practice_id)}
                 >
                   <Image
@@ -106,7 +112,7 @@ function AllPractices(props) {
                     src={picArr[i % picArr.length]}
                     alt="Example Cover"
                   />
-                  <PseudoBox bg="header" p={5} color="white">
+                  <PseudoBox bg={bgColor[colorMode]} p={5} color="white">
                     {practiceObj.practice_name}
                   </PseudoBox>
                 </PseudoBox>
@@ -121,7 +127,7 @@ function AllPractices(props) {
           isRound
           aria-label="Add a Practice"
           icon="add"
-          bg="black"
+          bg={bgColor[colorMode]}
           size="lg"
           boxShadow="lg"
           textShadow="lg"

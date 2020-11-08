@@ -24,7 +24,7 @@ function PracticeDetails(props) {
 
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
-  const bgColor = { light: "transparent", dark: "transparent" };
+  const bgColor = { light: "header", dark: "black" };
 
   const goToTimer = () => {
     props.dispatch({ type: "AT_TIMER" });
@@ -43,7 +43,6 @@ function PracticeDetails(props) {
       </Box>
       <Grid
         roundedTop={3}
-        bg={bgColor[colorMode]}
         w="60rem"
         padding={2}
         justifyContent="center"
@@ -59,7 +58,7 @@ function PracticeDetails(props) {
             pb={1}
             pr={2}
             pl={2}
-            bg="brand.900"
+            bg={bgColor[colorMode]}
             textAlign="right"
             color="white"
             fontSize="2.5rem"
@@ -71,7 +70,6 @@ function PracticeDetails(props) {
         </Skeleton>
       </Grid>
       <Grid
-        bg={bgColor[colorMode]}
         w="100%"
         padding={2}
         justifyContent="center"
@@ -112,14 +110,15 @@ function PracticeDetails(props) {
             <>
               <Skeleton isLoaded={!props.store.isLoading}>
                 <Text
-                  shadow="md"
-                  boxShadow="md"
-                  textShadow="md"
+                  shadow="lg"
+                  boxShadow="lg"
+                  textShadow="lg"
                   rounded={3}
                   fontSize="1.2rem"
-                  p={1}
+                  px={1}
+                  py={2}
                   textAlign="center"
-                  bg="black"
+                  bg={bgColor[colorMode]}
                   color="white"
                 >
                   {poseObj.pose_name}
@@ -127,13 +126,14 @@ function PracticeDetails(props) {
               </Skeleton>
               <Skeleton isLoaded={!props.store.isLoading}>
                 <Text
-                  shadow="md"
-                  boxShadow="md"
-                  textShadow="md"
+                  shadow="lg"
+                  boxShadow="lg"
+                  textShadow="lg"
                   rounded={3}
-                  p={1}
+                  px={1}
+                  py={2}
                   textAlign="center"
-                  bg="black"
+                  bg={bgColor[colorMode]}
                   fontSize="1.2rem"
                   color="white"
                 >
@@ -158,7 +158,7 @@ function PracticeDetails(props) {
           shadow="md"
           boxShadow="md"
           textShadow="md"
-          bg="black"
+          bg={bgColor[colorMode]}
           color="white"
           variantColor="green"
           onClick={goToTimer}
@@ -170,7 +170,7 @@ function PracticeDetails(props) {
           shadow="md"
           boxShadow="md"
           textShadow="md"
-          bg="black"
+          bg={bgColor[colorMode]}
           color="white"
           color={color[colorMode]}
           variantColor="yellow"

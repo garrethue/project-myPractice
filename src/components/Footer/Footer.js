@@ -4,7 +4,7 @@ import "./Footer.css";
 
 const Footer = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: "black", dark: "header" };
+  const bgColor = { light: "header", dark: "black" };
 
   return (
     <Box mb={2} ml={2} className="footer">
@@ -14,7 +14,7 @@ const Footer = () => {
         w="8rem"
         bg={bgColor[colorMode]}
         paddingLeft={1}
-        fontFamily="Bjorn Light"
+        fontFamily="Bjorn Light, sans serif"
         textAlign="left"
         fontSize="1.1rem"
         color="white"
