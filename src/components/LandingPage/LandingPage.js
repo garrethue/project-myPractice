@@ -34,13 +34,12 @@ const LandingPage = (props) => {
           bg="black"
           textAlign="center"
           color="white"
-          fontWeight="bold"
           fontSize="50px"
         >
           Welcome to your practice.
         </Text>
         <Box margin="auto" maxW="50%" bg="black">
-          <Text fontSize="40px" color="white" fontWeight="bold">
+          <Text fontSize="40px" color="white">
             Future you says thanks.
           </Text>
         </Box>

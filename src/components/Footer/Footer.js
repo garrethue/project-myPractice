@@ -1,21 +1,28 @@
 import React from "react";
-import { Box, Grid, Text } from "@chakra-ui/core";
+import { Box, Text, useColorMode } from "@chakra-ui/core";
 import "./Footer.css";
 
-const Footer = () => (
-  <Box marginTop={10} className="footer">
-    <Box opacity={0.3} bg="transparent" padding={3}>
+const Footer = () => {
+  const { colorMode } = useColorMode();
+  const bgColor = { light: "header", dark: "black" };
+
+  return (
+    <Box mb={2} ml={2} className="footer">
       <Text
+        boxShadow="lg"
+        rounded={2}
+        w="8rem"
+        bg={bgColor[colorMode]}
         paddingLeft={1}
-        fontFamily="mudrakshar, courier"
+        fontFamily="Bjorn Light, sans serif"
         textAlign="left"
-        fontWeight="bold"
-        fontSize="1.2rem"
+        fontSize="1.1rem"
+        color="white"
       >
-        YOGARRET PRODUCTIONS
+        yoGarret Productions
       </Text>
     </Box>
-  </Box>
-);
+  );
+};
 
 export default Footer;

@@ -28,14 +28,19 @@ function Timer(props) {
         "./sounds/bell-1.mp3",
         //PATH: "/Users/garret.larson/Desktop/node-projects/yogarretsapp/server/sounds/output.mp3",
       ],
+      volume: 0.4,
     })
   );
+
   const [timesToRingBell] = useState(props.timesToRingBellArr); //timesToRingBell is an array of integers that are used to signal transitions by playing the bell mp3 file
   const [promptUserTimes] = useState(props.timesToPromptUser); //when the internal timer reaches a number in this array, the prompt will play
   const [poseList] = useState(props.poseList); //poseList is an array of pose names that are used in conjunction with currentPose and poseListIndex to render the current pose in the practice
   const [currentPose, setCurrentPose] = useState(props.poseList[0]);
   const [poseListIndex, setPoseListIndex] = useState(0); //this allows one to iterate through the array to display the correct counter
+
   const { colorMode } = useColorMode();
+  const bgColor = { light: "header", dark: "black" };
+
   const color = { light: "white", dark: "white" };
   const toast = useToast();
 
@@ -53,7 +58,17 @@ function Timer(props) {
         position: "bottom",
         duration: 5000,
         render: () => (
-          <Box m={3} color="white" p={5} bg="black">
+          <Box
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
+            bg={bgColor[colorMode]}
+            m={3}
+            rounded={3}
+            color="white"
+            p={5}
+            bg="black"
+          >
             {" "}
             <Text fontSize="lg" fontWeight="bold">
               Find your mat!
@@ -76,25 +91,29 @@ function Timer(props) {
   function renderTimer() {
     return (
       <Box marginTop={5} w="100%">
-        <Box textAlign="center">
-          <Text
-            padding={3}
-            bg="black"
-            textAlign="center"
-            color="white"
-            fontWeight="bold"
-            fontSize="2rem"
-            marginBottom={3}
-          >
-            Time Remaining: <Text>{displayTime}</Text>
-          </Text>
-        </Box>
         <Text
+          shadow="lg"
+          boxShadow="lg"
+          textShadow="lg"
+          rounded={3}
           padding={3}
-          bg="black"
+          bg={bgColor[colorMode]}
           textAlign="center"
           color="white"
-          fontWeight="bold"
+          fontSize="2rem"
+          marginBottom={3}
+        >
+          Time Remaining: <Text>{displayTime}</Text>
+        </Text>
+        <Text
+          shadow="lg"
+          boxShadow="lg"
+          textShadow="lg"
+          rounded={3}
+          padding={3}
+          bg={bgColor[colorMode]}
+          textAlign="center"
+          color="white"
           fontSize="2rem"
         >
           {internalTimeInSec !== 0 ? (
@@ -112,9 +131,12 @@ function Timer(props) {
           {internalTimeInSec !== 0 ? (
             <Box margin={0}>
               <Button
+                shadow="lg"
+                boxShadow="lg"
+                textShadow="lg"
                 marginRight={3}
                 size="lg"
-                bg="black"
+                bg={bgColor[colorMode]}
                 color={color[colorMode]}
                 variantColor="green"
                 onClick={toggleTimer}
@@ -180,22 +202,28 @@ function Timer(props) {
       {internalTimeInSec === props.total_time && !isActive ? (
         <Box textAlign="center">
           <Text
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
+            rounded={3}
             marginTop={5}
             paddingLeft={3}
             paddingRight={3}
-            bg="black"
+            bg={bgColor[colorMode]}
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="60px"
+            fontSize="4rem"
             marginBottom={10}
           >
             Are you ready {props.user.first_name}?
           </Text>
           <Button
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
             w="40%"
             size="lg"
-            bg="black"
+            bg={bgColor[colorMode]}
             color={color[colorMode]}
             variantColor="green"
             onClick={toggleTimer}
@@ -207,8 +235,8 @@ function Timer(props) {
         <CircularProgress
           marginTop={8}
           marginBottom={8}
-          color="teal"
-          thickness="0.05"
+          bg="transparent"
+          thickness="0.035"
           size="40rem"
           value={getProgressValue()}
         >

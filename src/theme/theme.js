@@ -5,18 +5,23 @@ const customTheme = {
   ...theme,
   colors: {
     ...theme.colors,
+    white: "#fbf9fa",
+    black: "black", //
+    header: "#171717",
+    button: "#171717",
     brand: {
-      900: "#fce675",
-      800: "#b8144d",
-      700: "#55d6be",
-      600: "#06837f",
+      // 900: "#f0c9bf", //cotton candy
+      800: "#7e8994", //baby blue
+      // 700: "#FDFFCF", //cream color
+      // 600: "#fcfbce", //yellow
+      // 500: "#808080", //beautiful grey
     },
   },
-  // fonts: {
-  //   body: "Lato, sans-serif",
-  //   heading: "Georgia, serif",
-  //   mono: "Menlo, monospace",
-  // },
+  fonts: {
+    body: "P22 Johnston Underground, sans-serif",
+    heading: "P22 Johnston Underground, sans-serif",
+    mono: "P22 Johnston Underground, sans-serif",
+  },
 };
 
 export default customTheme;

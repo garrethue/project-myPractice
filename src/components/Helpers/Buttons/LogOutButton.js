@@ -5,20 +5,14 @@ import mapStoreToProps from "../../../redux/mapStoreToProps";
 
 const LogOutButton = (props) => {
   const { colorMode } = useColorMode();
-  const borderColor = { light: "yellow.600", dark: "brand.900" };
-
   return (
     <Button
       isDisabled={props.store.isAtTimer}
-      opacity={0.85}
       marginLeft={2}
-      border="1px"
-      variantColor="yellow"
       color="white"
-      borderColor={borderColor[colorMode]}
-      borderTop="transparent"
-      borderBottom="transparent"
       bg="transparent"
+      variant="ghost"
+      _hover={{ color: "white", bg: "button" }}
       onClick={() => props.dispatch({ type: "LOGOUT" })}
     >
       Log Out

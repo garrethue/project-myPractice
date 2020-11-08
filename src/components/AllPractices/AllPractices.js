@@ -7,15 +7,37 @@ import {
   IconButton,
   useColorMode,
   Skeleton,
+  Image,
+  Badge,
+  PseudoBox,
 } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 function AllPractices(props) {
-  const [colorArr] = useState(["green", "yellow", "red"]);
+  const [picArr] = useState([
+    "./screenshots/scorpion.png",
+    "./screenshots/sideplank.png",
+    "./screenshots/halfmoon.png",
+    "./screenshots/merman.png",
+    "./screenshots/downwarddog.png",
+    "./screenshots/upwardfacingbow.png",
+  ]);
+  const [welcomePromptsArr] = useState([
+    `Hiya, ${props.store.user.first_name}!`,
+    // `Good to see you, ${props.store.user.first_name}!`,
+    // `Here are your practices.`,
+    // `Future you says thanks!`,
+    // `Thanks for showing up!`,
+  ]);
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
+  const opacity = {
+    light: { opacity: "0.8", transition: "0.5s" },
+    dark: { opacity: "0.65", transition: "0.5s" },
+  };
 
   const goToDetailsPage = (id) => {
     props.dispatch({ type: "LOADING" });
@@ -37,18 +59,30 @@ function AllPractices(props) {
   console.log(props.store);
 
   return (
-    <Grid justifyContent="center">
+    <Grid mb={10} justifyContent="center">
       <Skeleton isLoaded={!props.store.isLoading}>
-        <Box alignItems="center" marginTop={5} w="100%" bg="black">
+        <Box
+          pt={2}
+          boxShadow="lg"
+          rounded={3}
+          alignItems="center"
+          marginTop={5}
+          w="100%"
+          bg={bgColor[colorMode]}
+        >
           <Text
+            textShadow="md"
             margin="auto"
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="50px"
-            w="35rem"
+            fontSize="3.5rem"
+            w="40rem"
           >
-            Your Practices
+            {
+              welcomePromptsArr[
+                Math.floor(Math.random() * welcomePromptsArr.length)
+              ]
+            }
           </Text>
         </Box>
       </Skeleton>
@@ -61,25 +95,27 @@ function AllPractices(props) {
           templateColumns="repeat(3, 1fr)"
           gap={4}
         >
-          {props.store.practices.map((practiceObj) => {
+          {props.store.practices.map((practiceObj, i) => {
             return (
               <Skeleton isLoaded={!props.store.isLoading}>
-                <Button
+                <PseudoBox
                   as="button"
-                  rounded="md"
-                  textAlign="center"
-                  bg="black"
-                  padding={5}
-                  w="13rem"
-                  h="13rem"
-                  variantColor={colorArr[practiceObj.practice_id % 3]}
-                  fontSize="1.5em"
+                  rounded="20px"
+                  maxW="18rem"
+                  overflow="hidden"
+                  boxShadow="md"
+                  _hover={opacity[colorMode]}
                   onClick={() => goToDetailsPage(practiceObj.practice_id)}
                 >
-                  <Text as="u" isTruncated fontWeight="bold" color="white">
+                  <Image
+                    rounded={2}
+                    src={picArr[i % picArr.length]}
+                    alt="Example Cover"
+                  />
+                  <PseudoBox bg={bgColor[colorMode]} p={5} color="white">
                     {practiceObj.practice_name}
-                  </Text>
-                </Button>
+                  </PseudoBox>
+                </PseudoBox>
               </Skeleton>
             );
           })}
@@ -91,10 +127,12 @@ function AllPractices(props) {
           isRound
           aria-label="Add a Practice"
           icon="add"
-          bg="black"
+          bg={bgColor[colorMode]}
           size="lg"
+          boxShadow="lg"
+          textShadow="lg"
           color={color[colorMode]}
-          variantColor="teal"
+          _hover={{ color: "black", bg: "white", transition: "0.5s" }}
           onClick={goToCreatePage}
         />
       </Box>

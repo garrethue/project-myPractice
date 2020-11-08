@@ -2,26 +2,22 @@ import React from "react";
 import { Box, Grid, Text } from "@chakra-ui/core";
 
 const AppTitle = () => (
-  <Grid marginTop={6} justifyContent="center">
-    <Box
-      bg="transparent"
-      rounded="md"
-      paddingLeft={3}
-      paddingRight={3}
-      border="2px"
-      borderColor="brand.800"
-      borderBottom="transparent"
-      borderTop="transparent"
+  <Grid
+    marginTop={6}
+    justifyContent="center"
+    columnGap={0}
+    gridTemplateColumns="0.1fr 1fr"
+  >
+    <Text fontFamily="Barcelony" textAlign="right" fontSize="40px">
+      my
+    </Text>
+    <Text
+      fontFamily="P22 Johnston Underground"
+      textAlign="center"
+      fontSize="40px"
     >
-      <Text
-        fontFamily="mudrakshar, courier"
-        textAlign="center"
-        fontWeight="bold"
-        fontSize="40px"
-      >
-        MY a PRACTICE
-      </Text>
-    </Box>
+      Practice
+    </Text>
   </Grid>
 );
 

@@ -17,11 +17,12 @@ export default function DeletePracticeButton(props) {
   const cancelRef = useRef();
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   return (
     <>
       <Button
-        bg="black"
+        bg={bgColor[colorMode]}
         color={color[colorMode]}
         variantColor="red"
         ref={btnRef}

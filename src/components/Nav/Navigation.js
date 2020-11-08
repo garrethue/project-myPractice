@@ -13,6 +13,7 @@ const Navigation = (props) => {
   const handleToggle = () => setShow(!show);
   const { colorMode } = useColorMode();
   const borderColor = { light: "yellow.600", dark: "brand.900" };
+  const bgColor = { light: "#000000", dark: "#000000" };
 
   //from nav
   let loginLinkData = {
@@ -22,7 +23,7 @@ const Navigation = (props) => {
 
   if (props.store.user.id != null) {
     loginLinkData.path = "/all-practices";
-    loginLinkData.text = "Practices";
+    loginLinkData.text = "All Practices";
   }
 
   console.log(props.store.isAtTimer);
@@ -33,8 +34,10 @@ const Navigation = (props) => {
       align="center"
       justify="space-between"
       wrap="wrap"
-      bg="black"
+      bg={bgColor[colorMode]}
       color="white"
+      boxShadow="md"
+      textShadow="sm"
       paddingRight={3}
       paddingLeft={5}
       {...props}
@@ -62,14 +65,10 @@ const Navigation = (props) => {
         <Button
           isDisabled={props.store.isAtTimer}
           marginLeft={2}
-          opacity={0.85}
-          border="1px"
-          variantColor="yellow"
           color="white"
-          borderColor={borderColor[colorMode]}
-          borderTop="transparent"
-          borderBottom="transparent"
           bg="transparent"
+          variant="ghost"
+          _hover={{ color: "white", bg: "button" }}
           onClick={() => props.history.push(loginLinkData.path)}
         >
           {/* <Link to={loginLinkData.path}> */}

@@ -29,6 +29,7 @@ function EditPractice(props) {
 
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -103,7 +104,7 @@ function EditPractice(props) {
               isRound
               aria-label="Delete a Row"
               icon="delete"
-              bg="black"
+              bg={bgColor[colorMode]}
               size="lg"
               color={color[colorMode]}
               variantColor="red"
@@ -123,22 +124,21 @@ function EditPractice(props) {
         </Box>
         <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
-            bg="black"
+            bg={bgColor[colorMode]}
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="50px"
+            fontSize="3rem"
           >
             Edit This Practice
           </Text>
           <br />
           <Text
             paddingRight={3}
-            bg="black"
+            bg={bgColor[colorMode]}
             textAlign="right"
             color="white"
             fontWeight="bold"
-            fontSize="30px"
+            fontSize="2rem"
             marginBottom={5}
           >
             {/* if availableRows is equal to 30, then there is no user-inputted data */}
@@ -166,7 +166,7 @@ function EditPractice(props) {
                 >
                   {createUI()}
                   <Button
-                    bg="black"
+                    bg={bgColor[colorMode]}
                     size="lg"
                     color={color[colorMode]}
                     variantColor="green"
@@ -183,10 +183,12 @@ function EditPractice(props) {
             isRound
             aria-label="Add a Row"
             icon="add"
-            bg="black"
+            bg={bgColor[colorMode]}
             size="lg"
+            boxShadow="lg"
+            textShadow="lg"
+            _hover={{ color: "black", bg: "white", transition: "0.5s" }}
             color={color[colorMode]}
-            variantColor="teal"
             onClick={addItem}
           />
         </Box>

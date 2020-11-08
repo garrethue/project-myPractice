@@ -4,15 +4,12 @@ import { Grid, Box, Button, Text, Input, useColorMode } from "@chakra-ui/core";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 const LoginForm = (props) => {
-  // state = {
-  //   username: "",
-  //   password: "",
-  // };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   const login = (event) => {
     event.preventDefault();
@@ -30,26 +27,22 @@ const LoginForm = (props) => {
     }
   }; // end login
 
-  // const handleInputChangeFor = (propertyName) => (event) => {
-  //   setState({
-  //     [propertyName]: event.target.value,
-  //   });
-  // };
-
   return (
     <Grid justifyContent="center">
-      <Box textAlign="center" rounded={3} h="100%" w="100%">
+      <Box textAlign="center" rounded={5} h="100%" w="100%">
         <form onSubmit={login}>
           <Text
-            marginTop={5}
-            marginBottom={5}
-            bg="black"
-            paddingLeft={2}
-            paddingRight={2}
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
+            my={5}
+            rounded={3}
+            bg={bgColor[colorMode]}
+            px={4}
+            py={1}
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="50px"
+            fontSize="4rem"
           >
             Welcome to Your Practice.
           </Text>
@@ -84,7 +77,7 @@ const LoginForm = (props) => {
             </label>
             <Button
               marginTop={5}
-              bg="black"
+              bg={bgColor[colorMode]}
               color={color[colorMode]}
               variantColor="green"
               type="submit"

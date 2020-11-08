@@ -25,6 +25,7 @@ function CreatePractice(props) {
   const [poses, setPoses] = useState([]);
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,7 +98,7 @@ function CreatePractice(props) {
             isRound
             aria-label="Delete a Row"
             icon="delete"
-            bg="black"
+            bg={bgColor[colorMode]}
             size="lg"
             color={color[colorMode]}
             variantColor="red"
@@ -117,24 +118,23 @@ function CreatePractice(props) {
         <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
             marginBottom={5}
-            bg="black"
+            bg={bgColor[colorMode]}
             paddingLeft={2}
             paddingRight={2}
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="50px"
+            fontSize="3rem"
           >
             Create a Practice
           </Text>
           <Text
             paddingRight={3}
             marginBottom={5}
-            bg="black"
+            bg={bgColor[colorMode]}
             textAlign="right"
             color="white"
             fontWeight="bold"
-            fontSize="30px"
+            fontSize="2rem"
           >
             {availableRows < 30 &&
               `Total Time: ${TimeFormatter(GetTotalTime(poses, true))}`}
@@ -159,7 +159,7 @@ function CreatePractice(props) {
                 >
                   {createUI()}
                   <Button
-                    bg="black"
+                    bg={bgColor[colorMode]}
                     size="lg"
                     color={color[colorMode]}
                     variantColor="green"
@@ -175,10 +175,12 @@ function CreatePractice(props) {
             isRound
             aria-label="Add a Row"
             icon="add"
-            bg="black"
+            bg={bgColor[colorMode]}
             size="lg"
+            boxShadow="lg"
+            textShadow="lg"
+            _hover={{ color: "black", bg: "white", transition: "0.5s" }}
             color={color[colorMode]}
-            variantColor="teal"
             onClick={addItem}
           />
         </Box>

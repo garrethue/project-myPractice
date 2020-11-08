@@ -9,6 +9,7 @@ import RegisterForm from "../RegisterForm/RegisterForm";
 const RegisterPage = (props) => {
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   return (
     <Fragment>
@@ -16,7 +17,7 @@ const RegisterPage = (props) => {
       <Grid justifyContent="center">
         <Button
           type="button"
-          bg="black"
+          bg={bgColor[colorMode]}
           color={color[colorMode]}
           variantColor="red"
           onClick={() => {

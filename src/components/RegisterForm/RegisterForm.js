@@ -13,6 +13,7 @@ const RegisterForm = (props) => {
 
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -32,15 +33,17 @@ const RegisterForm = (props) => {
       <Box textAlign="center" rounded={3} h="100%" w="100%">
         <form className="formPanel" onSubmit={registerUser}>
           <Text
-            marginTop={5}
-            marginBottom={5}
-            bg="black"
-            paddingLeft={2}
-            paddingRight={2}
+            bg={bgColor[colorMode]}
+            shadow="lg"
+            boxShadow="lg"
+            textShadow="lg"
+            my={5}
+            rounded={3}
+            px={4}
+            py={1}
             textAlign="center"
             color="white"
-            fontWeight="bold"
-            fontSize="50px"
+            fontSize="4rem"
           >
             Your Practice Begins Here.
           </Text>
@@ -98,7 +101,7 @@ const RegisterForm = (props) => {
             </label>
             <Button
               marginTop={5}
-              bg="black"
+              bg={bgColor[colorMode]}
               color={color[colorMode]}
               variantColor="green"
               type="submit"

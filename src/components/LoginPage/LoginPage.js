@@ -7,18 +7,18 @@ import { Grid, Box, Button, useColorMode, Text } from "@chakra-ui/core";
 const LoginPage = (props) => {
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   return (
     <div>
       <LoginForm />
       <Grid justifyContent="center">
-        <Box marginTop={5}>
-          <Text fontWeight="bold">Don't have an account?</Text>
-        </Box>
+        <Text fontWeight="bold" marginTop={5}>
+          Don't have an account?
+        </Text>
         <Button
           marginTop={2}
-          //type="button"
-          bg="black"
+          bg={bgColor[colorMode]}
           color={color[colorMode]}
           variantColor="teal"
           onClick={() => {
