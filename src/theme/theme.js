@@ -10,11 +10,11 @@ const customTheme = {
     header: "#171717",
     button: "#171717",
     brand: {
-      900: "#f0c9bf", //cotton candy
-      800: "#649cd2", //baby blue
-      700: "#FDFFCF", //cream color
-      600: "#fcfbce", //yellow
-      500: "#808080", //beautiful grey
+      // 900: "#f0c9bf", //cotton candy
+      800: "#7e8994", //baby blue
+      // 700: "#FDFFCF", //cream color
+      // 600: "#fcfbce", //yellow
+      // 500: "#808080", //beautiful grey
     },
   },
   fonts: {
