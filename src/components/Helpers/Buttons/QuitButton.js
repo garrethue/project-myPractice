@@ -17,6 +17,7 @@ export default function QuitButton(props) {
   const cancelRef = useRef();
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };
+  const bgColor = { light: "header", dark: "black" };
 
   const onOpenOverride = () => {
     onToggle();
@@ -43,7 +44,7 @@ export default function QuitButton(props) {
         textShadow="lg"
         marginLeft={3}
         size="lg"
-        bg="black"
+        bg={bgColor[colorMode]}
         color={color[colorMode]}
         variantColor="red"
         ref={btnRef}
