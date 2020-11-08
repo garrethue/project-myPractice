@@ -117,6 +117,7 @@ function CreatePractice(props) {
         </Box>
         <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
+            rounded={3}
             marginBottom={5}
             bg={bgColor[colorMode]}
             paddingLeft={2}
@@ -128,6 +129,7 @@ function CreatePractice(props) {
             Create a Practice
           </Text>
           <Text
+            rounded={3}
             paddingRight={3}
             marginBottom={5}
             bg={bgColor[colorMode]}

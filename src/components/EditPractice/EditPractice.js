@@ -124,6 +124,7 @@ function EditPractice(props) {
         </Box>
         <Box textAlign="center" rounded={3} h="100%" w="35em">
           <Text
+            rounded={3}
             bg={bgColor[colorMode]}
             textAlign="center"
             color="white"
@@ -133,6 +134,7 @@ function EditPractice(props) {
           </Text>
           <br />
           <Text
+            rounded={3}
             paddingRight={3}
             bg={bgColor[colorMode]}
             textAlign="right"
