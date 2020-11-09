@@ -8,13 +8,13 @@ const AppTitle = () => (
     columnGap={0}
     gridTemplateColumns="0.1fr 1fr"
   >
-    <Text fontFamily="Barcelony" textAlign="right" fontSize="40px">
+    <Text fontFamily="Barcelony, san serif" textAlign="right" fontSize="45px">
       my
     </Text>
     <Text
-      fontFamily="P22 Johnston Underground"
+      fontFamily="P22 Johnston Underground, san serif"
       textAlign="center"
-      fontSize="40px"
+      fontSize="45px"
     >
       Practice
     </Text>

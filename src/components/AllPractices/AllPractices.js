@@ -26,10 +26,11 @@ function AllPractices(props) {
   ]);
   const [welcomePromptsArr] = useState([
     `Hiya, ${props.store.user.first_name}!`,
-    // `Good to see you, ${props.store.user.first_name}!`,
-    // `Here are your practices.`,
-    // `Future you says thanks!`,
-    // `Thanks for showing up!`,
+    `Good to see you, ${props.store.user.first_name}!`,
+    `Here are your practices.`,
+    `Future you says thanks!`,
+    `Thanks for showing up!`,
+    `I am what I do.`,
   ]);
   const { colorMode } = useColorMode();
   const color = { light: "white", dark: "white" };

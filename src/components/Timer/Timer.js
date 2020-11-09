@@ -28,7 +28,7 @@ function Timer(props) {
         "./sounds/bell-1.mp3",
         //PATH: "/Users/garret.larson/Desktop/node-projects/yogarretsapp/server/sounds/output.mp3",
       ],
-      volume: 0.4,
+      volume: 0.25,
     })
   );
 
