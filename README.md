@@ -61,8 +61,7 @@ Future features I am planning to implement include:
 1. Create a database named `my_practice`,
 2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed.
 3. Open up your editor of choice and run an `npm install`
-4. Create .env file and place google credential in file (IE, type: GOOGLE_APPLICATION_CREDENTIAL="PATH_to_your_valid_key_here!")
-   4a. example of file path: "/Users/garret.larson/Desktop/text-to-speech-file.json"
+4. Create .env file and place google credential in file (IE, type: GOOGLE_APPLICATION_CREDENTIAL="PATH_to_your_valid_key_here!"). Example of file path: "/Users/garret.larson/Desktop/text-to-speech-file.json"
 5. Run `npm run server` in your terminal
 6. Run `npm run client` in your terminal (the `npm run client` command should open up a new browser tab for you)
 
