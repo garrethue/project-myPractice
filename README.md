@@ -51,10 +51,12 @@ Future features I am planning to implement include:
 
 ## Installation
 
-### Prerequisites to Installation
+### Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
 - A Google Cloud account with valid credentials to use Text-to-Speech API (usually a .json file you provide the file path for on your local or an API key). For a set of instruction to do this go here: [Getting Started with authentication][https://cloud.google.com/docs/authentication/getting-started]
+
+### Steps
 
 1. Create a database named `my_practice`,
 2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed.

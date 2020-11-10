@@ -1,7 +1,56 @@
+-- SELECTS
+------------------------------------
+select * from "user";
+select * from practices;
+select * from poses;
+select * from practices_poses;
+------------------------------------
+-- this should happen when user gets the !DETAILS! of a practice
+-- all poses and times for a given user and given practice id
+SELECT pr.id as practice_id, ps.pose_name, pp.pose_time FROM "user" u
+JOIN practices pr ON u.id=pr.user_id
+JOIN practices_poses pp ON pr.id=pp.practice_id
+JOIN poses ps ON pp.pose_id=ps.id
+WHERE u.id = 6
+AND pr.id = 2
+ORDER BY pp.id ASC; --this ensures that the poses are in order
+------------------------------------
+-- EDIT a Practice Query
+SELECT * FROM practices pr
+JOIN practices_poses pp ON pr.id=pp.practice_id
+WHERE pr.id = 7 -- have this
+ORDER BY pp.id ASC; --this ensures that the poses are in order
+--
+select *
+from practices_poses
+where practice_id = 7;
+
+----
+UPDATE practices_poses pp
+SET pp.pose_id = 3,
+pp.pose_time = 30,
+WHERE 
+
+-- 
+DELETE FROM practices_poses pp
+WHERE practice_id = 7;
+
+INSERT INTO practices_poses (practice_id, pose_id, pose_time) VALUES (7,2,4) RETURNING *;
+
+------------------------------------
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2,
+    ...
+WHERE condition;
+---
+
+-- get practice_id and practice_name for a given user
+SELECT * FROM "user" u JOIN practices pr ON u.id=pr.user_id WHERE u.id=6 ORDER BY pr.id;
+-- ####################################################################################
 
 -- CREATES
 -- ####################################################################################
-CREATE DATABASE my_practice; 
 CREATE TABLE "user" (
 "id" SERIAL PRIMARY KEY,
 "username" VARCHAR(100) UNIQUE NOT NULL,
@@ -26,7 +75,7 @@ id SERIAL PRIMARY KEY,
 practice_id INTEGER NOT NULL REFERENCES practices,
 pose_id INTEGER NOT NULL REFERENCES poses,
 pose_time INTEGER NOT NULL,
-pose_order INTEGER NOT NULL
+pose_order INTEGER NOT NULL,
 );
 
 -- ####################################################################################
@@ -54,5 +103,11 @@ VALUES ('scorpion pose'), ('corpse pose'), ('seated forward fold pose'), ('warri
 INSERT INTO poses ("pose_name")
 VALUES ('bird of paradise pose');
 
+
+select * from poses;
+------------------------------------
+--practices_poses junction table
+INSERT INTO practices_poses ("practice_id","pose_id","pose_time")
+VALUES (1, 1, 3), (1, 2, 2), (1, 4, 5);
 
 --############################################################################################
