@@ -54,7 +54,7 @@ Future features I am planning to implement include:
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
-- A Google Cloud account with valid credentials to use Text-to-Speech API (usually a .json file you provide the file path for on your local or an API key). For a set of instruction to do this go here: [Getting Started with authentication][https://cloud.google.com/docs/authentication/getting-started]
+- A Google Cloud account with valid credentials to use Text-to-Speech API (usually a .json file you provide the file path for on your local or an API key). For a set of instruction to do this go here: [Getting Started with authentication](https://cloud.google.com/docs/authentication/getting-started)
 
 ### Steps
 
